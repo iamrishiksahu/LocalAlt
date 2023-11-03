@@ -6,15 +6,15 @@ import {
   Button,
   Box,
   Typography,
-  // useTheme,  // You can remove this import if not used.
+
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission.
+    event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // Log the email and password entered by the user for further processing.
+
     console.log({
       email: data.get("email"),
       password: data.get("password"),
