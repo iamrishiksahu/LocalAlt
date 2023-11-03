@@ -12,6 +12,8 @@ import VManageProducts from './pages/vendor/VManageProducts';
 import VManageStore from './pages/vendor/VManageStore';
 import VAddProductPage from './pages/vendor/VAddProductPage';
 import VendorHeader from './components/VendorHeader';
+import HomePage from './pages/customer/HomePage';
+import AllProducts from './components/AllProducts';
 
 function App() {
 
@@ -23,8 +25,8 @@ function App() {
         <Route path='/forgot-password' element={<ForgotPassword />} />
 
         {/* Producted Routes - Authenticated Only */}
-        <Route path='/' element={<Header />}>
-          <Route index element={<LoginPage />} />
+        <Route path='/' element={<HomePage />}>
+          <Route index element={<AllProducts />} />
           <Route path='/product' element={<ProductPage />} />
           <Route path='/orders' element={<OrdersPage />} />
           <Route path='/account' element={<AccountPage />} />
