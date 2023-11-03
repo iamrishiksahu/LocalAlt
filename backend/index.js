@@ -1,6 +1,6 @@
 // Desc: This is the main file for the backend server. It will be used to serve the requests from the frontend.
 const { initializeApp } = require('firebase/app');
-const {getFirestore, collection, getDocs, addDoc} = require('firebase/firestore');
+const { getFirestore, collection, getDocs } = require('firebase/firestore/lite')
 const {connectFirestoreEmulator} = require('firebase/firestore');
 //const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 //const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
@@ -52,7 +52,7 @@ const PORT = process.env.PORT || 8001
 // const accountsRoutes = require('./routes/accountsRoutes')
 // const productsRoutes = require('./routes/productsRoutes')
 // const ordersRoutes = require('./routes/ordersRoutes')
-const authRoutes = require('./routes/authRoutes')(auth, db);
+const authRoutes = require('./routes/authRoutes')(auth, db, firebaseApp);
 // const searchRoutes = require('./routes/searchRoutes')
 //const storeRoutes = require('./routes/storeRoutes')(db);
 

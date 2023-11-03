@@ -1,12 +1,13 @@
 const express = require('express');
 const admin= require('firebase-admin');
 const { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } = require("firebase/auth");
-const { collection, addDoc, getDocs } = require('firebase/firestore');
+const { collection, addDoc, getDocs, getFirestore, doc, setDoc } = require('firebase/firestore');
 
 const router = express.Router();
 admin.initializeApp();
 
-module.exports = (auth,db) => {
+//db=getFirestore(firebaseApp);
+const authRoutes = (auth, db, firebaseApp) => {
   // Route for handling the user registration
   /**
   {name,
@@ -20,6 +21,8 @@ module.exports = (auth,db) => {
   address,
   }
    */
+  //console.log(firebaseApp);
+  const dbs=getFirestore(firebaseApp);
 
   router.post('/register', (req, res) => {
     const { name, email, password, role, contact, locality, longitude, latitude,address } = req.body;
@@ -32,8 +35,10 @@ module.exports = (auth,db) => {
         //console.log(user);
 
         // Now we create the user in the Firestore database
-        const userRef = collection(db, 'users');
-        addDoc(userRef, {
+        // const userRef =÷ collection('users').doc(userUID);
+        //const userRef = doc(db, 'users', userUID);
+
+         setDoc(doc(dbs, 'users', userUID),{
           role: role,
           uid: userUID,
           user_name: name,
@@ -43,7 +48,7 @@ module.exports = (auth,db) => {
           user_longitude: longitude,
           user_latitude: latitude,
           user_address: address,
-        },{id: userUID, merge: true})
+        })
           .then(() => {
             console.log('User added to the database');
             res.status(200).json({ message: 'Registration successful', 
@@ -127,3 +132,5 @@ module.exports = (auth,db) => {
 
   return router;
 };
+
+module.exports = authRoutes;
