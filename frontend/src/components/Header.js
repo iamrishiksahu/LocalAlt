@@ -1,11 +1,37 @@
-import React from 'react'
-import { TextField, Box, Select, Autocomplete, IconButton } from "@mui/material";
+import React, { useState } from 'react'
+import { TextField, Box, Autocomplete, IconButton } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
 
 
 const Header = () => {
 
     const navigate = useNavigate();
+
+    const [location, setLocation] = useState()
+
+    var successHandler = function (position) {
+        alert(position.coords.latitude);
+        alert(position.coords.longitude);
+    };
+
+    var errorHandler = function (errorObj) {
+        alert(errorObj.code + ": " + errorObj.message);
+    }
+
+
+    const handleLogoClick = (e) => {
+        e.preventDefault()
+
+
+
+
+        navigator.geolocation.getCurrentPosition(
+            successHandler, errorHandler,
+            { enableHighAccuracy: true, maximumAge: 10000 });
+
+        // navigate('/')
+
+    }
 
     return (
         <Box
@@ -31,7 +57,9 @@ const Header = () => {
 
                 }}>
 
-                <img src="/logo192.png" alt="logo" width="50px" onClick={() => navigate('/')} />
+                <img src="/logo192.png" alt="logo" width="50px" onClick={handleLogoClick} />
+
+                <p>{location?.coords?.latitude}</p>
                 <Autocomplete
                     disablePortal
                     id="combo-box-demo"
