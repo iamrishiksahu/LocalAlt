@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardContent, Typography, Button, styled, Box, Grid } from '@mui/material';
-
+import { Card, CardContent, Typography, Button, styled, Box, Grid, useTheme } from '@mui/material';
+import { Link } from 'react-router-dom';
 const VHomePage = () => {
   const StyledBox = styled(Box)`
     display: flex;
@@ -11,29 +11,41 @@ const VHomePage = () => {
 
   const StyledCard = styled(Card)`
   width: 45%;
-  height: 100%; /* Set the height to 100% */
   display: flex;
   flex-direction: column;
   `;
 
+  const theme = useTheme();
   return (
     <StyledBox>
-      <StyledCard>
+      <StyledCard
+        sx={{
+          backgroundImage: "none",
+          backgroundColor: theme.palette.background.main,
+        }}>
         <CardContent>
           <Typography variant="h6">Manage SHOP</Typography>
 
-          <Button variant="contained" color="primary" fullWidth>
-            Shop
-          </Button>
+          <Link to="/vendor/manage-store" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" fullWidth>
+              Shop
+            </Button>
+          </Link>
         </CardContent>
       </StyledCard>
-      <StyledCard>
+      <StyledCard
+        sx={{
+          backgroundImage: "none",
+          backgroundColor: theme.palette.background.main,
+        }}>
         <CardContent>
           <Typography variant="h6">Manage PRODUCTS</Typography>
 
-          <Button variant="contained" color="primary" fullWidth>
-            Products
-          </Button>
+          <Link to="/vendor/manage-products" style={{ textDecoration: 'none' }}>
+            <Button variant="contained" color="primary" fullWidth>
+              Products
+            </Button>
+          </Link>
         </CardContent>
       </StyledCard>
     </StyledBox >
