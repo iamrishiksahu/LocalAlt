@@ -95,7 +95,11 @@ const AllProducts = () => {
         <Box sx={{
             display: 'grid',
             gap: '1rem',
+<<<<<<< HEAD
             gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr 1fr' },
+=======
+            gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr' }, gap: '1rem',
+>>>>>>> 446cb5ae8ec864c6dfd7367dcc8f7fc5c6b6a3db
         }}>
 
             {productList.map((item, idx) => {

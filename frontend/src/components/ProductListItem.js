@@ -1,11 +1,14 @@
 import React from 'react'
+
 import { Box, Card, Typography, CardContent, CardActions, Button, Rating } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+
 
 const ProductListItem = ({ data }) => {
 
     const navigate = useNavigate();
     return (
+
         <>
 
             <Card onClick={() => navigate(`/product/${data.id}`)} sx={{ cursor: 'pointer' }}>
@@ -48,6 +51,7 @@ const ProductListItem = ({ data }) => {
             </Card>
 
         </>
+
     )
 }
 
