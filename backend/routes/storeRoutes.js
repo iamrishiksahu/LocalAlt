@@ -46,7 +46,25 @@ const storeRoutes = (db, firebaseApp) => {
           res.status(500).json({ message: 'Registration failed', error });
         });
     });
+
+    router.get('/store-details', (req, res) => {
+        const storeRef = collection(dbs, 'stores');
+        
+        getDocs(storeRef)
+            .then((snapshot) => {
+                const stores = [];
+                snapshot.forEach((doc) => {
+                    stores.push({ id: doc.id, data: doc.data() });
+                });
+                // Send the retrieved data as a response to the client
+                res.status(200).json({ stores });
+            })
+            .catch((error) => {
+                console.log('Error getting documents: ', error);
+                res.status(500).json({ error: 'Failed to retrieve stores' });
+            });
+    });
       return router;
   };
-  
+ 
   module.exports = storeRoutes;
