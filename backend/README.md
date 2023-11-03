@@ -3,7 +3,6 @@
 - index.js is the base level entry file 
 - routes are defined inside the routes folder
 - default port is 8001
-- https://chat.openai.com/share/8acba82a-5cd4-4a0e-9c13-e299d54f1d84 (check out the part in boilerplate codes for controllers and routes)
 
 
 ## endpoints
@@ -185,5 +184,67 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 ```
 {
     "message": "Store created successfully"
+}
+```
+
+### add a product (NOTE: Please take care of 's' in Products and Product (got stuck while implementing this :P))
+- POST(http://localhost:8001/products/add-product)
+
+- body:
+```
+{
+  "product_name": "Product Name",
+  "subtitle": "Product Subtitle",
+  "description": "Product Description",
+  "price": 10.99,
+  "quantity": 100,
+  "images": ["image1.jpg", "image2.jpg"],
+  "category": "Category",
+  "subcategory": "Subcategory",
+  "availability": true,
+  "rating": 4.5,
+  "reviews_count": 25,
+  "store_id": "store_12345"
+}
+
+```
+- payload format
+```
+{
+    "message": "Product added successfully",
+    "product_added": true,
+    "status": 200
+}
+```
+
+### get all products (DISCLAIMER: NOT FILTERED WITH THE DISTANCE)
+- GET(http://localhost:8001/products/all-products)
+
+### get individual product
+- GET(http://localhost:8001/products/:product_id)
+
+Path Variable: product_id=product450
+
+- payload format
+```
+{
+    "product": {
+        "subtitle": "A great product",
+        "quantity": 50,
+        "product_id": "product450",
+        "price": 19.99,
+        "images": [
+            "https://example.com/image1.jpg",
+            "https://example.com/image2.jpg",
+            "https://example.com/image3.jpg"
+        ],
+        "product_name": "Sample Product",
+        "subcategory": "Smartphones",
+        "reviews_count": 25,
+        "category": "Electronics",
+        "description": "This is a sample product description.",
+        "rating": 4.5,
+        "availability": true
+    }
 }
 ```
