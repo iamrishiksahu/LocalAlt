@@ -2,7 +2,6 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginPage from './pages/customer/LoginPage';
 import ProductPage from './pages/customer/ProductPage';
-import Header from './components/Header';
 import ForgotPassword from './pages/customer/ForgotPassword';
 import SignUpPage from './pages/customer/SignUpPage';
 import OrdersPage from './pages/customer/OrdersPage';
@@ -11,7 +10,6 @@ import VHomePage from './pages/vendor/VHomePage';
 import VManageProducts from './pages/vendor/VManageProducts';
 import VManageStore from './pages/vendor/VManageStore';
 import VAddProductPage from './pages/vendor/VAddProductPage';
-import VendorHeader from './components/VendorHeader';
 import HomePage from './pages/customer/HomePage';
 import AllProducts from './components/AllProducts';
 
