@@ -1,6 +1,6 @@
 
 ### Developer Documentation
-- index.js is the base entry file 
+- index.js is the base level entry file 
 - routes are defined inside the routes folder
 - default port is 8001
 - https://chat.openai.com/share/8acba82a-5cd4-4a0e-9c13-e299d54f1d84 (check out the part in boilerplate codes for controllers and routes)
