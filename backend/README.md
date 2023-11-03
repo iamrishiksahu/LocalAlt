@@ -220,3 +220,31 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 ### get all products (DISCLAIMER: NOT FILTERED WITH THE DISTANCE)
 - GET(http://localhost:8001/products/all-products)
 
+### get individual product
+- GET(http://localhost:8001/products/:product_id)
+
+Path Variable: product_id=product450
+
+- payload format
+```
+{
+    "product": {
+        "subtitle": "A great product",
+        "quantity": 50,
+        "product_id": "product450",
+        "price": 19.99,
+        "images": [
+            "https://example.com/image1.jpg",
+            "https://example.com/image2.jpg",
+            "https://example.com/image3.jpg"
+        ],
+        "product_name": "Sample Product",
+        "subcategory": "Smartphones",
+        "reviews_count": 25,
+        "category": "Electronics",
+        "description": "This is a sample product description.",
+        "rating": 4.5,
+        "availability": true
+    }
+}
+```

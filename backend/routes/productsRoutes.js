@@ -1,6 +1,6 @@
 const express = require('express');
 const admin= require('firebase-admin');
-const { collection, addDoc, getDocs, getFirestore, doc, setDoc } = require('firebase/firestore');
+const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc } = require('firebase/firestore');
 const router = express.Router();
 const uuid=require('uuid');
 
@@ -48,6 +48,7 @@ const productsRoutes = (db, firebaseApp) => {
           res.status(200).json({ 
             message: 'Product added successfully',
             product_added: true, 
+            product_id: product_id,
             status: 200,
         });
         })
@@ -77,7 +78,36 @@ const productsRoutes = (db, firebaseApp) => {
     });
 
     //This gives products filtered by the distance from the user's location (it gives in a 5km radius)
-      return router;
+    router.get('/products-by-distance', (req, res) => {
+      /**
+       ADD IMPLEMENTATION HERE
+       */
+
+    });
+
+ // Define the route with the product path parameter
+router.get('/:product_id', (req, res) => {
+  const param_product_id = req.params.product_id;
+  const productRef = doc(dbs, 'products', param_product_id);
+
+  getDoc(productRef)
+    .then((productDoc) => {
+      if (productDoc.exists()) {
+        const productData = productDoc.data();
+        res.status(200).json({ product: productData });
+      } else {
+        res.status(404).json({ error: 'Product not found' });
+      }
+    })
+    .catch((error) => {
+      console.log('Error getting product: ', error);
+      res.status(500).json({ error: 'Failed to retrieve product' });
+    });
+});
+
+      
+    
+    return router;
   };
  
   module.exports = productsRoutes;
