@@ -136,3 +136,54 @@ IMPORTANT: role is 0 for customer and 1 for vendor
     "message": "Logout successful"
 }
 ```
+### get store details
+- GET(http://localhost:8001/store/store-details)
+
+```
+{
+    "stores": [
+        {
+            "id": "store_id",
+            "data": {
+                "address": {
+                    "address_line_2": "test",
+                    "city": "Ranchi",
+                    "pincode": "800001",
+                    "address_line_1": "behind h5"
+                },
+                "store_id": "store_jcgc7883ggagjdcg99v9s",
+                "longitude": "67",
+                "store_owner": "Chotu",
+                "city": "Ranchi",
+                "store_name": "Chotu-Dhaba",
+                "uid": "jcgc7883ggagjdcg99v9s",
+                "locality": "Mesra",
+                "latitude": "93"
+            }
+        }
+    ]
+}
+```
+### create a new store
+- POST(http://localhost:8001/store/store-details)
+- body:
+```
+{
+    "store_name": "My Store",
+    "address": "123 Main Street",
+    "store_owner": "John Doe",
+    "uid": "user456",
+    "city": "New York",
+    "locality": "Downtown",
+    "longitude": "40.7128",
+    "latitude": "-74.0060"
+}
+
+```
+
+- payload format
+```
+{
+    "message": "Store created successfully"
+}
+```
