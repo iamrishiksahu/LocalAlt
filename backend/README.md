@@ -187,3 +187,34 @@ IMPORTANT: role is 0 for customer and 1 for vendor
     "message": "Store created successfully"
 }
 ```
+
+### add a product 
+- POST(http://localhost:8001/products/add-product)
+
+- body:
+```
+{
+  "product_name": "Product Name",
+  "subtitle": "Product Subtitle",
+  "description": "Product Description",
+  "price": 10.99,
+  "quantity": 100,
+  "images": ["image1.jpg", "image2.jpg"],
+  "category": "Category",
+  "subcategory": "Subcategory",
+  "availability": true,
+  "rating": 4.5,
+  "reviews_count": 25,
+  "store_id": "store_12345"
+}
+
+```
+- payload format
+```
+{
+    "message": "Product added successfully",
+    "product_added": true,
+    "status": 200
+}
+```
+
