@@ -48,6 +48,7 @@ const productsRoutes = (db, firebaseApp) => {
           res.status(200).json({ 
             message: 'Product added successfully',
             product_added: true, 
+            product_id: product_id,
             status: 200,
         });
         })
@@ -77,7 +78,14 @@ const productsRoutes = (db, firebaseApp) => {
     });
 
     //This gives products filtered by the distance from the user's location (it gives in a 5km radius)
-      return router;
+    router.get('/products-by-distance', (req, res) => {
+      /**
+       ADD IMPLEMENTATION HERE
+       */
+    });
+      
+    
+    return router;
   };
  
   module.exports = productsRoutes;
