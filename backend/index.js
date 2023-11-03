@@ -10,6 +10,8 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const morgan = require('morgan');
+const bodyParser = require('body-parser')
+
 
 app.use(morgan('dev'));
 const corsOptions = {
@@ -50,7 +52,7 @@ const PORT = process.env.PORT || 8001
 //define the import routes
 
 // const accountsRoutes = require('./routes/accountsRoutes')
-// const productsRoutes = require('./routes/productsRoutes')
+const productsRoutes = require('./routes/productsRoutes')(db, firebaseApp)
 // const ordersRoutes = require('./routes/ordersRoutes')
 const authRoutes = require('./routes/authRoutes')(auth, db, firebaseApp);
 // const searchRoutes = require('./routes/searchRoutes')
@@ -74,8 +76,8 @@ app.listen(PORT, () => {
 
 app.use('/auth', authRoutes)
 app.use('/store', storeRoutes)
+app.use('/products', productsRoutes)
 
 // app.use('/accounts', accountsRoutes)
-// app.use('/products', productsRoutes)
 // app.use('/orders', ordersRoutes)
 // app.use('/search', searchRoutes)

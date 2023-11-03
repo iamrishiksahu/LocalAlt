@@ -43,7 +43,7 @@ const storeRoutes = (db, firebaseApp) => {
         })
         .catch((error) => {
           console.log('Error occurred while adding user to the database', error);
-          res.status(500).json({ message: 'Registration failed', error });
+          res.status(500).json({ message: 'Error Occurred while adding the store', error });
         });
     });
 
