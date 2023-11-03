@@ -12,33 +12,41 @@ import VManageStore from './pages/vendor/VManageStore';
 import VAddProductPage from './pages/vendor/VAddProductPage';
 import HomePage from './pages/customer/HomePage';
 import AllProducts from './components/AllProducts';
+import ProductContext from './context/ProductsContext';
+import { useState } from 'react';
+import { ProductListData } from './utils/data';
 
 function App() {
 
+  const [productList, setProductList] = useState([])
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
+      <ProductContext.Provider value={{productList, setProductList} } >
+        <Routes>
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
 
-        {/* Producted Routes - Authenticated Only */}
-        <Route path='/' element={<HomePage />}>
-          <Route index element={<AllProducts />} />
-          <Route path='/product' element={<ProductPage />} />
-          <Route path='/orders' element={<OrdersPage />} />
-          <Route path='/account' element={<AccountPage />} />
-        </Route>
+          {/* Producted Routes - Authenticated Only */}
+          <Route path='/' element={<HomePage />}>
+            <Route index element={<AllProducts />} />
+            <Route path='/product' element={<ProductPage />} />
+            <Route path='/orders' element={<OrdersPage />} />
+            <Route path='/account' element={<AccountPage />} />
+          </Route>
 
-        {/* Vendor Only Routes - Authentication Required */}
 
-        <Route path='/vendor/home' element={<VHomePage />} />
-        <Route path='/vendor/manage-products' element={<VManageProducts />} />
-        <Route path='/vendor/add-product' element={<VAddProductPage />} />
-        <Route path='/vendor/manage-store' element={<VManageStore />} />
-        {/* END - Producted Routes - Authenticated Only */}
+          {/* Vendor Only Routes - Authentication Required */}
 
-      </Routes>
+          <Route path='/vendor/home' element={<VHomePage />} />
+          <Route path='/vendor/manage-products' element={<VManageProducts />} />
+          <Route path='/vendor/add-product' element={<VAddProductPage />} />
+          <Route path='/vendor/manage-store' element={<VManageStore />} />
+          {/* END - Producted Routes - Authenticated Only */}
+
+        </Routes>
+      </ProductContext.Provider>
     </BrowserRouter>
   );
 }
