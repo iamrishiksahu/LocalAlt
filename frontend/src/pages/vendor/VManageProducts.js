@@ -8,8 +8,6 @@ import {
   Button,
   Typography,
   Rating,
-  useTheme,
-  useMediaQuery,
 } from "@mui/material";
 
 const Product = ({
@@ -17,7 +15,6 @@ const Product = ({
   product_name,
   product_subtitle,
   product_price,
-  product_image,
   quantity_ofprods,
   description,
   category,
@@ -25,58 +22,43 @@ const Product = ({
   online,
   reviews_count,
   rating,
+  product_image, // Include product_image in props
 }) => {
-  const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <Card
-      sx={{
-        backgroundImage: "none",
-        backgroundColor: theme.palette.background.main,
-        borderRadius: "0.55rem",
-      }}
-    >
+    <Card>
       <CardContent>
-        <Typography
-          sx={{ fontSize: 14 }}
-          color={theme.palette.secondary.main}
-          gutterBottom
-        >
-          {category}
-        </Typography>
-        <Typography variant="h5" component="div">
-          {product_name}
-        </Typography>
-        <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary.main}>
-          ${Number(product_price).toFixed(2)}
-        </Typography>
+        <Typography variant="h6">{product_name}</Typography>
+        <Typography>${product_price.toFixed(2)}</Typography>
         <Rating value={rating} readOnly />
-
         <Typography variant="body2">{description}</Typography>
       </CardContent>
       <CardActions>
         <Button
-          variant="primary"
+          variant="outlined"
           size="small"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           See More
         </Button>
       </CardActions>
-      <Collapse
-        in={isExpanded}
-        timeout="auto"
-        unmountOnExit
-        sx={{
-          color: theme.palette.neutral[300],
-        }}
-      >
+      <Collapse in={isExpanded}>
         <CardContent>
-          <Typography>id: {product_id}</Typography>
-          <Typography>Supply Left: {quantity_ofprods}</Typography>
+          <Typography>Product ID: {product_id}</Typography>
+          <Typography>Subtitle: {product_subtitle}</Typography>
+          <Typography>Quantity: {quantity_ofprods}</Typography>
+          <Typography>Category: {category}</Typography>
           <Typography>Sub Category: {sub_category}</Typography>
-          <Typography>product_subtitle: {product_subtitle}</Typography>
+          <Typography>Online: {online ? "Yes" : "No"}</Typography>
+          <Typography>Reviews Count: {reviews_count}</Typography>
+          <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            DELETE
+          </Button>
         </CardContent>
       </Collapse>
     </Card>
@@ -84,77 +66,70 @@ const Product = ({
 };
 
 const VManageProducts = () => {
-  const isNonMobile = useMediaQuery("(min-width:1000px)");
-  //calls backend to grab data
-
   const [data, setData] = useState([
     {
       "product_id": "P12345",
-      "product_name": "Example Product",
-      "product_subtitle": "A fantastic product for your needs",
+      "product_name": "Product A",
+      "product_subtitle": "An amazing product for your needs",
       "product_price": 29.99,
-      "product_image": "product_image_url.jpg",
+      "product_image": "product_a_image.jpg",
       "quantity_ofprods": 100,
-      "description": "This is a high-quality example product description. It includes all the important details about the product and its features.",
+      "description": "Product A is a high-quality example product. It has great features and is perfect for your needs.",
       "category": "Electronics",
       "sub_category": "Smartphones",
       "online": true,
       "reviews_count": 25,
       "rating": 4.5
+    },
+    {
+      "product_id": "P67890",
+      "product_name": "Product B",
+      "product_subtitle": "A versatile and affordable product",
+      "product_price": 19.99,
+      "product_image": "product_b_image.jpg",
+      "quantity_ofprods": 50,
+      "description": "Product B is a versatile and affordable product with a range of applications.",
+      "category": "Home & Garden",
+      "sub_category": "Kitchen Appliances",
+      "online": true,
+      "reviews_count": 10,
+      "rating": 4.0
+    },
+    {
+      "product_id": "P54321",
+      "product_name": "Product C",
+      "product_subtitle": "The latest innovation in technology",
+      "product_price": 49.99,
+      "product_image": "product_c_image.jpg",
+      "quantity_ofprods": 75,
+      "description": "Product C is the latest innovation in technology, offering advanced features and functionality.",
+      "category": "Electronics",
+      "sub_category": "Gadgets",
+      "online": true,
+      "reviews_count": 30,
+      "rating": 4.8
     }
-
   ]);
-  // console.log(data);
+
+  console.log(data);
   return (
     <Box m="1.5rem 2.5rem">
-      {/* {data || !isLoading ? ( */}
-      <Box
-        mt="20px"
-        display="grid"
-        gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-        justifyContent="space-between"
-        rowGap="20px"
-        columnGap="1.33%"
-        sx={{
-          "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-        }}
-      >
-        {data.map(
-          ({
-            product_id,
-            product_name,
-            product_subtitle,
-            product_price,
-            product_image,
-            quantity_ofprods,
-            description,
-            category,
-            sub_category,
-            online,
-            reviews_count,
-            rating,
-          }) => (
-            <Product
-              key={product_id}
-              product_id={product_id}
-              product_name={product_name}
-              product_subtitle={product_subtitle}
-              product_price={product_price}
-              product_image={product_image}
-              quantity_ofprods={quantity_ofprods}
-              description={description}
-              category={category}
-              sub_category={sub_category}
-              online={online}
-              reviews_count={reviews_count}
-              rating={rating}
-            />
-          )
-        )}
-      </Box>
-      {/* ) : (
+      {data ? (
+        <Box
+          mt="20px"
+          display="grid"
+          gridTemplateColumns="repeat(3, minmax(0, 1fr))"
+          justifyContent="space-between"
+          rowGap="20px"
+          columnGap="1.33%"
+        >
+          {data.map((product) => (
+            <Product key={product.product_id} {...product} />
+          ))}
+        </Box>
+      ) : (
         <>Loading...</>
-      )} */}
+      )}
     </Box>
   );
 };
