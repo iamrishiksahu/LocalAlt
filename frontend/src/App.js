@@ -35,7 +35,7 @@ function App() {
         {/* Vendor Only Routes - Authentication Required */}
 
         <Route path='/vendor/home' element={<VHomePage />} />
-        <Route path='/vendor/manage-products' element={<VHomePage />} />
+        <Route path='/vendor/manage-products' element={<VManageProducts />} />
         <Route path='/vendor/add-product' element={<VAddProductPage />} />
         <Route path='/vendor/manage-store' element={<VManageStore />} />
         {/* END - Producted Routes - Authenticated Only */}
