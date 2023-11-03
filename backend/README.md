@@ -188,7 +188,7 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 }
 ```
 
-### add a product 
+### add a product (NOTE: Please take care of 's' in Products and Product (got stuck while implementing this :P))
 - POST(http://localhost:8001/products/add-product)
 
 - body:
@@ -217,4 +217,7 @@ IMPORTANT: role is 0 for customer and 1 for vendor
     "status": 200
 }
 ```
+
+### get all products (DISCLAIMER: NOT FILTERED WITH THE DISTANCE)
+- GET(http://localhost:8001/products/all-products)
 
