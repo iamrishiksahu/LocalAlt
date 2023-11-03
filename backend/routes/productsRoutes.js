@@ -57,23 +57,26 @@ const productsRoutes = (db, firebaseApp) => {
         });
     });
 
-    // router.get('/store-details', (req, res) => {
-    //     const storeRef = collection(dbs, 'stores');
+    //DISCLAIMER: this gives all products listed on the database. This is not the way to go in production.
+    router.get('/all-products', (req, res) => {
+        const productRef = collection(dbs, 'products');
         
-    //     getDocs(storeRef)
-    //         .then((snapshot) => {
-    //             const stores = [];
-    //             snapshot.forEach((doc) => {
-    //                 stores.push({ id: doc.id, data: doc.data() });
-    //             });
-    //             // Send the retrieved data as a response to the client
-    //             res.status(200).json({ stores });
-    //         })
-    //         .catch((error) => {
-    //             console.log('Error getting documents: ', error);
-    //             res.status(500).json({ error: 'Failed to retrieve stores' });
-    //         });
-    // });
+        getDocs(productRef)
+            .then((snapshot) => {
+                const products = [];
+                snapshot.forEach((doc) => {
+                    products.push({ id: doc.id, data: doc.data() });
+                });
+                // Send the retrieved data as a response to the client
+                res.status(200).json({ products });
+            })
+            .catch((error) => {
+                console.log('Error getting products: ', error);
+                res.status(500).json({ error: 'Failed to retrieve products' });
+            });
+    });
+
+    //This gives products filtered by the distance from the user's location (it gives in a 5km radius)
       return router;
   };
  
