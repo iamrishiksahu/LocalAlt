@@ -1,8 +1,9 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
 const AccountPage = () => {
   return (
-    <div>AccountPage</div>
+    <Typography>AccountPage</Typography>
   )
 }
 

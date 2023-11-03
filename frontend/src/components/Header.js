@@ -1,28 +1,34 @@
 import React, { useContext, useRef, useState } from 'react'
-import { TextField, Box, Autocomplete, IconButton, FormGroup } from "@mui/material";
+import { TextField, Box, Autocomplete, IconButton, FormGroup, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
 import { searchProductsByQuery } from '../api/productApis';
 import { ProductListData } from '../utils/data';
 import ProductContext from '../context/ProductsContext';
+import { getPlaceNameWithLatLong } from '../api/mapApis';
 
 
 const Header = () => {
 
     const searchRef = useRef()
 
-    const {productList, setProductList} = useContext(ProductContext)
+    const { productList, setProductList } = useContext(ProductContext)
 
     const navigate = useNavigate();
 
     const [location, setLocation] = useState()
 
-    var successHandler = function (position) {
-        alert(position.coords.latitude);
-        alert(position.coords.longitude);
+    const successHandler = async (position) => {
+        const lat = (position.coords.latitude);
+        const lon = (position.coords.longitude);
+
+        console.log(lat, lon)
+        const res = await getPlaceNameWithLatLong({lat, lon})
+        console.log(res)
+       
     };
 
-    var errorHandler = function (errorObj) {
-        alert(errorObj.code + ": " + errorObj.message);
+    const errorHandler = (err) => {
+        alert(err.code + ":" + err.message);
     }
 
     const searchWithQuery = async () => {
@@ -30,7 +36,6 @@ const Header = () => {
         console.log(query);
         // const list = await searchProductsByQuery({ query: query })
 
-        setProductList(ProductListData)
 
         //this list has to be sent to the state
     }
@@ -38,7 +43,6 @@ const Header = () => {
 
     const handleLogoClick = (e) => {
         e.preventDefault()
-
 
         navigator.geolocation.getCurrentPosition(
             successHandler, errorHandler,
@@ -129,7 +133,7 @@ const Header = () => {
                         }}>
                         account_circle
                     </span>
-                    <span style={{ fontSize: '0.75rem' }}>Accounts</span>
+                    <Typography style={{ fontSize: '0.75rem' }}>Accounts</Typography>
 
                 </IconButton>
 
@@ -142,7 +146,7 @@ const Header = () => {
                         }}>
                         package_2
                     </span>
-                    <span style={{ fontSize: '0.75rem' }}>Orders</span>
+                    <Typography style={{ fontSize: '0.75rem' }}>Orders</Typography>
 
                 </IconButton>
 

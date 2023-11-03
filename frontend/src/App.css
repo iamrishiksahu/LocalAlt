@@ -4,16 +4,17 @@
   text-decoration: none;
   font-size: 14px;
   box-sizing: border-box;
+  font-family: 'Inter, sans-serif';
 }
 
 
-body{
+body {
   padding: 0;
   margin: 0;
+
 }
 
-.link-text{
+.link-text {
   text-decoration: none;
-  font-family: 'Inter';
+  font-family: 'Inter, sans-serif';
 }
-

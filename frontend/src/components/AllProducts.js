@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import ProductListItem from './ProductListItem'
 import { Box } from '@mui/material'
 import ProductContext from '../context/ProductsContext'
-import { ProductListData } from '../utils/data'
+import HeaderProgress from './HeaderProgress'
 
 const AllProducts = () => {
 
@@ -20,12 +20,12 @@ const AllProducts = () => {
 
         }}>
 
-            {productList ? productList.map((item, idx) => {
+            {productList.length > 0 ? productList.map((item, idx) => {
 
                 return (
                     <ProductListItem key={idx} data={item} />
                 )
-            }) : <></>}
+            }) : <HeaderProgress/>}
 
         </Box>
     )

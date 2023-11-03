@@ -18,7 +18,7 @@ import { ProductListData } from './utils/data';
 
 function App() {
 
-  const [productList, setProductList] = useState([])
+  const [productList, setProductList] = useState(ProductListData)
 
   return (
     <BrowserRouter>
