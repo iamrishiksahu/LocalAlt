@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
-import { TextField, Box, Autocomplete, IconButton } from "@mui/material";
+import React, { useContext, useRef, useState } from 'react'
+import { TextField, Box, Autocomplete, IconButton, FormGroup } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
+import { searchProductsByQuery } from '../api/productApis';
+import { ProductListData } from '../utils/data';
+import ProductContext from '../context/ProductsContext';
 
 
 const Header = () => {
+
+    const searchRef = useRef()
+
+    const {productList, setProductList} = useContext(ProductContext)
 
     const navigate = useNavigate();
 
@@ -18,11 +25,19 @@ const Header = () => {
         alert(errorObj.code + ": " + errorObj.message);
     }
 
+    const searchWithQuery = async () => {
+        const query = searchRef.current.value;
+        console.log(query);
+        // const list = await searchProductsByQuery({ query: query })
+
+        setProductList(ProductListData)
+
+        //this list has to be sent to the state
+    }
+
 
     const handleLogoClick = (e) => {
         e.preventDefault()
-
-
 
 
         navigator.geolocation.getCurrentPosition(
@@ -42,8 +57,7 @@ const Header = () => {
                 justifyContent: 'space-around',
                 maxWidth: '100vw',
                 backgroundColor: 'white',
-                boxShadow: '10px 0 30px #00000010'
-
+                boxShadow: '10px 0 30px #00000010',
             }}
         >
 
@@ -80,11 +94,18 @@ const Header = () => {
             </Box>
 
             {/* Search box */}
+
+
             <TextField
                 variant="outlined"
                 placeholder="Search"
                 size="small"
-
+                inputRef={searchRef}
+                onKeyDown={(e) => {
+                    if (e.key == 'Enter') {
+                        searchWithQuery()
+                    }
+                }}
                 sx={{
                     backgroundColor: '#f8f8f8',
                     border: '1px solid #afafaf',
