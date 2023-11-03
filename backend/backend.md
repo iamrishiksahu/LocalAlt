@@ -1,6 +1,6 @@
 
 ### Developer Documentation
-- index.js is the base entry file 
+- index.js is the base level entry file 
 - routes are defined inside the routes folder
 - default port is 8001
 - https://chat.openai.com/share/8acba82a-5cd4-4a0e-9c13-e299d54f1d84 (check out the part in boilerplate codes for controllers and routes)
@@ -15,12 +15,20 @@
 IMPORTANT: role is 0 for customer and 1 for vendor
 ```
 {
-  "name":"test",
-  "email": "test@gmail.com",
+  "name":"test123",
+  "email": "testalpha@gmail.com",
   "password":"test@123",
   "role":"0",
   "contact":"1234567890",
-  "location":"test"
+  "locality":"Kanke",
+  "longitude":"24",
+  "latitude":"37",
+  "address": {
+      "address_line_1":"sample address",
+      "address_line_2":"sample address2",
+      "city":"Ranchi",
+      "pincode":"800001"
+  }
 }
 ```
 - Payload- 
@@ -28,20 +36,29 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 {
     "message": "Registration successful",
     "user": {
-        "uid": "DWkNxf2oJdfnJJM4MkdWZYG1gJz2",
-        "email": "test@gmail.com",
+        "uid": "b6WmnL9gvrN92D901HvM46adbNl2",
+        "documentId": "b6WmnL9gvrN92D901HvM46adbNl2",
+        "email": "testalpha@gmail.com",
         "emailVerified": false,
         "phoneNumber": "1234567890",
-        "displayName": "test",
+        "displayName": "test123",
         "role": "0",
-        "location": "test",
+        "location": "Kanke",
+        "longitude": "24",
+        "latitude": "37",
+        "address": {
+            "address_line_1": "sample address",
+            "address_line_2": "sample address2",
+            "city": "Ranchi",
+            "pincode": "800001"
+        },
         "tenantId": null,
         "providerData": [
             {
                 "providerId": "password",
-                "uid": "test@gmail.com",
+                "uid": "testalpha@gmail.com",
                 "displayName": null,
-                "email": "test@gmail.com",
+                "email": "testalpha@gmail.com",
                 "phoneNumber": null,
                 "photoURL": null
             }

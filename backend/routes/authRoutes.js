@@ -14,12 +14,15 @@ module.exports = (auth,db) => {
   password,
   role,
   contact,
-  location,
+  locality,
+  longitude,
+  latitude,
+  address,
   }
    */
 
   router.post('/register', (req, res) => {
-    const { name, email, password, role, contact, location } = req.body;
+    const { name, email, password, role, contact, locality, longitude, latitude,address } = req.body;
 
     // First, as soon as we have the email and password, we create the user in the auth table
     createUserWithEmailAndPassword(auth, email, password)
@@ -36,7 +39,10 @@ module.exports = (auth,db) => {
           user_name: name,
           user_contact: contact,
           user_email: email,
-          user_location: location
+          user_locality: locality,
+          user_longitude: longitude,
+          user_latitude: latitude,
+          user_address: address,
         },{id: userUID, merge: true})
           .then(() => {
             console.log('User added to the database');
@@ -49,7 +55,10 @@ module.exports = (auth,db) => {
               phoneNumber: contact,
               displayName: name,
               role: role,
-              location: location,
+              location: locality,
+              longitude: longitude,
+              latitude: latitude,
+              address: address,
               tokensValidAfterTime: userCredential.user.tokensValidAfterTime,
               tenantId: userCredential.user.tenantId,
               providerData: userCredential.user.providerData,
