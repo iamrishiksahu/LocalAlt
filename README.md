@@ -3,6 +3,10 @@
 ## Description
 LocalAlt is a web platform that bridges the gap between local stores and online consumers, empowering shoppers to browse products, compare prices, place orders, and find store locations immediate purchase. LocalAlt also helps stores showcase their inventory to a wider audience, boosting sales.
 
+## Wireframing and Conceptualisation
+
+- Initial Design Link : https://drive.google.com/file/d/136GoPETNLGbnVCcAZwYipJCZkmP_eeKr/view?usp=sharing
+
 ## Problem Statement
 - Offline stores are unable to reach a wider audience. 
 - Customer are currently unable to find the best deals locally.
