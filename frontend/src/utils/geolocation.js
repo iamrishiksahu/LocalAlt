@@ -5,8 +5,6 @@ const successHandler = async (position) => {
     localStorage.setItem('latitude', lat);
     localStorage.setItem('longitude', lon);
 
-    // console.log(lat, lon);
-
 };
 
 const errorHandler = (err) => {
@@ -24,4 +22,12 @@ const getCurrentLocation = async () => {
     );
 }
 
-export { getCurrentLocation }
+const getLatLong = async ()=> {
+    await getCurrentLocation()
+    const lat = localStorage.getItem('latitude')
+    const lon = localStorage.getItem('longitude')
+    return { lat,lon }
+
+}
+
+export { getCurrentLocation, getLatLong }

@@ -14,16 +14,13 @@ const AllProducts = () => {
     useEffect(() => {
 
         getAllProduct().then((data) => {
-            setShowProgress(false)
             setProductList(data)
+            setShowProgress(false)
         })
 
     }, [])
 
     useEffect(() => {
-
-        console.log(productList? {...productList} : 'nahi aaya')
-
 
     }, [productList])
 
