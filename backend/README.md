@@ -4,6 +4,8 @@
 - routes are defined inside the routes folder
 - default port is 8001
 
+# vendor= uid=zGL8PUJJ3NcdruVeFGDJG91hLBF2
+# customer= uid=eBgnibrTPqMG0QmBjtwv9KVnnRj2
 
 ## endpoints
 
@@ -14,19 +16,19 @@
 IMPORTANT: role is 0 for customer and 1 for vendor
 ```
 {
-  "name":"test123",
-  "email": "testalpha@gmail.com",
-  "password":"test@123",
-  "role":"0",
-  "contact":"1234567890",
-  "locality":"Kanke",
-  "longitude":"24",
-  "latitude":"37",
+  "name":"Rishik Sahu",
+  "email": "iamrishiksahu@gmail.com",
+  "password":"test@aryan",
+  "role":"1",
+  "contact":"9470380221",
+  "locality":"Ranchi",
+  "longitude":"85.015",
+  "latitude":"23.06",
   "address": {
-      "address_line_1":"sample address",
-      "address_line_2":"sample address2",
+      "address_line_1":"Shop 156, Hostel 5, BIT Mesra",
+      "address_line_2":"Ranchi",
       "city":"Ranchi",
-      "pincode":"800001"
+      "pincode":"835215"
   }
 }
 ```
@@ -72,8 +74,8 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 - body: 
 ```
 {
-  "email": "mike@test.com",
-  "password": "test@123"
+  "email": "aryanraj2k25@gmail.com",
+  "password": "test@aryan"
 }
 ```
 - payload format
@@ -81,27 +83,27 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 {
     "message": "Login successful",
     "user": {
-        "uid": "bmGWhpFLhAeOrakNckqcKEAMWMG3",
-        "email": "mike@test.com",
+        "uid": "eBgnibrTPqMG0QmBjtwv9KVnnRj2",
+        "email": "aryanraj2k25@gmail.com",
         "emailVerified": false,
         "isAnonymous": false,
         "providerData": [
             {
                 "providerId": "password",
-                "uid": "mike@test.com",
+                "uid": "aryanraj2k25@gmail.com",
                 "displayName": null,
-                "email": "mike@test.com",
+                "email": "aryanraj2k25@gmail.com",
                 "phoneNumber": null,
                 "photoURL": null
             }
         ],
         "stsTokenManager": {
-            "refreshToken": "AMf-vByyCJ_cX8f6Txe7k2cvYn5a8pCZ36c-IC2SkfBGz_kcz0Zre9kO1S6tc0Ihxxm2W9sSzxpxq-1IJCy8mqAEhYnsXm0iJL55GAciDC52Fdv6e0tEjEu5RG0hMvflT87_WOuzztpau7VcfELHXfggi3S8_4lkYd8fbgKIxuCvoksR-RDS1mbwBuQvWsjsIV03uMXd0tND",
-            "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjBkMGU4NmJkNjQ3NDBjYWQyNDc1NjI4ZGEyZWM0OTZkZjUyYWRiNWQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWxhbHQiLCJhdWQiOiJsb2NhbGFsdCIsImF1dGhfdGltZSI6MTY5ODk1MTk4MiwidXNlcl9pZCI6ImJtR1docEZMaEFlT3Jha05ja3FjS0VBTVdNRzMiLCJzdWIiOiJibUdXaHBGTGhBZU9yYWtOY2txY0tFQU1XTUczIiwiaWF0IjoxNjk4OTUxOTgyLCJleHAiOjE2OTg5NTU1ODIsImVtYWlsIjoibWlrZUB0ZXN0LmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJtaWtlQHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.BiMRlLRwNXss4u5EP4AR-s1BL70y02n5IU2bFfvzMrMe4ohQbv225YR_iiCP4rQcBT7GbNsJCRF-OhlB50ga9sZ3mqGCD1e413w0A_ztFyBZI-0xnB_2zFOq1UvdtgrBmFGJ79LAROOJDvrRNUF0YS2zoQw-i8N9SSiThTjZnwbl2roxkJAo4Q4dYgheogzaYz8dc7kBym-11HYpDRQaSyV4CAhA3Gz5rJg31HvnV17gzkhnyex1KW_vZxwtQAnHZPtKKR_6pDScUmIm1VUQQUeIdMnEtWRWp97869ghnrjWyrbUOEVlMYdBcpV_dr8mfecW3XxbjaLSd7ETfFpojQ",
-            "expirationTime": 1698955582646
+            "refreshToken": "AMf-vBwOM5WlW8jFvo3b5rrPssgQLve0AtCeccTVd8g1FX9XYMNG1eGnxHRB0ibPU2-iAw4oYCd_huGlTma7LBGg02rwl5E1-J2LJP_nVcYJE54gJMQhONodUSXkqa-GdnNXSYyXw8L9Fug8249XcYwoCZG6cFmhhaxIKejqCVwyc8WjWRUTf7np-pD12f6G5iTJ0d5anz2y",
+            "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQ0OWU0N2ZiZGQ0ZWUyNDE0Nzk2ZDhlMDhjZWY2YjU1ZDA3MDRlNGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWxhbHQiLCJhdWQiOiJsb2NhbGFsdCIsImF1dGhfdGltZSI6MTY5OTEwNjE1OSwidXNlcl9pZCI6ImVCZ25pYnJUUHFNRzBRbUJqdHd2OUtWbm5SajIiLCJzdWIiOiJlQmduaWJyVFBxTUcwUW1CanR3djlLVm5uUmoyIiwiaWF0IjoxNjk5MTA2MTU5LCJleHAiOjE2OTkxMDk3NTksImVtYWlsIjoiYXJ5YW5yYWoyazI1QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhcnlhbnJhajJrMjVAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.d64NWlLlrplU9eK1xzmFw6WO6Z4knzaHc585jkUO81jJlhlFzv9TnUWiaSWueH93k07ADTratHxmenCZdXDsbncljyweO8vlp7spAe0VwkOEDBV_UcwN1etXtC_QN7cBOG41ZTFY7meGBdHZqA2kc9HuykAkIvTQ6L6aQnvUdpCVZ-x6AYrJUZ4g8TB0ahdAuwN-EvtU2IxJ4rIWtzg_SAp7yyXi13uPr5Bfp5nIlU_Lvd5CHMqu3DLXKJIpL9lrmXan8tbxH2AYmXaY70XFbetE5ujNFJqRAeZdFp0mXy_ok_HJVINj1RH-9qncr62gPWjTb7cKFVTK5sPVKRjSAA",
+            "expirationTime": 1699109760052
         },
-        "createdAt": "1698941473248",
-        "lastLoginAt": "1698951982523",
+        "createdAt": "1699105563696",
+        "lastLoginAt": "1699106159949",
         "apiKey": "AIzaSyBVdo0lgjLhsSO5StQbo3n7I2ttiTkDY_8",
         "appName": "[DEFAULT]"
     }
@@ -142,22 +144,18 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 {
     "stores": [
         {
-            "id": "store_id",
+            "id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
             "data": {
-                "address": {
-                    "address_line_2": "test",
-                    "city": "Ranchi",
-                    "pincode": "800001",
-                    "address_line_1": "behind h5"
-                },
-                "store_id": "store_jcgc7883ggagjdcg99v9s",
-                "longitude": "67",
-                "store_owner": "Chotu",
-                "city": "Ranchi",
-                "store_name": "Chotu-Dhaba",
-                "uid": "jcgc7883ggagjdcg99v9s",
-                "locality": "Mesra",
-                "latitude": "93"
+                "store_name": "Sai Honda",
+                "address": "East Jail Road, near Nucleus Mall, Lalpur",
+                "locality": "Lalpur",
+                "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+                "longitude": "85.03",
+                "uid": "zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+                "store_owner": "Rishik Kumar Sahu",
+                "contact": "7209440551",
+                "latitude": "23.05",
+                "city": "Ranchi"
             }
         }
     ]
@@ -168,14 +166,17 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 - body:
 ```
 {
-    "store_name": "My Store",
-    "address": "123 Main Street",
-    "store_owner": "John Doe",
-    "uid": "user456",
-    "city": "New York",
-    "locality": "Downtown",
-    "longitude": "40.7128",
-    "latitude": "-74.0060"
+    {
+    "store_name": "Sai Honda",
+    "address": "East Jail Road, near Nucleus Mall, Lalpur",
+    "store_owner": "Rishik Kumar Sahu",
+    "uid": "zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+    "city": "Ranchi",
+    "locality": "Lalpur",
+    "longitude": "85.03",
+    "latitude": "23.05",
+    "contact": "7209440551"
+}
 }
 
 ```
@@ -183,7 +184,11 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 - payload format
 ```
 {
-    "message": "Store created successfully"
+    "message": "Store Registered successful",
+    "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+    "store_name": "Sai Honda",
+    "store_owner": "Rishik Kumar Sahu",
+    "uid": "zGL8PUJJ3NcdruVeFGDJG91hLBF2"
 }
 ```
 
@@ -193,10 +198,10 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 - body:
 ```
 {
-  "product_name": "OnePlus Phone",
+  "product_name": "Apple Phone",
   "subtitle": "Smart Phone",
   "description": "Sample Phone Description",
-  "price": 10.99,
+  "price": 54000,
   "quantity": 100,
   "images": ["https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg", 
   "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
@@ -206,21 +211,20 @@ IMPORTANT: role is 0 for customer and 1 for vendor
   "availability": true,
   "rating": 4.5,
   "reviews_count": 25,
-  "store_id": "store_user456"
+  "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2"
 }
-
 ```
 - payload format
 ```
 {
     "message": "Product added successfully",
     "product_added": true,
-    "product_id": "d2872db2-7f9f-44a7-854d-2ff3c755f765",
+    "product_id": "9becfe8d-3e2c-4197-b60c-9d6157d586b8",
     "status": 200,
     "storeDataFromStoreId": {
-        "store_name": "My Store",
-        "latitude": 23.06,
-        "longitude": 85.015
+        "store_name": "Sai Honda",
+        "latitude": "23.05",
+        "longitude": "85.03"
     }
 }
 ```
@@ -231,7 +235,7 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 ### get individual product
 - GET(http://localhost:8001/products/:product_id)
 
-Path Variable: product_id=product450
+Path Variable: product_id=9becfe8d-3e2c-4197-b60c-9d6157d586b8
 
 - payload format
 ```

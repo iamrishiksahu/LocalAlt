@@ -14,13 +14,14 @@ const storeRoutes = (db, firebaseApp) => {
     locality,
     longitude,
     latitude,
-    city
+    city,
+    phone
     }
      */
     const dbs=getFirestore(firebaseApp);
   
     router.post('/store-details', (req, res) => {
-      const { store_name, address, store_owner,uid, locality,longitude,latitude,city } = req.body;
+      const { store_name, address, store_owner,uid, locality,longitude,latitude,city,contact } = req.body;
       store_id="store_"+uid;
       console.log(store_id);
       setDoc(doc(dbs, 'stores',store_id),{
@@ -33,13 +34,17 @@ const storeRoutes = (db, firebaseApp) => {
         locality:locality,
         longitude:longitude,
         latitude:latitude,
+        contact:contact
       })
         .then(() => {
           console.log('Store Listed on the database');
-          res.status(200).json({ message: 'Store Registered successful', 
-          user:{
-            "test successful": "test successful"
-          } });
+          res.status(200).json({ 
+            message: 'Store Registered successful',
+            store_id:store_id,
+            store_name:store_name,
+            store_owner:store_owner,
+            uid:uid,
+          });
         })
         .catch((error) => {
           console.log('Error occurred while adding user to the database', error);
