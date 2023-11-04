@@ -20,6 +20,11 @@ import { ProductListData } from './utils/data';
 function App() {
 
   const [productList, setProductList] = useState(ProductListData)
+<<<<<<< Updated upstream
+=======
+
+  const [user, setUser] = useState({});
+>>>>>>> Stashed changes
 
   return (
     <BrowserRouter>
@@ -29,6 +34,7 @@ function App() {
           <Route path='/signup' element={<SignUpPage />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
 
+<<<<<<< Updated upstream
           {/* Producted Routes - Authenticated Only */}
           <Route path='/' element={<HomePage />}>
             <Route index element={<AllProducts />} />
@@ -36,6 +42,23 @@ function App() {
             <Route path='/orders' element={<OrdersPage />} />
             <Route path='/account' element={<AccountPage />} />
           </Route>
+=======
+
+      <AuthContext.Provider value={{ user, setUser }}>
+        <ProductContext.Provider value={{ productList, setProductList }} >
+          <Routes>
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/signup' element={<SignUpPage />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+
+            {/* Producted Routes - Authenticated Only */}
+            <Route path='/' element={<HomePage />}>
+              <Route index element={<AllProducts />} />
+              <Route path='/product/:id' element={<ProductPage />} />
+              <Route path='/orders' element={<OrdersPage />} />
+              <Route path='/account' element={<AccountPage />} />
+            </Route>
+>>>>>>> Stashed changes
 
 
           {/* Vendor Only Routes - Authentication Required */}
