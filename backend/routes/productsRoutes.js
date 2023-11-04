@@ -114,7 +114,7 @@ const productsRoutes = (db, firebaseApp) => {
     router.post('/products-by-distance', (req, res) => {
       const longitude=req.body.longitude;
       const latitude=req.body.latitude;
-      const maxDistance = 10;
+      const maxDistance = 80;
       // const distance=req.body.distance;
       // const maxDistance = (parseFloat)distance;
       const filteredStores = []; 
@@ -227,5 +227,5 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   };
 
 
- 
+
   module.exports = productsRoutes;
