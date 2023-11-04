@@ -5,11 +5,13 @@ import { searchProductsByQuery } from '../api/productApis';
 import { ProductListData } from '../utils/data';
 import ProductContext from '../context/ProductsContext';
 import { getPlaceNameWithLatLong } from '../api/mapApis';
+import { useTheme } from '@emotion/react';
 
 
 const Header = () => {
 
     const searchRef = useRef()
+    const theme = useTheme();
 
     const { productList, setProductList } = useContext(ProductContext)
     const [currentLocation, setCurrentLocation] = useState('Locate')
@@ -33,7 +35,6 @@ const Header = () => {
             setCurrentLocation(res)
         }
         setShowLocationProgress(false)
-
 
     };
 
@@ -72,7 +73,7 @@ const Header = () => {
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 maxWidth: '100vw',
-                backgroundColor: 'white',
+                backgroundColor: theme.palette.primary.main,
                 boxShadow: '10px 0 30px #00000010',
             }}
         >
@@ -128,7 +129,11 @@ const Header = () => {
                         {showLocationProgress ? <CircularProgress sx={{ marginLeft: '2rem' }} size={'1rem'} /> : <Typography sx={{ overflow: 'hidden' }}>{currentLocation}</Typography>}
                     </Box>
 
+<<<<<<< HEAD
                     <span class="material-symbols-outlined"
+=======
+                    <span className="material-symbols-outlined"
+>>>>>>> 43ef8337ae082326f64c208a5b4b7096a21af018
                         style={{
                             color: '#b50101',
                             backgroundColor: '#f0f0f0',
@@ -173,10 +178,11 @@ const Header = () => {
 
                 <IconButton aria-label="account"
                     onClick={() => navigate('/account')}
-                    sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <span class="material-symbols-outlined"
+                    sx={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
+                    <span className="material-symbols-outlined"
                         style={{
                             fontSize: '2rem',
+
                         }}>
                         account_circle
                     </span>
@@ -186,8 +192,8 @@ const Header = () => {
 
                 <IconButton aria-label="orders"
                     onClick={() => navigate('/orders')}
-                    sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <span class="material-symbols-outlined"
+                    sx={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
+                    <span className="material-symbols-outlined"
                         style={{
                             fontSize: '2rem',
                         }}>

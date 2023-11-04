@@ -1,26 +1,25 @@
 import axiosApi from "../utils/axiosConfig";
 
-const searchProductsByQuery = async ({query}) => {
+const searchProductsByQuery = async ({ query }) => {
 
-    try{
+    try {
         const data = await axiosApi.get(`/products/search?query=${query}`)
-        if(data){
-            console.log(data)    
+        if (data) {
+            console.log(data)
         }
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 
 }
-
-const getSingleProductWithId = async ({id}) => {
-    try{
+const getSingleProductWithId = async ({ id }) => {
+    try {
         const data = await axiosApi.get(`/products/${id}`)
         console.log(data)
         return data.data.product
-    }catch(err){
+    } catch (err) {
         console.log(err)
-        return {isError: true, ...err}
+        return { isError: true, ...err }
     }
 }
-export {searchProductsByQuery, getSingleProductWithId}
+export { searchProductsByQuery, getSingleProductWithId }

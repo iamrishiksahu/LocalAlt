@@ -6,9 +6,11 @@ import {
   Button,
   Box,
   Typography,
+  Input
 
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import ImageUpload from "../../components/ImageUpload";
 
 const VAddProductPage = () => {
   const handleSubmit = (event) => {
@@ -16,11 +18,12 @@ const VAddProductPage = () => {
     const data = new FormData(event.currentTarget);
 
     console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      location: data.get("location"),
-      phone: data.get("phone"),
+      subtitle: data.get("subtitle"),
+      Description: data.get("Description"),
+      quantity: data.get("quantity"),
+      category: data.get("category"),
     });
+
   };
 
   return (
@@ -42,60 +45,72 @@ const VAddProductPage = () => {
           ADD PRODUCT
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
+
           <TextField
             margin="normal"
             required
             fullWidth
-            id="name"
+            id="product_name"
             label="Product Name"
-            name="name"
+            name="product_name"
             autoFocus
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
+            id="subtitle"
+            label="Product Subtitle"
+            name="subtitle"
             autoFocus
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
+            name="description"
+            label="Description"
+
+            id="description"
           />
           <TextField
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Confirm Password"
-            type="password"
-            id="cpassword"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="location"
-            label="Location"
-            type="string"
-            id="location"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="phone"
-            label="Phone"
+            name="price"
+            label="Price"
             type="number"
-            id="phone"
+            id="price"
           />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="quantity"
+            label="Quantity"
+            type="number"
+            id="quantity"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="category"
+            label="Category"
+            type="string"
+            id="category"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="sub_category"
+            label="Sub Category"
+            type="string"
+            id="sub_category"
+          />
+          <ImageUpload />
           <Button
             type="submit"
             fullWidth
@@ -103,17 +118,12 @@ const VAddProductPage = () => {
             color="primary"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Add Product
           </Button>
           <Grid container>
             <Grid item xs>
               <Link to="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link to="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                Cancel
               </Link>
             </Grid>
           </Grid>
