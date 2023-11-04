@@ -195,12 +195,12 @@ const Header = () => {
                         style={{
                             fontSize: '2rem',
                         }}>
-                        package_2
+                        favorite
                     </span>
                     <Typography sx={{
                         fontSize: '0.75rem',
                         display: { md: 'block', xs: 'none', sm: 'none' },
-                    }}>Orders</Typography>
+                    }}>Wishlist</Typography>
 
                 </IconButton>
 

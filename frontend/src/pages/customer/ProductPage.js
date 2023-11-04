@@ -12,6 +12,9 @@ const ProductPage = () => {
   const [data, setData] = useState({})
   const { user, setUser } = useContext(AuthContext);
 
+  const locateStore = () => {
+    window.open(`https://www.google.com/maps/search/?api=1&query=${data?.store_data?.latitude}%2C${data?.store_data?.longitude}`, '_blank')
+  }
 
   useEffect(() => {
     getSingleProductWithId({ id }).then((res) => {
@@ -79,7 +82,7 @@ const ProductPage = () => {
 
                 <Box
 
-                  onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${data?.store_data?.latitude}%2C${data?.store_data?.longitude}`, '_blank')}
+                  onClick={locateStore}
 
                   sx={{
                     display: 'flex',
@@ -97,15 +100,17 @@ const ProductPage = () => {
 
                 </Box>
 
-                <Box sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '1rem',
-                  backgroundColor: 'background.main',
-                  padding: '0.25rem 1rem',
-                  borderRadius: '0.5rem',
-                  cursor: 'pointer'
-                }}>
+                <Box
+                  onClick={() => window.open(`tel:${data?.store_data?.phone}`, '_blank')}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    backgroundColor: 'background.main',
+                    padding: '0.25rem 1rem',
+                    borderRadius: '0.5rem',
+                    cursor: 'pointer'
+                  }}>
                   <span class="material-symbols-outlined">
                     call
                   </span>
@@ -150,10 +155,12 @@ const ProductPage = () => {
 
               <Button variant={'contained'} sx={{
                 width: 'max-content'
-              }}>Buy Now</Button>
-              <Button variant={'outlined'} sx={{
-                width: 'max-content'
-              }}>Visit Store</Button>
+              }}>+ Wishlist</Button>
+              <Button
+                onClick={locateStore}
+                variant={'outlined'} sx={{
+                  width: 'max-content'
+                }}>Visit Store</Button>
 
             </Box>
 
