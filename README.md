@@ -102,7 +102,7 @@ Interested in contributing to LocalAlt ? Contact us for details on our code of c
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](path_to_license.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for details.
 
 ---
 
