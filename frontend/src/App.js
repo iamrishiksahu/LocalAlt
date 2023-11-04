@@ -16,13 +16,14 @@ import ProductContext from './context/ProductsContext';
 import { useState } from 'react';
 import { ProductListData } from './utils/data';
 
+
 function App() {
 
   const [productList, setProductList] = useState(ProductListData)
 
   return (
     <BrowserRouter>
-      <ProductContext.Provider value={{productList, setProductList} } >
+      <ProductContext.Provider value={{ productList, setProductList }} >
         <Routes>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signup' element={<SignUpPage />} />
@@ -42,6 +43,8 @@ function App() {
           <Route path='/vendor/home' element={<VHomePage />} />
           <Route path='/vendor/manage-products' element={<VManageProducts />} />
           <Route path='/vendor/add-product' element={<VAddProductPage />} />
+
+
           <Route path='/vendor/manage-store' element={<VManageStore />} />
           {/* END - Producted Routes - Authenticated Only */}
 
