@@ -5,11 +5,13 @@ import { searchProductsByQuery } from '../api/productApis';
 import { ProductListData } from '../utils/data';
 import ProductContext from '../context/ProductsContext';
 import { getPlaceNameWithLatLong } from '../api/mapApis';
+import { useTheme } from '@emotion/react';
 
 
 const Header = () => {
 
     const searchRef = useRef()
+    const theme = useTheme();
 
     const { productList, setProductList } = useContext(ProductContext)
     const [currentLocation, setCurrentLocation] = useState('Locate')
@@ -27,7 +29,12 @@ const Header = () => {
         const res = await getPlaceNameWithLatLong({ lat, lon })
         console.log(res)
         setShowLocationProgress(false)
-        setCurrentLocation(res)
+        if (res.isError) {
+            alert('Error Detecting Location!')
+        } else {
+
+            setCurrentLocation(res)
+        }
 
 
     };
@@ -67,7 +74,7 @@ const Header = () => {
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 maxWidth: '100vw',
-                backgroundColor: 'white',
+                backgroundColor: theme.palette.primary.main,
                 boxShadow: '10px 0 30px #00000010',
             }}
         >
@@ -116,19 +123,19 @@ const Header = () => {
 
                     <Box sx={{
                         width: '50px',
-                        display:'flex',
-                        alignItems:'center',
+                        display: 'flex',
+                        alignItems: 'center',
                     }}>
 
-                        {showLocationProgress ? <CircularProgress sx={{marginLeft: '2rem'}} size={'1rem'} /> : <Typography sx={{overflow: 'hidden'}}>{currentLocation}</Typography>}
+                        {showLocationProgress ? <CircularProgress sx={{ marginLeft: '2rem' }} size={'1rem'} /> : <Typography sx={{ overflow: 'hidden' }}>{currentLocation}</Typography>}
                     </Box>
 
-                    <span class="material-symbols-outlined" 
-                    style={{
-                        color: '#b50101',
-                        backgroundColor: '#f0f0f0',
-                        borderRadius: '50%',
-                    }}>
+                    <span className="material-symbols-outlined"
+                        style={{
+                            color: '#b50101',
+                            backgroundColor: '#f0f0f0',
+                            borderRadius: '50%',
+                        }}>
                         location_on
                     </span>
 
@@ -168,10 +175,11 @@ const Header = () => {
 
                 <IconButton aria-label="account"
                     onClick={() => navigate('/account')}
-                    sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <span class="material-symbols-outlined"
+                    sx={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
+                    <span className="material-symbols-outlined"
                         style={{
                             fontSize: '2rem',
+
                         }}>
                         account_circle
                     </span>
@@ -181,8 +189,8 @@ const Header = () => {
 
                 <IconButton aria-label="orders"
                     onClick={() => navigate('/orders')}
-                    sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <span class="material-symbols-outlined"
+                    sx={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
+                    <span className="material-symbols-outlined"
                         style={{
                             fontSize: '2rem',
                         }}>
