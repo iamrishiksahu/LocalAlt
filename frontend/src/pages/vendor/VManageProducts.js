@@ -4,6 +4,7 @@ import { Box } from "@mui/material";
 import VendorProductItem from "../../components/VendorProductItem";
 import { getAllProduct } from "../../api/productApis";
 import HeaderProgress from '../../components/HeaderProgress'
+import VHeader from "./VHeader";
 
 const VManageProducts = () => {
   const [data, setData] = useState([]);
@@ -18,10 +19,11 @@ const VManageProducts = () => {
       }
       setShowProgress(false)
     })
-  console.log(data);
+    console.log(data);
+  }, [])
   return (
     <>
-    <VHeader title={'Manage Products'} />
+      <VHeader title={'Manage Products'} />
       <Box m="1.5rem 2.5rem">
         {data ? (
           <Box
@@ -41,8 +43,7 @@ const VManageProducts = () => {
         )}
       </Box>
     </>
+  )
+}
 
-  );
-};
-
-export default VManageProducts;
+export default VManageProducts
