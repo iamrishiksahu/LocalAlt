@@ -8,9 +8,6 @@ const AllProducts = () => {
 
     const { productList, setProductList } = useContext(ProductContext)
 
-    console.log(productList)
-
-
     return (
         <Box sx={{
             display: 'grid',

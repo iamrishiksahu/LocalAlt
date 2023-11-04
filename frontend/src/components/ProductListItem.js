@@ -11,7 +11,7 @@ const ProductListItem = ({ data }) => {
 
         <>
 
-            <Card onClick={() => navigate(`/product/${data.id}`)} sx={{ cursor: 'pointer' }}>
+            <Card onClick={() => navigate(`/product/${data.product_id}`)} sx={{ cursor: 'pointer' }}>
                 <Box sx={{ width: '100%', display: 'flex', gap: '1rem', padding: '1rem', boxSizing: 'border-box' }}>
 
 
