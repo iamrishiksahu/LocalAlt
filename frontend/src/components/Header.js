@@ -129,11 +129,7 @@ const Header = () => {
                         {showLocationProgress ? <CircularProgress sx={{ marginLeft: '2rem' }} size={'1rem'} /> : <Typography sx={{ overflow: 'hidden' }}>{currentLocation}</Typography>}
                     </Box>
 
-<<<<<<< HEAD
-                    <span class="material-symbols-outlined"
-=======
                     <span className="material-symbols-outlined"
->>>>>>> 43ef8337ae082326f64c208a5b4b7096a21af018
                         style={{
                             color: '#b50101',
                             backgroundColor: '#f0f0f0',
