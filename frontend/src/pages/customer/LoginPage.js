@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import {
-  Container,
-  Grid,
   TextField,
   Button,
   Box,
@@ -13,6 +11,7 @@ import { login } from "../../api/productApis";
 import { useNavigate } from 'react-router-dom';
 import Modal from "../../components/Modal";
 import AuthContext from "../../context/AuthContext";
+import { setLocalUserData } from "../../utils/localUserData";
 
 const LoginPage = () => {
   const theme = useTheme()
@@ -33,9 +32,10 @@ const LoginPage = () => {
 
     try {
       const response = await login(postData);
-      setUser(response.data);
-      navigate('/');
+      setLocalUserData(response.data?.user)
+      setUser(response);
       console.log(user);
+      navigate('/');
 
     } catch (err) {
       alert('Invalid credentials!');
