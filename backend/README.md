@@ -294,3 +294,37 @@ Path Variable: product_id=9becfe8d-3e2c-4197-b60c-9d6157d586b8
             "store_distance": 5.289313666098676
 }
 ```
+
+### get products by store_id
+
+- POST("http://localhost:8001/products/store/:store_id")
+
+- body:
+```
+{
+  "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2"
+}
+```
+
+- Payload 
+```
+{
+        "images": [
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg"
+        ],
+        "category": "Electronics",
+        "product_name": "Apple Phone",
+        "subcategory": "Phones",
+        "availability": true,
+        "quantity": 100,
+        "reviews_count": 25,
+        "description": "Sample Phone Description",
+        "price": 54000,
+        "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+        "product_id": "440aa615-8011-4859-8970-8c48bf23b61d",
+        "subtitle": "Smart Phone",
+        "rating": 4.5
+    }
+```

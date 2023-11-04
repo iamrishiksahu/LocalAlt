@@ -15,36 +15,35 @@ import AllProducts from './components/AllProducts';
 import ProductContext from './context/ProductsContext';
 import { useState } from 'react';
 import { ProductListData } from './utils/data';
+import VHeader from './pages/vendor/VHeader';
+import Header from './components/Header';
+import AuthContext from './context/AuthContext';
 
 
 function App() {
 
   const [productList, setProductList] = useState(ProductListData)
-<<<<<<< Updated upstream
-=======
 
   const [user, setUser] = useState({});
->>>>>>> Stashed changes
+
+  const [auth, setAuth] = useState({})
+
 
   return (
     <BrowserRouter>
-      <ProductContext.Provider value={{ productList, setProductList }} >
-        <Routes>
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
 
-<<<<<<< Updated upstream
-          {/* Producted Routes - Authenticated Only */}
-          <Route path='/' element={<HomePage />}>
-            <Route index element={<AllProducts />} />
-            <Route path='/product/:id' element={<ProductPage />} />
-            <Route path='/orders' element={<OrdersPage />} />
-            <Route path='/account' element={<AccountPage />} />
-          </Route>
-=======
+
+      {/* Producted Routes - Authenticated Only */}
+      <Route path='/' element={<HomePage />}>
+        <Route index element={<AllProducts />} />
+        <Route path='/product/:id' element={<ProductPage />} />
+        <Route path='/orders' element={<OrdersPage />} />
+        <Route path='/account' element={<AccountPage />} />
+      </Route>
+
 
       <AuthContext.Provider value={{ user, setUser }}>
+
         <ProductContext.Provider value={{ productList, setProductList }} >
           <Routes>
             <Route path='/login' element={<LoginPage />} />
@@ -58,21 +57,21 @@ function App() {
               <Route path='/orders' element={<OrdersPage />} />
               <Route path='/account' element={<AccountPage />} />
             </Route>
->>>>>>> Stashed changes
 
 
-          {/* Vendor Only Routes - Authentication Required */}
+            {/* Vendor Only Routes - Authentication Required */}
 
-          <Route path='/vendor/home' element={<VHomePage />} />
-          <Route path='/vendor/manage-products' element={<VManageProducts />} />
-          <Route path='/vendor/add-product' element={<VAddProductPage />} />
+            <Route path='/vendor/home' element={<VHomePage />} />
+            <Route path='/vendor/manage-products' element={<VManageProducts />} />
+            <Route path='/vendor/add-product' element={<VAddProductPage />} />
+            <Route path='/vendor/manage-store' element={<VManageStore />} />
 
+            {/* END - Producted Routes - Authenticated Only */}
 
-          <Route path='/vendor/manage-store' element={<VManageStore />} />
-          {/* END - Producted Routes - Authenticated Only */}
+          </Routes>
+        </ProductContext.Provider>
+      </AuthContext.Provider>
 
-        </Routes>
-      </ProductContext.Provider>
     </BrowserRouter>
   );
 }
