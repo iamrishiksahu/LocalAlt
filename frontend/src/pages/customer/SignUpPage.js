@@ -6,10 +6,12 @@ import {
   Button,
   Box,
   Typography,
-  FormControl, FormControlLabel, Checkbox
+  FormControl, FormControlLabel, Checkbox, FormLabel, Radio, RadioGroup
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addUser } from "../../api/userApi";
+import { fontSize } from "@mui/system";
+
 
 const SignUpPage = () => {
 
@@ -90,25 +92,13 @@ const SignUpPage = () => {
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="body1">
-            Register
+          <Typography component="h1" variant="body1" sx={{ fontSize: '30px' }}>
+            Signup
           </Typography>
-          <FormControl component="fieldset" display="flow"
-          // sx={{
-          //   "& .css-1nrlq1o-MuiFormControl-root": {
-          //     display: 'flow',
-          //   }
-          // }}
-          >
-            <FormControlLabel
-              control={<Checkbox checked={selectedValue === "0"} onChange={handleChange} value="0" />}
-              label="Customer"
-            />
-            <FormControlLabel
-              control={<Checkbox checked={selectedValue === "1"} onChange={handleChange} value="1" />}
-              label="Vendor"
-            />
-          </FormControl>
+
+
+
+
 
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -120,6 +110,7 @@ const SignUpPage = () => {
               name="name"
               autoFocus
             />
+
             <TextField
               margin="normal"
               required
@@ -149,6 +140,19 @@ const SignUpPage = () => {
               type="password"
               id="cpassword"
             />
+            <Typography>Role</Typography>
+            <FormControl component="fieldset" style={{ display: "flow" }}
+
+            >
+              <FormControlLabel
+                control={<Checkbox checked={selectedValue === "0"} onChange={handleChange} value="0" />}
+                label="Customer"
+              />
+              <FormControlLabel
+                control={<Checkbox checked={selectedValue === "1"} onChange={handleChange} value="1" />}
+                label="Vendor"
+              />
+            </FormControl>
             <TextField
               margin="normal"
               required

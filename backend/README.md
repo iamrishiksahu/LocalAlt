@@ -116,6 +116,7 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 ```
 {
   "email": "nakul@test.com"
+}
 ```
 - payload format
 ```
@@ -329,7 +330,7 @@ Path Variable: product_id=9becfe8d-3e2c-4197-b60c-9d6157d586b8
     }
 ```
 
-### Search functionality to get products by product
+### Search functionality to get products by product name
 - GET("http://localhost:8001/seacrh/searchProduct/:product_name")
 - Payload
 ```

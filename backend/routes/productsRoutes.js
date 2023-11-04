@@ -1,6 +1,6 @@
 const express = require('express');
 const admin= require('firebase-admin');
-const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc, query, where, orWhere } = require('firebase/firestore');
+const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc, query, where, or } = require('firebase/firestore');
 const router = express.Router();
 const uuid=require('uuid');
 
@@ -185,12 +185,8 @@ router.post('/products-by-distance/:search_name', (req, res) => {
       console.log('queries', queries);
       
 
-      queryCheck = query(productsRef, 
-        where('product_name','==', searchName) ||
-        where('category', '==', searchName)||
-        where('subcategory', '==', searchName)||
-        where('description', '==', searchName)
-        );
+      queryCheck = query(productsRef, where('product_name', '>=', searchName), where('product_name', '<=', searchName + '\uf8ff'));
+      
       //console.log('queryCheck', queryCheck);
 
       getDocs(queryCheck)

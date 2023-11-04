@@ -14,11 +14,10 @@ import AuthContext from "../../context/AuthContext";
 import { setLocalUserData } from "../../utils/localUserData";
 
 const LoginPage = () => {
-  const theme = useTheme()
   const { user, setUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  
+
 
   //submit button
   const handleSubmit = async (event) => {
@@ -78,7 +77,7 @@ const LoginPage = () => {
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="body1">
+          <Typography component="h1" variant="body1" sx={{ fontSize: '30px' }}>
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
