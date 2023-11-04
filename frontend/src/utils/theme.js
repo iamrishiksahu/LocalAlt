@@ -2,13 +2,19 @@ import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
     typography: {
-        fontFamily: 'Inter, sans-serif',
+
+        allVariants: {
+            fontFamily: 'Inter, sans-serif',
+            color:"rgba(0,0,0,0.7)"
+        },
+        body1: {}
+
     },
     palette: {
         primary: {
-            main: '#2a1250', //violet
-            light: '#564375',
-            dark: '#8000ff',
+            main: '#EB594C', //violet
+            light: '#ffafa8',
+            dark: '#ba3d32',
         },
         secondary: {
             main: '#e63fa7',//magenta
@@ -17,6 +23,10 @@ export const theme = createTheme({
         },
         background: {
             main: "#f0f0f0", //grey
+            secondary: '#f5fcff'
+        },
+        text: {
+            main: '#000000090'
         }
     },
 })

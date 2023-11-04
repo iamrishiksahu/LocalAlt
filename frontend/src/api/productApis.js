@@ -22,4 +22,33 @@ const getSingleProductWithId = async ({ id }) => {
         return { isError: true, ...err }
     }
 }
-export { searchProductsByQuery, getSingleProductWithId }
+
+const getAllProduct = async () => {
+    try {
+        const data = await axiosApi.get(`/products/all-products`)
+        // console.log(data.data)
+        return data.data
+    } catch (err) {
+        console.log(err)
+        return { isError: true, ...err }
+    }
+}
+
+const addProduct = async (postData) => {
+    try {
+        const response = await axiosApi.post('/products/add-product', postData);
+        console.log(response.data);
+    } catch (err) {
+        console.log(err);
+    }
+};
+const login = async (postData) => {
+    try {
+        const response = await axiosApi.post('/auth/login', postData);
+        console.log(response.data);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export { searchProductsByQuery, getSingleProductWithId, addProduct, getAllProduct, login }

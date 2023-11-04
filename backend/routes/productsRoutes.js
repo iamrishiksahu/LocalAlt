@@ -1,6 +1,6 @@
 const express = require('express');
 const admin= require('firebase-admin');
-const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc } = require('firebase/firestore');
+const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc, query, where } = require('firebase/firestore');
 const router = express.Router();
 const uuid=require('uuid');
 
@@ -114,7 +114,7 @@ const productsRoutes = (db, firebaseApp) => {
     router.post('/products-by-distance', (req, res) => {
       const longitude=req.body.longitude;
       const latitude=req.body.latitude;
-      const maxDistance = 10;
+      const maxDistance = 80;
       // const distance=req.body.distance;
       // const maxDistance = (parseFloat)distance;
       const filteredStores = []; 
@@ -153,7 +153,7 @@ const productsRoutes = (db, firebaseApp) => {
   
 
  // Define the route with the product path parameter
- router.get('/:product_id', (req, res) => {
+ router.post('/:product_id', (req, res) => {
   const param_product_id = req.params.product_id;
   const productRef = doc(dbs, 'products', param_product_id);
 
@@ -161,7 +161,6 @@ const productsRoutes = (db, firebaseApp) => {
     .then((productDoc) => {
       if (productDoc.exists()) {
         const productData = productDoc.data();
-
         // Check if the product has a store_id
         if (productData.store_id) {
           const storeId = productData.store_id;
@@ -202,6 +201,28 @@ const productsRoutes = (db, firebaseApp) => {
     });
 });
 
+// Define the route with the store path parameter
+router.post('/store/:store_id', async (req, res) => {
+  const param_store_id = req.params.store_id;
+  try {
+    const productsRef = collection(dbs, 'products'); // Use 'products' collection reference
+    const q = query(productsRef, where('store_id', '==', param_store_id));
+    const querySnapshot = await getDocs(q);
+    const products = [];
+    querySnapshot.forEach((doc) => {
+      const productData = doc.data();
+      products.push(productData);
+    });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Failed to retrieve products' });
+  }
+});
+
+
+
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -227,5 +248,5 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   };
 
 
- 
+
   module.exports = productsRoutes;
