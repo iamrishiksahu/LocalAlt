@@ -26,8 +26,13 @@ const Header = () => {
         console.log(lat, lon)
         const res = await getPlaceNameWithLatLong({ lat, lon })
         console.log(res)
+        if (res.isError) {
+            alert('Error Detecting Location!')
+        } {
+
+            setCurrentLocation(res)
+        }
         setShowLocationProgress(false)
-        setCurrentLocation(res)
 
 
     };
@@ -116,19 +121,19 @@ const Header = () => {
 
                     <Box sx={{
                         width: '50px',
-                        display:'flex',
-                        alignItems:'center',
+                        display: 'flex',
+                        alignItems: 'center',
                     }}>
 
-                        {showLocationProgress ? <CircularProgress sx={{marginLeft: '2rem'}} size={'1rem'} /> : <Typography sx={{overflow: 'hidden'}}>{currentLocation}</Typography>}
+                        {showLocationProgress ? <CircularProgress sx={{ marginLeft: '2rem' }} size={'1rem'} /> : <Typography sx={{ overflow: 'hidden' }}>{currentLocation}</Typography>}
                     </Box>
 
-                    <span class="material-symbols-outlined" 
-                    style={{
-                        color: '#b50101',
-                        backgroundColor: '#f0f0f0',
-                        borderRadius: '50%',
-                    }}>
+                    <span class="material-symbols-outlined"
+                        style={{
+                            color: '#b50101',
+                            backgroundColor: '#f0f0f0',
+                            borderRadius: '50%',
+                        }}>
                         location_on
                     </span>
 

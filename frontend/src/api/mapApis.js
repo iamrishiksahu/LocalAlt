@@ -8,7 +8,7 @@ const getPlaceNameWithLatLong = async ({ lat, lon }) => {
         const op = data.data.features[0].properties
         res = op.name || op.street || op.city || op.suburb || op.country || op.address_line1;
     }catch(err){
-        res = err;
+        res = {isError: true, ...err};
     }
 
     return res;
