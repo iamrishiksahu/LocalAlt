@@ -1,7 +1,7 @@
 const express = require('express');
 const admin= require('firebase-admin');
 const { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } = require("firebase/auth");
-const { collection, addDoc, getDocs, getFirestore, doc, setDoc } = require('firebase/firestore');
+const { collection, addDoc, getDocs, getFirestore, doc, getDoc, setDoc } = require('firebase/firestore');
 
 const router = express.Router();
 admin.initializeApp();
@@ -84,14 +84,35 @@ const authRoutes = (auth, db, firebaseApp) => {
       });
   });
 
-  //route for handling the login request
-  router.post('/login', (req, res) => {
+  // route for handling the login request
+  router.post('/login',(req, res) => {
     const { email, password } = req.body;
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        res.status(200).json({ message: 'Login successful', user });
+      .then( (userCredential) => {
+        const user =  userCredential.user;
+
+        let toSend = {}
+
+        getDoc(doc(dbs, 'users', user.uid)).then((doc) => {
+          if (doc.exists()) {
+            // user.role=doc.data().role;
+            toSend = {uid: user.uid, ...doc.data()}
+            console.log("Docu/ment data:", toSend);
+            res.status(200).json({ 
+              message: 'Login successful', 
+              user: {...toSend}
+             });
+
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        }).catch((error) => {
+          console.log("Error getting document:", error);
+        })
+        // console.log(toSend);
+
+       
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -100,6 +121,38 @@ const authRoutes = (auth, db, firebaseApp) => {
         res.status(401).json({ error: 'Login failed', errorCode, errorMessage });
       });
   });
+  // router.post('/login', (req, res) => {
+  //   const { email, password } = req.body;
+    
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then(async (userCredential) => {
+  //       const user = userCredential.user;
+  //       const uid = user.uid;
+  //       const db=getFirestore(firebaseApp);
+  //       const usersRef = db.collection('users');
+  //       const userDoc = await usersRef.doc(uid).get();
+  //       if (userDoc.exists) {
+  //         const userData = userDoc.data();
+  //         const role = userData.role;
+  
+  //         res.status(200).json({ 
+  //           message: 'Login successful', 
+  //           user,
+  //           uid,
+  //           role,
+  //         });
+  //       } else {
+  //         res.status(401).json({ error: 'User not found in the database' });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.error(`Firebase Authentication Error: ${errorCode} - ${errorMessage}`);
+  //       res.status(401).json({ error: 'Login failed', errorCode, errorMessage });
+  //     });
+  // });
+  
   // Route for handling the "forgot password" request
   router.post('/forgot-password', (req, res) => {
     const { email } = req.body;
