@@ -68,13 +68,13 @@ const Header = () => {
     return (
         <Box
             sx={{
-                height: '10vh',
+                height: { md: '10vh', xs: '7vh', sm: '7vh' },
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-around',
                 maxWidth: '100vw',
                 backgroundColor: theme.palette.primary.main,
-                boxShadow: '10px 0 30px #00000010',
+                boxShadow: '10px 0 30px #00000030',
             }}
         >
 
@@ -84,7 +84,8 @@ const Header = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'flex-start',
-                    gap: '1rem'
+                    gap: '1rem',
+                    marginRight: '1rem'
 
                 }}>
 
@@ -109,11 +110,12 @@ const Header = () => {
 
                 <Box sx={{
                     display: 'flex',
-                    gap: '1rem',
                     backgroundColor: 'background.main',
-                    padding: '0.5rem 2rem',
+                    padding: {md: '0.5rem 2rem', sm: '0.25rem', xs: '0.25rem'},
                     borderRadius: '5rem',
                     cursor: 'pointer',
+                    transition: 'all 200ms ease'
+
                 }}
 
                     onClick={handleLocationClick}
@@ -124,16 +126,23 @@ const Header = () => {
                         width: '50px',
                         display: 'flex',
                         alignItems: 'center',
+                        marginRight: '1rem',
+
+                        display: { "md": 'block', "sm": 'none', "xs": 'none' }
                     }}>
 
-                        {showLocationProgress ? <CircularProgress sx={{ marginLeft: '2rem' }} size={'1rem'} /> : <Typography sx={{ overflow: 'hidden' }}>{currentLocation}</Typography>}
+                        {showLocationProgress ? <CircularProgress size={'1rem'} /> : <Typography sx={{
+                            overflow: 'hidden',
+
+                        }}>{currentLocation}</Typography>}
                     </Box>
 
                     <span className="material-symbols-outlined"
                         style={{
-                            color: '#b50101',
+                            color: '#ba3d32',
                             backgroundColor: '#f0f0f0',
                             borderRadius: '50%',
+
                         }}>
                         location_on
                     </span>
@@ -159,20 +168,23 @@ const Header = () => {
                     }
                 }}
                 sx={{
-                    backgroundColor: '#f8f8f8',
+                    backgroundColor: '#f0f0f0',
                     border: '1px solid #afafaf',
                     width: '50%',
                     borderRadius: '2rem',
+                    marginRight: '0.5rem',
                     "& fieldset": { border: 'none' }
                 }}
             />
 
             {/* Account and Orders */}
             <Box
-                sx={{ display: 'flex', gap: '1rem' }}
+                sx={{ display: 'flex', gap: {md: '1rem', xs: '0rem', sm: '0rem'},
+            }}
             >
 
                 <IconButton aria-label="account"
+
                     onClick={() => navigate('/account')}
                     sx={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
                     <span className="material-symbols-outlined"
@@ -182,7 +194,11 @@ const Header = () => {
                         }}>
                         account_circle
                     </span>
-                    <Typography style={{ fontSize: '0.75rem' }}>Accounts</Typography>
+                    <Typography sx={{
+                        fontSize: '0.75rem',
+                        display: { md: 'block', xs: 'none', sm: 'none' },
+
+                    }}>Accounts</Typography>
 
                 </IconButton>
 
@@ -195,7 +211,10 @@ const Header = () => {
                         }}>
                         package_2
                     </span>
-                    <Typography style={{ fontSize: '0.75rem' }}>Orders</Typography>
+                    <Typography sx={{
+                        fontSize: '0.75rem',
+                        display: { md: 'block', xs: 'none', sm: 'none' },
+                    }}>Orders</Typography>
 
                 </IconButton>
 

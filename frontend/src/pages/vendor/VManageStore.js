@@ -1,8 +1,15 @@
 import React from 'react'
+import VHeader from './VHeader'
+
 
 const VManageStore = () => {
   return (
-    <div>VManageStore</div>
+    <>
+      <VHeader title={'Manage Store'} />
+
+      {/* Make the component below this line */}
+
+    </>
   )
 }
 
