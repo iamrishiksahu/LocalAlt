@@ -57,6 +57,22 @@ Welcome to the official GitHub repository of **LocalAlt**, the leading H-Commerc
 
 - Ensure you have [Node.js](https://nodejs.org/) installed.
 - Set up a [Firebase](https://firebase.google.com/) project.
+### Test User Details
+
+- Customer 
+```
+{
+  email -  test123@gmail.com
+  password - Test123
+}
+```
+- Vendor
+```
+{
+  email -  test456@gmail.com
+  password - Test456
+}
+```
   
 ### Installation
 
