@@ -17,7 +17,7 @@ const Header = () => {
     const { productList, setProductList } = useContext(ProductContext)
     const [currentLocation, setCurrentLocation] = useState('Locate')
     const [showLocationProgress, setShowLocationProgress] = useState(false)
-    const [showProgress, setShowProgress] = useState(true)
+    const [showProgress, setShowProgress] = useState(false)
 
 
     const navigate = useNavigate();
