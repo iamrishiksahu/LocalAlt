@@ -198,10 +198,10 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 - body:
 ```
 {
-  "product_name": "OnePlus Phone",
+  "product_name": "Apple Phone",
   "subtitle": "Smart Phone",
   "description": "Sample Phone Description",
-  "price": 10.99,
+  "price": 54000,
   "quantity": 100,
   "images": ["https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg", 
   "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
@@ -211,21 +211,20 @@ IMPORTANT: role is 0 for customer and 1 for vendor
   "availability": true,
   "rating": 4.5,
   "reviews_count": 25,
-  "store_id": "store_user456"
+  "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2"
 }
-
 ```
 - payload format
 ```
 {
     "message": "Product added successfully",
     "product_added": true,
-    "product_id": "d2872db2-7f9f-44a7-854d-2ff3c755f765",
+    "product_id": "9becfe8d-3e2c-4197-b60c-9d6157d586b8",
     "status": 200,
     "storeDataFromStoreId": {
-        "store_name": "My Store",
-        "latitude": 23.06,
-        "longitude": 85.015
+        "store_name": "Sai Honda",
+        "latitude": "23.05",
+        "longitude": "85.03"
     }
 }
 ```
@@ -236,7 +235,7 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 ### get individual product
 - GET(http://localhost:8001/products/:product_id)
 
-Path Variable: product_id=product450
+Path Variable: product_id=9becfe8d-3e2c-4197-b60c-9d6157d586b8
 
 - payload format
 ```
