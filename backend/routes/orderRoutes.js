@@ -47,13 +47,13 @@ const orderRoutes = (db, firebaseApp) => {
   });
   
 
-  // Route for updating order status *Fix this not working*
+  // Route for updating order status 
   router.post("/delete-order", async (req, res) => {
     const order_id = req.body.order_id;
     console.log(order_id);
 
-    // Correct way to get a reference to a document inside a collection
-    const orderDocRef = doc(dbs, "orders", order_id); // Assuming your collection is named "orders"
+  
+    const orderDocRef = doc(dbs, "orders", order_id); 
 
     // Delete the document
     try {
