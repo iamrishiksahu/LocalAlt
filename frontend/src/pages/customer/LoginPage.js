@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Grid,
@@ -6,21 +6,19 @@ import {
   Button,
   Box,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { login } from "../../api/productApis";
 import { useNavigate } from 'react-router-dom';
 
-
+import AuthContext from "../../context/AuthContext";
 
 const LoginPage = () => {
-  const theme = useTheme()
+
+  const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
-
-
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -30,14 +28,15 @@ const LoginPage = () => {
     };
 
     try {
-      await login(postData).then(navigate('/'));
-      ;
+      const response = await login(postData);
+      setUser(response.data);
+      navigate('/');
+      console.log(user);
+
     } catch (err) {
       alert('Invalid credentials!');
     }
   };
-
-
 
   return (
     <Box component="main" >
@@ -51,7 +50,7 @@ const LoginPage = () => {
 
 
         <Box sx={{
-          padding: {md: '8rem 0 0 8rem', sm: '1rem', xs: '1rem'}
+          padding: { md: '8rem 0 0 8rem', sm: '1rem', xs: '1rem' }
         }}>
 
           {/* <Typography variant="h4" align="center">LocalAlt</Typography> */}
@@ -62,7 +61,7 @@ const LoginPage = () => {
 
         <Box
           sx={{
-            boxShadow: {md: '0 0 4rem 0 #00000020', xs: '0 0 5rem #00000020'},
+            boxShadow: { md: '0 0 4rem 0 #00000020', xs: '0 0 5rem #00000020' },
             borderRadius: 2,
             height: 'max-content',
             backgroundColor: '#fff',
@@ -114,16 +113,17 @@ const LoginPage = () => {
 
             </Link>
 
-            <Link className="link-text" to="/register" variant="body2">
+            <Link className="link-text" to="/signup" variant="body2">
               <Typography align="center" mt={'10rem'}> Don't have an account? Sign Up</Typography>
             </Link>
-          
+
           </Box>
         </Box>
 
       </Box>
-
     </Box>
+
+
   );
 };
 

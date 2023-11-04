@@ -23,12 +23,17 @@ import AuthContext from './context/AuthContext';
 function App() {
 
   const [productList, setProductList] = useState(ProductListData)
+
+  const [user, setUser] = useState({});
+
   const [auth, setAuth] = useState({})
+
 
   return (
     <BrowserRouter>
 
-      <AuthContext.Provider value={{ auth, setAuth }}>
+      <AuthContext.Provider value={{ user, setUser }}>
+
         <ProductContext.Provider value={{ productList, setProductList }} >
           <Routes>
             <Route path='/login' element={<LoginPage />} />
