@@ -150,7 +150,61 @@ const productsRoutes = (db, firebaseApp) => {
               res.status(500).json({ error: 'Failed to retrieve stores' });
           });
   });
+
+  //this will give the products filtered by the search query as well as the proximity to the user's location
+router.post('/products-by-distance/:search_name', (req, res) => {
+  const searchName = req.params.search_name;
+  const longitude = req.body.longitude;
+  const latitude = req.body.latitude;
+  const maxDistance = 80;
+  const filteredStores = [];
   
+  const storeRef = collection(dbs, 'stores');
+  getDocs(storeRef)
+    .then((storeSnapshot) => {
+      storeSnapshot.forEach((storeDoc) => {
+        const storeData = storeDoc.data();
+        const storeDistance = calculateDistance(
+          parseFloat(latitude),
+          parseFloat(longitude),
+          storeData.latitude,
+          storeData.longitude
+        );
+        if (storeDistance <= maxDistance) {
+          filteredStores.push(storeData);
+          storeData.store_distance = storeDistance;
+        }
+      });
+      console.log('filteredStores', filteredStores);
+      // Query the 'products' collection based on the search name
+      const productsRef = collection(dbs, 'products');
+      queryCheck = query(productsRef, 
+        where('product_name', '==', searchName)
+        );
+      console.log('queryCheck', queryCheck);
+
+      getDocs(queryCheck)
+        .then((productSnapshot) => {
+          const filteredProducts = [];
+          productSnapshot.forEach((productDoc) => {
+            const productData = productDoc.data();
+            // Include only products matching the search name
+            filteredProducts.push(productData);
+          });
+
+          // Send the filtered stores and products as a response
+          res.status(200).json({ stores: filteredStores, products: filteredProducts });
+        })
+        .catch((productError) => {
+          console.error('Error querying products:', productError);
+          res.status(500).json({ error: 'Failed to retrieve products' });
+        });
+    })
+    .catch((error) => {
+      console.error('Error querying stores:', error);
+      res.status(500).json({ error: 'Failed to retrieve stores' });
+    });
+});
 
  // Define the route with the product path parameter
  router.post('/:product_id', (req, res) => {
