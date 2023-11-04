@@ -55,7 +55,7 @@ const PORT = process.env.PORT || 8001
 const productsRoutes = require('./routes/productsRoutes')(db, firebaseApp)
 const orderRoutes = require('./routes/orderRoutes')(db, firebaseApp)
 const authRoutes = require('./routes/authRoutes')(auth, db, firebaseApp);
-// const searchRoutes = require('./routes/searchRoutes')
+const searchRoutes = require('./routes/searchRoutes')(firebaseApp)
 const storeRoutes = require('./routes/storeRoutes')(db, firebaseApp);
 
 app.use(express.json())
