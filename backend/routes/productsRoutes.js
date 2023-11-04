@@ -153,7 +153,7 @@ const productsRoutes = (db, firebaseApp) => {
   
 
  // Define the route with the product path parameter
-router.get('/:product_id', (req, res) => {
+ router.get('/:product_id', (req, res) => {
   const param_product_id = req.params.product_id;
   const productRef = doc(dbs, 'products', param_product_id);
 
@@ -161,7 +161,37 @@ router.get('/:product_id', (req, res) => {
     .then((productDoc) => {
       if (productDoc.exists()) {
         const productData = productDoc.data();
-        res.status(200).json({ product: productData });
+
+        // Check if the product has a store_id
+        if (productData.store_id) {
+          const storeId = productData.store_id;
+          const storeRef = doc(dbs, 'stores', storeId);
+
+          getDoc(storeRef)
+            .then((storeDoc) => {
+              if (storeDoc.exists()) {
+                const storeData = storeDoc.data();
+
+                // Include store data in the productData variable
+                productData.store_data = {
+                  store_name: storeData.store_name,
+                  latitude: storeData.latitude,
+                  longitude: storeData.longitude,
+                };
+
+                res.status(200).json({ product: productData });
+              } else {
+                res.status(404).json({ error: 'Store not found' });
+              }
+            })
+            .catch((error) => {
+              console.log('Error getting store details: ', error);
+              res.status(500).json({ error: 'Failed to retrieve store details' });
+            });
+        } else {
+          // If there is no store_id, return the product data without store information
+          res.status(200).json({ product: productData });
+        }
       } else {
         res.status(404).json({ error: 'Product not found' });
       }
@@ -171,6 +201,7 @@ router.get('/:product_id', (req, res) => {
       res.status(500).json({ error: 'Failed to retrieve product' });
     });
 });
+
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;

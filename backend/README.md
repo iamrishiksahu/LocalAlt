@@ -237,22 +237,28 @@ Path Variable: product_id=product450
 ```
 {
     "product": {
-        "subtitle": "A great product",
-        "quantity": 50,
-        "product_id": "product450",
-        "price": 19.99,
+        "subtitle": "Smart Phone",
+        "subcategory": "Phones",
         "images": [
-            "https://example.com/image1.jpg",
-            "https://example.com/image2.jpg",
-            "https://example.com/image3.jpg"
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg"
         ],
-        "product_name": "Sample Product",
-        "subcategory": "Smartphones",
-        "reviews_count": 25,
-        "category": "Electronics",
-        "description": "This is a sample product description.",
+        "availability": true,
         "rating": 4.5,
-        "availability": true
+        "category": "Electronics",
+        "product_name": "OnePlus Phone",
+        "price": 10.99,
+        "product_id": "98cb1c39-e5e4-4cbb-940b-dd38039c54b7",
+        "quantity": 100,
+        "description": "Sample Phone Description",
+        "store_id": "store_user459",
+        "reviews_count": 25,
+        "store_data": {
+            "store_name": "Brooklyn 99 Store",
+            "latitude": "23.035",
+            "longitude": "85.035"
+        }
     }
 }
 ```
