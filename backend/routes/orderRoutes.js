@@ -9,7 +9,8 @@ const orderRoutes = (db, firebaseApp) => {
 
   // Route for placing a new order
   router.post("/wishlist", (req, res) => {
-    const { product_id, user_id, order_id } = req.body;
+    const order_id =  uuid.v4() ;
+    const { product_id, user_id } = req.body;
     setDoc(doc(dbs, 'orders', order_id), {
       user_id: user_id,
       product_id: product_id,
