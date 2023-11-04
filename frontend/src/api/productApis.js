@@ -51,4 +51,5 @@ const login = async (postData) => {
     }
 };
 
+
 export { searchProductsByQuery, getSingleProductWithId, addProduct, getAllProduct, login }
