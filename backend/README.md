@@ -401,3 +401,15 @@ Path Variable: product_id=9becfe8d-3e2c-4197-b60c-9d6157d586b8
     ]
 }
 ```
+### Delete Product in Wishlist
+- POST("http://localhost:8001/orders/delete-order")
+- Body
+```
+{
+    "order_id":"ord56789"
+}
+```
+- Payload
+```
+Document successfully deleted!
+```
