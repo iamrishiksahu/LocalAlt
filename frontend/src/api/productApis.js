@@ -23,6 +23,17 @@ const getSingleProductWithId = async ({ id }) => {
     }
 }
 
+const getAllProduct = async () => {
+    try {
+        const data = await axiosApi.get(`/products/all-products`)
+        // console.log(data.data)
+        return data.data
+    } catch (err) {
+        console.log(err)
+        return { isError: true, ...err }
+    }
+}
+
 const addProduct = async (postData) => {
     try {
         const response = await axiosApi.post('products/add-product', postData);
@@ -32,4 +43,4 @@ const addProduct = async (postData) => {
     }
 };
 
-export { searchProductsByQuery, getSingleProductWithId, addProduct }
+export { searchProductsByQuery, getSingleProductWithId, addProduct, getAllProduct }
