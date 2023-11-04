@@ -206,7 +206,6 @@ IMPORTANT: role is 0 for customer and 1 for vendor
   "reviews_count": 25,
   "store_id": "store_12345"
 }
-
 ```
 - payload format
 ```
@@ -246,5 +245,33 @@ Path Variable: product_id=product450
         "rating": 4.5,
         "availability": true
     }
+}
+```
+
+### get products filtered by location
+
+- POST(http://localhost:8001/products/products-by-distance)
+
+- body:
+```
+{
+  "latitude": 23.7128,
+  "longitude": 85.0060
+}
+```
+
+- payload format
+```
+{
+            "latitude": "23.035",
+            "locality": "Downtown",
+            "store_id": "store_user459",
+            "address": "123 Main Street",
+            "store_name": "Brooklyn 99 Store",
+            "uid": "user459",
+            "store_owner": "John Doe",
+            "longitude": "85.035",
+            "city": "New York",
+            "store_distance": 5.289313666098676
 }
 ```
