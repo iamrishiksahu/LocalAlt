@@ -193,26 +193,35 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 - body:
 ```
 {
-  "product_name": "Product Name",
-  "subtitle": "Product Subtitle",
-  "description": "Product Description",
+  "product_name": "OnePlus Phone",
+  "subtitle": "Smart Phone",
+  "description": "Sample Phone Description",
   "price": 10.99,
   "quantity": 100,
-  "images": ["image1.jpg", "image2.jpg"],
-  "category": "Category",
-  "subcategory": "Subcategory",
+  "images": ["https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg", 
+  "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+  "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg"],
+  "category": "Electronics",
+  "subcategory": "Phones",
   "availability": true,
   "rating": 4.5,
   "reviews_count": 25,
-  "store_id": "store_12345"
+  "store_id": "store_user456"
 }
+
 ```
 - payload format
 ```
 {
     "message": "Product added successfully",
     "product_added": true,
-    "status": 200
+    "product_id": "d2872db2-7f9f-44a7-854d-2ff3c755f765",
+    "status": 200,
+    "storeDataFromStoreId": {
+        "store_name": "My Store",
+        "latitude": 23.06,
+        "longitude": 85.015
+    }
 }
 ```
 
@@ -228,22 +237,28 @@ Path Variable: product_id=product450
 ```
 {
     "product": {
-        "subtitle": "A great product",
-        "quantity": 50,
-        "product_id": "product450",
-        "price": 19.99,
+        "subtitle": "Smart Phone",
+        "subcategory": "Phones",
         "images": [
-            "https://example.com/image1.jpg",
-            "https://example.com/image2.jpg",
-            "https://example.com/image3.jpg"
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg"
         ],
-        "product_name": "Sample Product",
-        "subcategory": "Smartphones",
-        "reviews_count": 25,
-        "category": "Electronics",
-        "description": "This is a sample product description.",
+        "availability": true,
         "rating": 4.5,
-        "availability": true
+        "category": "Electronics",
+        "product_name": "OnePlus Phone",
+        "price": 10.99,
+        "product_id": "98cb1c39-e5e4-4cbb-940b-dd38039c54b7",
+        "quantity": 100,
+        "description": "Sample Phone Description",
+        "store_id": "store_user459",
+        "reviews_count": 25,
+        "store_data": {
+            "store_name": "Brooklyn 99 Store",
+            "latitude": "23.035",
+            "longitude": "85.035"
+        }
     }
 }
 ```

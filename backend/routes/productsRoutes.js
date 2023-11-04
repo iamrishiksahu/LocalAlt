@@ -25,38 +25,71 @@ const productsRoutes = (db, firebaseApp) => {
     }
      */
     const dbs=getFirestore(firebaseApp);
+    
     router.post('/add-product', (req, res) => {
-      const {product_name,subtitle,description,price,quantity,images,category,subcategory,availability,rating,reviews_count,store_id } = req.body;
-      const product_id=uuid.v4();
-      setDoc(doc(dbs, 'products', product_id),{
-        product_id:product_id,
-        product_name:product_name,
-        subtitle:subtitle,
-        description:description,
-        price:price,
-        quantity:quantity,
-        images:images,
-        category:category,
-        subcategory:subcategory,
-        availability:availability,
-        rating:rating,
-        reviews_count:reviews_count,
-        store_id:store_id,
-      })
-        .then(() => {
-          console.log('Product Added to the database');
-          res.status(200).json({ 
-            message: 'Product added successfully',
-            product_added: true, 
-            product_id: product_id,
-            status: 200,
-        });
-        })
-        .catch((error) => {
-          console.log('Error occurred while adding the product', error);
-          res.status(500).json({ message: 'Error occurred while adding the product', error });
-        });
-    });
+      const {
+          product_name, subtitle, description, price, quantity, images, category, subcategory, availability, rating, reviews_count, store_id
+      } = req.body;
+  
+      const product_id = uuid.v4();
+  
+      const storeDataFromStoreId = {};
+  
+      // Query the 'stores' collection based on the store_id
+      const storeRef = doc(dbs, 'stores', store_id);
+  
+      getDoc(storeRef)
+          .then((storeDoc) => {
+              if (storeDoc.exists()) {
+                  const storeData = storeDoc.data();
+                  const { store_name, latitude, longitude } = storeData;
+  
+                  // Assign store data to the variable
+                  storeDataFromStoreId.store_name = store_name;
+                  storeDataFromStoreId.latitude = latitude;
+                  storeDataFromStoreId.longitude = longitude;
+                  //storeDataFromStoreId.phone = phone;
+  
+                  // Now you can use storeDataFromStoreId in your payload
+                  setDoc(doc(dbs, 'products', product_id), {
+                      product_id,
+                      product_name,
+                      subtitle,
+                      description,
+                      price,
+                      quantity,
+                      images,
+                      category,
+                      subcategory,
+                      availability,
+                      rating,
+                      reviews_count,
+                      store_id
+                  })
+                  .then(() => {
+                      console.log('Product Added to the database');
+                      res.status(200).json({
+                          message: 'Product added successfully',
+                          product_added: true,
+                          product_id,
+                          status: 200,
+                          storeDataFromStoreId
+                      });
+                  })
+                  .catch((error) => {
+                      console.log('Error occurred while adding the product', error);
+                      res.status(500).json({ message: 'Error occurred while adding the product', error });
+                  });
+              } else {
+                  res.status(404).json({ error: 'Store not found' });
+              }
+          })
+          .catch((error) => {
+              console.log('Error getting store details: ', error);
+              res.status(500).json({ error: 'Failed to retrieve store details' });
+          });
+  });
+  
 
     //DISCLAIMER: this gives all products listed on the database. This is not the way to go in production.
     router.get('/all-products', (req, res) => {
@@ -120,7 +153,7 @@ const productsRoutes = (db, firebaseApp) => {
   
 
  // Define the route with the product path parameter
-router.get('/:product_id', (req, res) => {
+ router.get('/:product_id', (req, res) => {
   const param_product_id = req.params.product_id;
   const productRef = doc(dbs, 'products', param_product_id);
 
@@ -128,7 +161,37 @@ router.get('/:product_id', (req, res) => {
     .then((productDoc) => {
       if (productDoc.exists()) {
         const productData = productDoc.data();
-        res.status(200).json({ product: productData });
+
+        // Check if the product has a store_id
+        if (productData.store_id) {
+          const storeId = productData.store_id;
+          const storeRef = doc(dbs, 'stores', storeId);
+
+          getDoc(storeRef)
+            .then((storeDoc) => {
+              if (storeDoc.exists()) {
+                const storeData = storeDoc.data();
+
+                // Include store data in the productData variable
+                productData.store_data = {
+                  store_name: storeData.store_name,
+                  latitude: storeData.latitude,
+                  longitude: storeData.longitude,
+                };
+
+                res.status(200).json({ product: productData });
+              } else {
+                res.status(404).json({ error: 'Store not found' });
+              }
+            })
+            .catch((error) => {
+              console.log('Error getting store details: ', error);
+              res.status(500).json({ error: 'Failed to retrieve store details' });
+            });
+        } else {
+          // If there is no store_id, return the product data without store information
+          res.status(200).json({ product: productData });
+        }
       } else {
         res.status(404).json({ error: 'Product not found' });
       }
@@ -138,6 +201,7 @@ router.get('/:product_id', (req, res) => {
       res.status(500).json({ error: 'Failed to retrieve product' });
     });
 });
+
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371;
