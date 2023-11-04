@@ -19,6 +19,7 @@ import VHeader from './pages/vendor/VHeader';
 import Header from './components/Header';
 import AuthContext from './context/AuthContext';
 
+
 function App() {
 
   const [productList, setProductList] = useState(ProductListData)
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <BrowserRouter>
+
       <AuthContext.Provider value={{ auth, setAuth }}>
         <ProductContext.Provider value={{ productList, setProductList }} >
           <Routes>
@@ -54,6 +56,7 @@ function App() {
           </Routes>
         </ProductContext.Provider>
       </AuthContext.Provider>
+
     </BrowserRouter>
   );
 }
