@@ -55,7 +55,7 @@ const PORT = process.env.PORT || 8001
 const productsRoutes = require('./routes/productsRoutes')(db, firebaseApp)
 // const ordersRoutes = require('./routes/ordersRoutes')
 const authRoutes = require('./routes/authRoutes')(auth, db, firebaseApp);
-// const searchRoutes = require('./routes/searchRoutes')
+//const searchRoutes = require('./routes/searchRoutes')
 const storeRoutes = require('./routes/storeRoutes')(db, firebaseApp);
 
 app.use(express.json())
@@ -80,4 +80,4 @@ app.use('/products', productsRoutes)
 
 // app.use('/accounts', accountsRoutes)
 // app.use('/orders', ordersRoutes)
-// app.use('/search', searchRoutes)
+//app.use('/search', searchRoutes)
