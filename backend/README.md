@@ -329,5 +329,75 @@ Path Variable: product_id=9becfe8d-3e2c-4197-b60c-9d6157d586b8
     }
 ```
 
-### search functionality to get products by name
+### Search functionality to get products by product
+- GET("http://localhost:8001/seacrh/searchProduct/:product_name")
+- Payload
+```
+{
+        "images": [
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg",
+            "https://m.media-amazon.com/images/I/41TmlehQnaL._SX300_SY300_QL70_FMwebp_.jpg"
+        ],
+        "category": "Electronics",
+        "product_name": "Apple Phone",
+        "subcategory": "Phones",
+        "availability": true,
+        "quantity": 100,
+        "reviews_count": 25,
+        "description": "Sample Phone Description",
+        "price": 54000,
+        "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+        "product_id": "440aa615-8011-4859-8970-8c48bf23b61d",
+        "subtitle": "Smart Phone",
+        "rating": 4.5
+    }
+```
+### Add Products to Wishlist
+- POST("http://localhost:8001/orders/wishlist/")
+- Body
+```
+{
+  "product_id": "fgagaagagasdsds",
+  "user_id": "loveday"
+}
+```
+- Payload
+```
+{
+    "message": "Order placed successfully"
+}
+```
 
+### Show products in wishlist
+- GET("http://localhost:8001/orders/fetch-orders/:user_id")
+- Payload 
+```
+    "orders": [
+        {
+            "order_id": "ord567887789",
+            "status": "pending",
+            "user_id": "user98765",
+            "orderDate": "2023-11-04T13:48:56.968Z",
+            "product_id": "prod12345",
+            "id": "ord567887789"
+        },
+        {
+            "order_id": "ord56789",
+            "status": "pending",
+            "user_id": "user98765",
+            "product_id": "prod12345",
+            "orderDate": "2023-11-04T13:26:59.149Z",
+            "id": "ord56789"
+        },
+        {
+            "product_id": "prod12345",
+            "user_id": "user98765",
+            "status": "pending",
+            "orderDate": "2023-11-04T13:27:33.573Z",
+            "order_id": "ord789",
+            "id": "ord789"
+        }
+    ]
+}
+```
