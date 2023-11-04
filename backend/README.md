@@ -144,22 +144,18 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 {
     "stores": [
         {
-            "id": "store_id",
+            "id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
             "data": {
-                "address": {
-                    "address_line_2": "test",
-                    "city": "Ranchi",
-                    "pincode": "800001",
-                    "address_line_1": "behind h5"
-                },
-                "store_id": "store_jcgc7883ggagjdcg99v9s",
-                "longitude": "67",
-                "store_owner": "Chotu",
-                "city": "Ranchi",
-                "store_name": "Chotu-Dhaba",
-                "uid": "jcgc7883ggagjdcg99v9s",
-                "locality": "Mesra",
-                "latitude": "93"
+                "store_name": "Sai Honda",
+                "address": "East Jail Road, near Nucleus Mall, Lalpur",
+                "locality": "Lalpur",
+                "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+                "longitude": "85.03",
+                "uid": "zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+                "store_owner": "Rishik Kumar Sahu",
+                "contact": "7209440551",
+                "latitude": "23.05",
+                "city": "Ranchi"
             }
         }
     ]
@@ -188,7 +184,11 @@ IMPORTANT: role is 0 for customer and 1 for vendor
 - payload format
 ```
 {
-    "message": "Store created successfully"
+    "message": "Store Registered successful",
+    "store_id": "store_zGL8PUJJ3NcdruVeFGDJG91hLBF2",
+    "store_name": "Sai Honda",
+    "store_owner": "Rishik Kumar Sahu",
+    "uid": "zGL8PUJJ3NcdruVeFGDJG91hLBF2"
 }
 ```
 
