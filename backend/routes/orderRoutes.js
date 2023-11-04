@@ -48,24 +48,20 @@ const orderRoutes = (db, firebaseApp) => {
   
 
   // Route for updating order status *Fix this not working*
-  router.delete("/delete-order/:order_id", async (req, res) => {
-    const orderId = req.query.order_id;
+  router.post("/delete-order", async (req, res) => {
+    const order_id = req.body.order_id;
+    console.log(order_id);
+
+    // Correct way to get a reference to a document inside a collection
+    const orderDocRef = doc(dbs, "orders", order_id); // Assuming your collection is named "orders"
+
+    // Delete the document
     try {
-        // Query for the document with the matching order_id field
-        const querySnapshot = await db.collection('orders').where('order_id', '==', orderId).get();
-
-        if (querySnapshot.empty) {
-            return res.status(404).json({ message: "No matching order found" });
-        }
-
-        // Assuming there's only one order with this order_id
-        const orderDoc = querySnapshot.docs[0];
-
-        await db.collection('orders').doc(orderDoc.id).delete();
-        res.status(200).json({ message: "Order deleted successfully" });
+        await deleteDoc(orderDocRef);
+        res.status(200).send("Document successfully deleted!");
     } catch (error) {
-        console.error("Error deleting the order:", error);
-        res.status(500).json({ error: "Deleting order failed" });
+        console.error("Error removing document: ", error);
+        res.status(500).send("Error removing document");
     }
 });
 
