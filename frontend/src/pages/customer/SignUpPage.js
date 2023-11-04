@@ -10,8 +10,6 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addUser } from "../../api/userApi";
-import { Alert, AlertTitle } from "@mui/material";
-
 
 const SignUpPage = () => {
 

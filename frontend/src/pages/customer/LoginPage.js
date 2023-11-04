@@ -11,13 +11,16 @@ import {
 import { Link } from "react-router-dom";
 import { login } from "../../api/productApis";
 import { useNavigate } from 'react-router-dom';
-
+import Modal from "../../components/Modal";
 
 
 const LoginPage = () => {
+
   const theme = useTheme()
   const navigate = useNavigate();
 
+
+  //submit button
   const handleSubmit = async (event) => {
 
 
@@ -51,7 +54,7 @@ const LoginPage = () => {
 
 
         <Box sx={{
-          padding: {md: '8rem 0 0 8rem', sm: '1rem', xs: '1rem'}
+          padding: { md: '8rem 0 0 8rem', sm: '1rem', xs: '1rem' }
         }}>
 
           {/* <Typography variant="h4" align="center">LocalAlt</Typography> */}
@@ -62,7 +65,7 @@ const LoginPage = () => {
 
         <Box
           sx={{
-            boxShadow: {md: '0 0 4rem 0 #00000020', xs: '0 0 5rem #00000020'},
+            boxShadow: { md: '0 0 4rem 0 #00000020', xs: '0 0 5rem #00000020' },
             borderRadius: 2,
             height: 'max-content',
             backgroundColor: '#fff',
@@ -109,15 +112,15 @@ const LoginPage = () => {
               Sign In
             </Button>
 
-            <Link className="link-text" to="#" variant="body2">
-              <Typography align="center"> Forgot Password</Typography>
 
-            </Link>
+            <Typography align="center"> <Modal /></Typography>
+
+
 
             <Link className="link-text" to="/register" variant="body2">
               <Typography align="center" mt={'10rem'}> Don't have an account? Sign Up</Typography>
             </Link>
-          
+
           </Box>
         </Box>
 
