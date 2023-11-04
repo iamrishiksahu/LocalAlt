@@ -72,7 +72,6 @@ const SignUpPage = () => {
 
           {/* <Typography variant="h4" align="center">LocalAlt</Typography> */}
           <img width={'450px'} src="/images/login-hero.png" alt="login hero" />
-
         </Box>
 
 

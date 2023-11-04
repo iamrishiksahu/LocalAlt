@@ -1,25 +1,30 @@
 import { Box, Button, Rating, Typography, Card } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getSingleProductWithId } from '../../api/productApis'
 import HeaderProgress from '../../components/HeaderProgress'
+import AuthContext from '../../context/AuthContext'
+import axios from 'axios'
 
 const ProductPage = () => {
 
   const { id } = useParams()
   const [data, setData] = useState({})
+  const { user, setUser } = useContext(AuthContext);
 
 
   useEffect(() => {
-
     getSingleProductWithId({ id }).then((res) => {
 
       if (res.isError) {
         alert('Error Occurred!')
       } else {
+        console.log(res)
         setData(res)
       }
     })
+    // console.log(user);
+
 
   }, [])
 
@@ -36,7 +41,7 @@ const ProductPage = () => {
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: {"md": '1fr 1fr', "sm": '1fr'},
+            gridTemplateColumns: { "md": '1fr 1fr', "sm": '1fr' },
           }}>
 
           <Box sx={{
@@ -59,7 +64,7 @@ const ProductPage = () => {
               flexDirection: 'column',
               padding: '2rem',
               gap: '1rem',
-              width: {"md" : '70%', "xs" :'100%', "sm" : '100%'}
+              width: { "md": '70%', "xs": '100%', "sm": '100%' }
             }}>
 
               <Typography variant='body'>Seller</Typography>
@@ -74,7 +79,7 @@ const ProductPage = () => {
 
                 <Box
 
-                  onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${data?.store_lat}%2C${data?.store_lon}`, '_blank')}
+                  onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${data?.store_data?.latitude}%2C${data?.store_data?.longitude}`, '_blank')}
 
                   sx={{
                     display: 'flex',
@@ -122,7 +127,7 @@ const ProductPage = () => {
             display: 'flex',
             flexDirection: 'column',
             gap: '0.5rem',
-            marginTop: {"md" : "0rem" ,"sm" : "5rem", "xs" : '5rem'}
+            marginTop: { "md": "0rem", "sm": "5rem", "xs": '5rem' }
           }}>
             <Typography variant='h5' sx={{ fontWeight: '500' }}>{data?.product_name}</Typography>
             <Typography>{data?.subtitle}</Typography>

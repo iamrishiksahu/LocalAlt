@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Grid,
@@ -6,24 +6,22 @@ import {
   Button,
   Box,
   Typography,
-  useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { login } from "../../api/productApis";
 import { useNavigate } from 'react-router-dom';
 import Modal from "../../components/Modal";
-
+import AuthContext from "../../context/AuthContext";
 
 const LoginPage = () => {
-
   const theme = useTheme()
-  const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+  
 
   //submit button
   const handleSubmit = async (event) => {
-
-
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -33,14 +31,15 @@ const LoginPage = () => {
     };
 
     try {
-      await login(postData).then(navigate('/'));
-      ;
+      const response = await login(postData);
+      setUser(response.data);
+      navigate('/');
+      console.log(user);
+
     } catch (err) {
       alert('Invalid credentials!');
     }
   };
-
-
 
   return (
     <Box component="main" >
@@ -117,7 +116,7 @@ const LoginPage = () => {
 
 
 
-            <Link className="link-text" to="/register" variant="body2">
+            <Link className="link-text" to="/signup" variant="body2">
               <Typography align="center" mt={'10rem'}> Don't have an account? Sign Up</Typography>
             </Link>
 
@@ -125,8 +124,9 @@ const LoginPage = () => {
         </Box>
 
       </Box>
-
     </Box>
+
+
   );
 };
 

@@ -1,11 +1,20 @@
+import axios from "axios";
 import axiosApi from "../utils/axiosConfig";
+import { getCurrentLocation } from "../utils/geolocation";
 
 const searchProductsByQuery = async ({ query }) => {
 
+    await getCurrentLocation()
+    const lat = localStorage.getItem('latitude')
+    const lon = localStorage.getItem('longitude')
+
     try {
-        const data = await axiosApi.get(`/products/search?query=${query}`)
+        const data = await axiosApi.post(`/products/products-by-distance/${query}`, {
+            longitude: lat ,
+            latitude: lon
+        })
         if (data) {
-            console.log(data)
+            return data.data.products
         }
     } catch (err) {
         console.log(err)
@@ -13,21 +22,29 @@ const searchProductsByQuery = async ({ query }) => {
 
 }
 const getSingleProductWithId = async ({ id }) => {
+
     try {
         const data = await axiosApi.get(`/products/${id}`)
         console.log(data)
         return data.data.product
+
     } catch (err) {
-        console.log(err)
-        return { isError: true, ...err }
+
+        if (err.response.status == 404) {
+            alert('Product Not Found!')
+        } else if (err.response.status == 403) {
+            alert('Store is invalid!')
+        } else {
+            console.log(err)
+            return { isError: true, ...err }
+        }
     }
 }
 
 const getAllProduct = async () => {
     try {
         const data = await axiosApi.get(`/products/all-products`)
-        // console.log(data.data)
-        return data.data
+        return data.data.products
     } catch (err) {
         console.log(err)
         return { isError: true, ...err }

@@ -11,47 +11,51 @@ const VHeader = ({ title }) => {
 
     return (
 
+        <Box
+            sx={{
+                height: {md: '10vh', xs: '7vh'},
+                display: 'flex',
+                alignItems: 'center',
+                paddingLeft: '1.5rem',
+                justifyContent: {md: 'space-around', xs: 'flex-start'},
+                maxWidth: '100vw',
+                backgroundColor: theme.palette.primary.main,
+                boxShadow: '10px 0 30px #00000080',
+            }}
+        >
+
+            {/* Logo and Location */}
             <Box
                 sx={{
-                    height: '10vh',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-around',
-                    maxWidth: '100vw',
-                    backgroundColor: theme.palette.primary.main,
-                    boxShadow: '10px 0 30px #00000010',
-                }}
-            >
+                    justifyContent: 'flex-start',
+                    gap: '1rem'
 
-                {/* Logo and Location */}
-                <Box
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-start',
-                        gap: '1rem'
+                }}>
 
-                    }}>
+                <img src="/logo192.png" alt="logo" width="50px" onClick={() => navigate('/vendor/home')} />
 
-                    <img src="/logo192.png" alt="logo" width="50px" onClick={() => navigate('/vendor/home')} />
-
-                    <Typography variant='h6'>{title} </Typography>
-
-                </Box>
-
-
-
-                {/* Account and Orders */}
-                <Box
-                    sx={{ display: 'flex', gap: '1rem' }}
-                >
-                    {format(new Date(), 'MMM dd, yyyy - hh:mm:a')}
-
-                </Box>
+                <Typography variant='body1' sx={{ color: 'white' }} >{title} </Typography>
 
             </Box>
 
-            
+
+
+            {/* Account and Orders */}
+            <Box
+                sx={{ display: 'flex', gap: '1rem' }}
+            >
+                <Typography sx={{ color: 'white',
+                display: {md: 'block', xs: 'none'}
+             }}> {format(new Date(), 'MMM dd, yyyy - hh:mm:a')}
+                </Typography>
+
+            </Box>
+
+        </Box>
+
+
 
 
 

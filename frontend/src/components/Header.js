@@ -6,6 +6,7 @@ import { ProductListData } from '../utils/data';
 import ProductContext from '../context/ProductsContext';
 import { getPlaceNameWithLatLong } from '../api/mapApis';
 import { useTheme } from '@emotion/react';
+import HeaderProgress from './HeaderProgress';
 
 
 const Header = () => {
@@ -16,9 +17,10 @@ const Header = () => {
     const { productList, setProductList } = useContext(ProductContext)
     const [currentLocation, setCurrentLocation] = useState('Locate')
     const [showLocationProgress, setShowLocationProgress] = useState(false)
+    const [showProgress, setShowProgress] = useState(true)
+
 
     const navigate = useNavigate();
-
     const [location, setLocation] = useState()
 
     const successHandler = async (position) => {
@@ -45,12 +47,11 @@ const Header = () => {
     }
 
     const searchWithQuery = async () => {
+        setShowProgress(true)
         const query = searchRef.current.value;
-        console.log(query);
-        // const list = await searchProductsByQuery({ query: query })
-
-
-        //this list has to be sent to the state
+        const list = await searchProductsByQuery({ query: query })
+        await setProductList(list)
+        setShowProgress(false)
     }
 
 
@@ -77,6 +78,7 @@ const Header = () => {
                 boxShadow: '10px 0 30px #00000030',
             }}
         >
+            {showProgress ? <HeaderProgress /> : <></>}
 
             {/* Logo and Location */}
             <Box
@@ -91,27 +93,10 @@ const Header = () => {
 
                 <img src="/logo192.png" alt="logo" width="50px" onClick={() => navigate('/')} />
 
-                {/* <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    size="small"
-                    options={top100Films}
-                    sx={{ width: '190px', border: 'none' }}
-
-                    renderInput={(params) => <TextField
-                        sx={{
-                            backgroundColor: '#f8f8f8',
-                            border: '1px solid #afafaf',
-                            borderRadius: '2rem',
-                            "& fieldset": { border: 'none' }
-                        }}
-                        {...params} placeholder="Location" />}
-                /> */}
-
                 <Box sx={{
                     display: 'flex',
                     backgroundColor: 'background.main',
-                    padding: {md: '0.5rem 2rem', sm: '0.25rem', xs: '0.25rem'},
+                    padding: { md: '0.5rem 2rem', sm: '0.25rem', xs: '0.25rem' },
                     borderRadius: '5rem',
                     cursor: 'pointer',
                     transition: 'all 200ms ease'
@@ -123,7 +108,7 @@ const Header = () => {
                 >
 
                     <Box sx={{
-                        width: '50px',
+                        width: '100px',
                         display: 'flex',
                         alignItems: 'center',
                         marginRight: '1rem',
@@ -134,7 +119,7 @@ const Header = () => {
                         {showLocationProgress ? <CircularProgress size={'1rem'} /> : <Typography sx={{
                             overflow: 'hidden',
 
-                        }}>{currentLocation}</Typography>}
+                        }}>{currentLocation.substring(0, 10)}</Typography>}
                     </Box>
 
                     <span className="material-symbols-outlined"
@@ -179,8 +164,9 @@ const Header = () => {
 
             {/* Account and Orders */}
             <Box
-                sx={{ display: 'flex', gap: {md: '1rem', xs: '0rem', sm: '0rem'},
-            }}
+                sx={{
+                    display: 'flex', gap: { md: '1rem', xs: '0rem', sm: '0rem' },
+                }}
             >
 
                 <IconButton aria-label="account"

@@ -1,6 +1,6 @@
 const express = require('express');
 const admin= require('firebase-admin');
-const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc, query, where } = require('firebase/firestore');
+const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc, query, where, orWhere } = require('firebase/firestore');
 const router = express.Router();
 const uuid=require('uuid');
 
@@ -150,10 +150,74 @@ const productsRoutes = (db, firebaseApp) => {
               res.status(500).json({ error: 'Failed to retrieve stores' });
           });
   });
-  
+
+  //this will give the products filtered by the search query as well as the proximity to the user's location
+router.post('/products-by-distance/:search_name', (req, res) => {
+  const searchName = req.params.search_name;
+  const keywords = searchName.split(' ');
+  const longitude = req.body.longitude;
+  const latitude = req.body.latitude;
+  const maxDistance = 80;
+  const filteredStores = [];
+
+  const storeRef = collection(dbs, 'stores');
+  getDocs(storeRef)
+    .then((storeSnapshot) => {
+      storeSnapshot.forEach((storeDoc) => {
+        const storeData = storeDoc.data();
+        const storeDistance = calculateDistance(
+          parseFloat(latitude),
+          parseFloat(longitude),
+          storeData.latitude,
+          storeData.longitude
+        );
+        if (storeDistance <= maxDistance) {
+          filteredStores.push(storeData);
+          storeData.store_distance = storeDistance;
+        }
+      });
+      // Query the 'products' collection based on the search name
+      const productsRef = collection(dbs, 'products');
+      const queries = keywords.map(keyword => 
+        query(productsRef, where('description', 'array-contains-any', [keyword]))
+      );
+    
+      console.log('queries', queries);
+      
+
+      queryCheck = query(productsRef, 
+        where('product_name','==', searchName) ||
+        where('category', '==', searchName)||
+        where('subcategory', '==', searchName)||
+        where('description', '==', searchName)
+        );
+      //console.log('queryCheck', queryCheck);
+
+      getDocs(queryCheck)
+        .then((productSnapshot) => {
+          const filteredProducts = [];
+          productSnapshot.forEach((productDoc) => {
+            const productData = productDoc.data();
+            // Include only products matching the search name
+            filteredProducts.push(productData);
+          });
+
+          // Send the filtered stores and products as a response
+          res.status(200).json({ stores: filteredStores, products: filteredProducts });
+        })
+        .catch((productError) => {
+          console.error('Error querying products:', productError);
+          res.status(500).json({ error: 'Failed to retrieve products' });
+        });
+    })
+    .catch((error) => {
+      console.error('Error querying stores:', error);
+      res.status(500).json({ error: 'Failed to retrieve stores' });
+    });
+});
 
  // Define the route with the product path parameter
- router.post('/:product_id', (req, res) => {
+ router.get('/:product_id', (req, res) => {
   const param_product_id = req.params.product_id;
   const productRef = doc(dbs, 'products', param_product_id);
 
@@ -176,11 +240,16 @@ const productsRoutes = (db, firebaseApp) => {
                   store_name: storeData.store_name,
                   latitude: storeData.latitude,
                   longitude: storeData.longitude,
+                  phone: storeData.contact,
+                  locality: storeData.locality,
+                  city: storeData.city,
+                  address: storeData.address,
+                  uid: storeData.uid
                 };
 
                 res.status(200).json({ product: productData });
               } else {
-                res.status(404).json({ error: 'Store not found' });
+                res.status(403).json({ error: 'Store not found' });
               }
             })
             .catch((error) => {
@@ -192,7 +261,7 @@ const productsRoutes = (db, firebaseApp) => {
           res.status(200).json({ product: productData });
         }
       } else {
-        res.status(404).json({ error: 'Product not found' });
+        res.status(403).json({ error: 'Product not found' });
       }
     })
     .catch((error) => {
