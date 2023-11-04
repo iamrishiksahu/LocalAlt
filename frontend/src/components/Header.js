@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import { TextField, Box, Autocomplete, IconButton, FormGroup, Typography } from "@mui/material";
+import { TextField, Box, Autocomplete, IconButton, FormGroup, Typography, CircularProgress } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
 import { searchProductsByQuery } from '../api/productApis';
 import { ProductListData } from '../utils/data';
@@ -12,6 +12,8 @@ const Header = () => {
     const searchRef = useRef()
 
     const { productList, setProductList } = useContext(ProductContext)
+    const [currentLocation, setCurrentLocation] = useState('Locate')
+    const [showLocationProgress, setShowLocationProgress] = useState(false)
 
     const navigate = useNavigate();
 
@@ -22,13 +24,18 @@ const Header = () => {
         const lon = (position.coords.longitude);
 
         console.log(lat, lon)
-        const res = await getPlaceNameWithLatLong({lat, lon})
+        const res = await getPlaceNameWithLatLong({ lat, lon })
         console.log(res)
-       
+        setShowLocationProgress(false)
+        setCurrentLocation(res)
+
+
     };
 
     const errorHandler = (err) => {
         alert(err.code + ":" + err.message);
+        setShowLocationProgress(false)
+
     }
 
     const searchWithQuery = async () => {
@@ -41,9 +48,9 @@ const Header = () => {
     }
 
 
-    const handleLogoClick = (e) => {
+    const handleLocationClick = (e) => {
         e.preventDefault()
-
+        setShowLocationProgress(true)
         navigator.geolocation.getCurrentPosition(
             successHandler, errorHandler,
             { enableHighAccuracy: true, maximumAge: 10000 });
@@ -75,10 +82,9 @@ const Header = () => {
 
                 }}>
 
-                <img src="/logo192.png" alt="logo" width="50px" onClick={handleLogoClick} />
+                <img src="/logo192.png" alt="logo" width="50px" onClick={() => navigate('/')} />
 
-                <p>{location?.coords?.latitude}</p>
-                <Autocomplete
+                {/* <Autocomplete
                     disablePortal
                     id="combo-box-demo"
                     size="small"
@@ -93,7 +99,43 @@ const Header = () => {
                             "& fieldset": { border: 'none' }
                         }}
                         {...params} placeholder="Location" />}
-                />
+                /> */}
+
+                <Box sx={{
+                    display: 'flex',
+                    gap: '1rem',
+                    backgroundColor: 'background.main',
+                    padding: '0.5rem 2rem',
+                    borderRadius: '5rem',
+                    cursor: 'pointer',
+                }}
+
+                    onClick={handleLocationClick}
+
+                >
+
+                    <Box sx={{
+                        width: '50px',
+                        display:'flex',
+                        alignItems:'center',
+                    }}>
+
+                        {showLocationProgress ? <CircularProgress sx={{marginLeft: '2rem'}} size={'1rem'} /> : <Typography sx={{overflow: 'hidden'}}>{currentLocation}</Typography>}
+                    </Box>
+
+                    <span class="material-symbols-outlined" 
+                    style={{
+                        color: '#b50101',
+                        backgroundColor: '#f0f0f0',
+                        borderRadius: '50%',
+                    }}>
+                        location_on
+                    </span>
+
+                </Box>
+
+
+
 
             </Box>
 
