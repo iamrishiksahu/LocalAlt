@@ -13,4 +13,14 @@ const searchProductsByQuery = async ({query}) => {
 
 }
 
-export {searchProductsByQuery}
+const getSingleProductWithId = async ({id}) => {
+    try{
+        const data = await axiosApi.get(`/products/${id}`)
+        console.log(data)
+        return data.data.product
+    }catch(err){
+        console.log(err)
+        return {isError: true, ...err}
+    }
+}
+export {searchProductsByQuery, getSingleProductWithId}
