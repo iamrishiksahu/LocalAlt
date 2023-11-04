@@ -207,7 +207,7 @@ router.post('/products-by-distance/:search_name', (req, res) => {
 });
 
  // Define the route with the product path parameter
- router.post('/:product_id', (req, res) => {
+ router.get('/:product_id', (req, res) => {
   const param_product_id = req.params.product_id;
   const productRef = doc(dbs, 'products', param_product_id);
 

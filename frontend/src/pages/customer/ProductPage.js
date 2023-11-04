@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { getSingleProductWithId } from '../../api/productApis'
 import HeaderProgress from '../../components/HeaderProgress'
 import AuthContext from '../../context/AuthContext'
+import axios from 'axios'
 
 const ProductPage = () => {
 
@@ -13,16 +14,17 @@ const ProductPage = () => {
 
 
   useEffect(() => {
-
     getSingleProductWithId({ id }).then((res) => {
 
       if (res.isError) {
         alert('Error Occurred!')
       } else {
+        console.log(res)
         setData(res)
       }
     })
-    console.log(user);
+    // console.log(user);
+
 
   }, [])
 
@@ -77,7 +79,7 @@ const ProductPage = () => {
 
                 <Box
 
-                  onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${data?.store_lat}%2C${data?.store_lon}`, '_blank')}
+                  onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${data?.store_data?.latitude}%2C${data?.store_data?.longitude}`, '_blank')}
 
                   sx={{
                     display: 'flex',

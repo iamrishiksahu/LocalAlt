@@ -4,11 +4,17 @@ import { Box, Card, Typography, CardContent, CardActions, Button, Rating } from 
 import { useNavigate } from 'react-router-dom'
 
 
-const ProductListItem = ({ data }) => {
+const ProductListItem = ({ item }) => {
 
     const navigate = useNavigate();
-    return (
+    let data = []
+    if(item.data != undefined){
+        data = item.data
+    }else{
+        data = item;
+    }
 
+    return (
         <>
 
             <Card onClick={() => navigate(`/product/${data.product_id}`)} sx={{ 
@@ -34,7 +40,7 @@ const ProductListItem = ({ data }) => {
 
                         {/* LEFT SIDE (MIMAGE CONTAINER) */}
                         <Box sx={{ width: '100%', height: '160px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', mb: '1rem'}}>
-                            <img src={data.product_images[0]} alt='product_image'
+                            <img src={data?.images?.[0]} alt='product_image'
                                 style={{
                                     maxWidth: '100%',
                                     maxHeight: '100%',

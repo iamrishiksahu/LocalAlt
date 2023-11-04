@@ -3,12 +3,32 @@ import ProductListItem from './ProductListItem'
 import { Box } from '@mui/material'
 import ProductContext from '../context/ProductsContext'
 import HeaderProgress from './HeaderProgress'
+import { getAllProduct } from '../api/productApis'
+
 
 const AllProducts = () => {
 
     const { productList, setProductList } = useContext(ProductContext)
+    const [showProgress, setShowProgress] = useState(true)
+
+    useEffect(() => {
+
+        getAllProduct().then((data) => {
+            setShowProgress(false)
+            setProductList(data)
+        })
+
+    }, [])
+
+    useEffect(() => {
+
+        console.log(productList? {...productList} : 'nahi aaya')
+
+
+    }, [productList])
 
     return (
+
         <Box sx={{
             display: 'grid',
             gap: { xs: '1rem', sm: '1rem', md: '1rem' },
@@ -17,12 +37,22 @@ const AllProducts = () => {
 
         }}>
 
-            {productList.length > 0 ? productList.map((item, idx) => {
+            {showProgress ? <HeaderProgress /> : (
+                <>
+                    {
+                        productList?.length > 0 ? productList.map((item, idx) => {
+                            const itemData = item
+                            console.log(itemData);
+                            return (
+                                <ProductListItem key={idx} item={itemData} />
+                            )
+                        }) : <HeaderProgress />
+                    }
+                </>
 
-                return (
-                    <ProductListItem key={idx} data={item} />
-                )
-            }) : <HeaderProgress />}
+            )}
+
+
 
         </Box>
     )
