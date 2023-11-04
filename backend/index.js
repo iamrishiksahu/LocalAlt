@@ -11,6 +11,7 @@ const app = express()
 const cors = require('cors')
 const morgan = require('morgan');
 const bodyParser = require('body-parser')
+require('dotenv').config();
 
 
 app.use(morgan('dev'));
@@ -26,13 +27,13 @@ app.use(cors(corsOptions));
 
 //firebase config 
 const firebaseConfig = {
-    apiKey: "AIzaSyBVdo0lgjLhsSO5StQbo3n7I2ttiTkDY_8",
-    authDomain: "localalt.firebaseapp.com",
-    projectId: "localalt",
-    storageBucket: "localalt.appspot.com",
-    messagingSenderId: "428319982093",
-    appId: "1:428319982093:web:de298ea66185bc6e20cb44",
-    measurementId: "G-DRXP89W3Z2"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
   };
 
 
@@ -47,7 +48,7 @@ const db= getFirestore(firebaseApp);
 
 
 //define the port for the server
-const PORT = process.env.PORT || 8001
+const PORT = process.env.PORT;
 
 //define the import routes
 
