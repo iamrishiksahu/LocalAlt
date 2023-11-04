@@ -10,14 +10,17 @@ import {
 import { Link } from "react-router-dom";
 import { login } from "../../api/productApis";
 import { useNavigate } from 'react-router-dom';
-
+import Modal from "../../components/Modal";
 import AuthContext from "../../context/AuthContext";
 
 const LoginPage = () => {
-
+  const theme = useTheme()
   const { user, setUser } = useContext(AuthContext);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
+  
+
+  //submit button
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -108,10 +111,10 @@ const LoginPage = () => {
               Sign In
             </Button>
 
-            <Link className="link-text" to="#" variant="body2">
-              <Typography align="center"> Forgot Password</Typography>
 
-            </Link>
+            <Typography align="center"> <Modal /></Typography>
+
+
 
             <Link className="link-text" to="/signup" variant="body2">
               <Typography align="center" mt={'10rem'}> Don't have an account? Sign Up</Typography>

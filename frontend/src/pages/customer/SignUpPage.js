@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Grid,
@@ -6,21 +6,53 @@ import {
   Button,
   Box,
   Typography,
-
+  FormControl, FormControlLabel, Checkbox
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { addUser } from "../../api/userApi";
 
 const SignUpPage = () => {
-  const handleSubmit = (event) => {
+
+  //role button
+  const [selectedValue, setSelectedValue] = useState('');
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+    console.log(selectedValue);
+  };
+
+  //submit button
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    console.log({
+    const postData = {
+      name: data.get("name"),
       email: data.get("email"),
       password: data.get("password"),
-      location: data.get("location"),
-      phone: data.get("phone"),
-    });
+      role: selectedValue,
+      contact: data.get("phone"),
+      locality: data.get("location"),
+      longitude: "",
+      latitude: "",
+      address: {
+        address_line_1: data.get("address_line_1"),
+        address_line_2: data.get("address_line_2"),
+        city: data.get("city"),
+        pincode: data.get("pincode"),
+      },
+    };
+
+    console.log(postData);
+
+    try {
+      await addUser(postData);
+    } catch (err) {
+      if (err.response && err.response.status === 401) {
+        alert('User already exists');
+      } else {
+        alert('An error occurred: ' + err.message);
+      }
+    }
   };
 
   return (
@@ -40,7 +72,6 @@ const SignUpPage = () => {
 
           {/* <Typography variant="h4" align="center">LocalAlt</Typography> */}
           <img width={'450px'} src="/images/login-hero.png" alt="login hero" />
-
         </Box>
 
 
@@ -62,6 +93,23 @@ const SignUpPage = () => {
           <Typography component="h1" variant="body1">
             Register
           </Typography>
+          <FormControl component="fieldset" display="flow"
+          // sx={{
+          //   "& .css-1nrlq1o-MuiFormControl-root": {
+          //     display: 'flow',
+          //   }
+          // }}
+          >
+            <FormControlLabel
+              control={<Checkbox checked={selectedValue === "0"} onChange={handleChange} value="0" />}
+              label="Customer"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={selectedValue === "1"} onChange={handleChange} value="1" />}
+              label="Vendor"
+            />
+          </FormControl>
+
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -105,19 +153,49 @@ const SignUpPage = () => {
               margin="normal"
               required
               fullWidth
-              name="location"
-              label="Location"
+              name="locality"
+              label="Locality"
               type="string"
-              id="location"
+              id="locality"
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="phone"
-              label="Phone"
+              label="Contact Number"
               type="number"
               id="phone"
+
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="address_line_1"
+              label="Address Line 1"
+              type="string"
+              id="address_line_1"
+
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="address_line_2"
+              label="Address Line 2"
+              type="string"
+              id="address_line_2"
+
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="pincode"
+              label="Pincode"
+              type="number"
+              id="pincode"
 
             />
             <Button
@@ -140,7 +218,7 @@ const SignUpPage = () => {
 
       </Box>
 
-    </Box>
+    </Box >
   );
 };
 
