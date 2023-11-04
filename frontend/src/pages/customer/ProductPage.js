@@ -9,8 +9,10 @@ import axios from 'axios'
 const ProductPage = () => {
 
   const { id } = useParams()
-  const [data, setData] = useState({})
+  const [data, setData] = useState(null)
   const { user, setUser } = useContext(AuthContext);
+
+  const [showProgress, setShowProgress] = useState(true)
 
   const locateStore = () => {
     window.open(`https://www.google.com/maps/search/?api=1&query=${data?.store_data?.latitude}%2C${data?.store_data?.longitude}`, '_blank')
@@ -24,7 +26,9 @@ const ProductPage = () => {
       } else {
         console.log(res)
         setData(res)
+
       }
+      setShowProgress(false)
     })
     // console.log(user);
 
@@ -38,7 +42,7 @@ const ProductPage = () => {
         width: '100%'
       }}
     >
-      {data == {} ? <HeaderProgress /> :
+      {!data? <HeaderProgress /> :
 
 
         <Box
@@ -67,11 +71,12 @@ const ProductPage = () => {
               flexDirection: 'column',
               padding: '2rem',
               gap: '1rem',
+              height: '30vh',
               width: { "md": '70%', "xs": '100%', "sm": '100%' }
             }}>
 
               <Typography variant='body'>Seller</Typography>
-              {/* <Typography variant='h6'>{data?.store_name + data?.locality}</Typography> */}
+              <Typography variant='h6'>{data?.store_data?.store_name + ' - ' + data?.store_data?.locality}</Typography>
 
               <Box sx={{
                 display: 'flex',

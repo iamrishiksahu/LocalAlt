@@ -9,14 +9,17 @@ import { getAllProduct } from '../api/productApis'
 const AllProducts = () => {
 
     const { productList, setProductList } = useContext(ProductContext)
-    const [showProgress, setShowProgress] = useState(true)
+    const [showProgress, setShowProgress] = useState(false)
 
     useEffect(() => {
-
+        setShowProgress(true)
         getAllProduct().then((data) => {
             setProductList(data)
             setShowProgress(false)
-        })
+        }).catch(err => {
+            console.log(err)
+            setShowProgress(false)
+        }) 
 
     }, [])
 
