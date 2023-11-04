@@ -12,17 +12,14 @@ const searchProductsByQuery = async ({ query }) => {
     }
 
 }
-const addProduct = async ({ query }) => {
-
+const getSingleProductWithId = async ({ id }) => {
     try {
-        const data = await axiosApi.post(`/products/add-product`)
-        if (data) {
-            console.log(data)
-        }
+        const data = await axiosApi.get(`/products/${id}`)
+        console.log(data)
+        return data.data.product
     } catch (err) {
         console.log(err)
+        return { isError: true, ...err }
     }
-
 }
-
-export { searchProductsByQuery }
+export { searchProductsByQuery, getSingleProductWithId }
