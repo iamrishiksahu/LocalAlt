@@ -38,10 +38,13 @@ const storeRoutes = (db, firebaseApp) => {
       })
         .then(() => {
           console.log('Store Listed on the database');
-          res.status(200).json({ message: 'Store Registered successful', 
-          user:{
-            "test successful": "test successful"
-          } });
+          res.status(200).json({ 
+            message: 'Store Registered successful',
+            store_id:store_id,
+            store_name:store_name,
+            store_owner:store_owner,
+            uid:uid,
+          });
         })
         .catch((error) => {
           console.log('Error occurred while adding user to the database', error);
