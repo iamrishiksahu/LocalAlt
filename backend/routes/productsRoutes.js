@@ -79,26 +79,26 @@ const productsRoutes = (db, firebaseApp) => {
 
     //This gives products filtered by the distance from the user's location (it gives in a 5km radius)
     router.get('/products-by-distance', (req, res) => {
-      const { longitude, latitude } = req.body;
-      const maxDistance = 5;
-      const filteredStores = []; // Collect filtered stores
+      const longitude=req.longitude;
+      const latitude=req.latitude;
+      const maxDistance = 10;
+      const filteredStores = []; 
   
       const storeRef = collection(dbs, 'stores');
       getDocs(storeRef)
           .then((storeSnapshot) => {
               storeSnapshot.forEach((storeDoc) => {
                   const storeData = storeDoc.data();
-                  console.log(storeData);
-  
+                  console.log(longitude);  
+                  console.log(latitude, longitude, storeData.latitude, storeData.longitude);
                   // Calculate the distance between the user and the store
-                  // const storeDistance = calculateDistance(
-                  //     latitude,
-                  //     longitude,
-                  //     storeData.latitude,
-                  //     storeData.longitude
-                  // );
-  
-                  if (true) {
+                  const storeDistance = calculateDistance(
+                      parseFloat(latitude),
+                      parseFloat(longitude),
+                      storeData.latitude,
+                      storeData.longitude
+                  );
+                  if (storeDistance <= maxDistance) {
                       // Store is within the specified distance
                       filteredStores.push(storeData);
                   }
@@ -134,9 +134,29 @@ router.get('/:product_id', (req, res) => {
     });
 });
 
-      
-    
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const radLat1 = (Math.PI * lat1) / 180;
+  const radLon1 = (Math.PI * lon1) / 180;
+  const radLat2 = (Math.PI * lat2) / 180;
+  const radLon2 = (Math.PI * lon2) / 180;
+
+  // Haversine formula
+  const dLat = radLat2 - radLat1;
+  const dLon = radLon2 - radLon1;
+
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(radLat1) * Math.cos(radLat2) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c;
+  console.log('distance', distance);
+  return distance;
+} 
     return router;
   };
+
+
  
   module.exports = productsRoutes;
