@@ -82,6 +82,8 @@ const productsRoutes = (db, firebaseApp) => {
       const longitude=req.body.longitude;
       const latitude=req.body.latitude;
       const maxDistance = 10;
+      // const distance=req.body.distance;
+      // const maxDistance = (parseFloat)distance;
       const filteredStores = []; 
       console.log(longitude);  
   
