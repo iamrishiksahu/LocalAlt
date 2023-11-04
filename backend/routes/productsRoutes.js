@@ -78,19 +78,21 @@ const productsRoutes = (db, firebaseApp) => {
     });
 
     //This gives products filtered by the distance from the user's location (it gives in a 5km radius)
-    router.get('/products-by-distance', (req, res) => {
-      const longitude=req.longitude;
-      const latitude=req.latitude;
+    router.post('/products-by-distance', (req, res) => {
+      const longitude=req.body.longitude;
+      const latitude=req.body.latitude;
       const maxDistance = 10;
+      // const distance=req.body.distance;
+      // const maxDistance = (parseFloat)distance;
       const filteredStores = []; 
+      console.log(longitude);  
   
       const storeRef = collection(dbs, 'stores');
       getDocs(storeRef)
           .then((storeSnapshot) => {
               storeSnapshot.forEach((storeDoc) => {
                   const storeData = storeDoc.data();
-                  console.log(longitude);  
-                  console.log(latitude, longitude, storeData.latitude, storeData.longitude);
+                  
                   // Calculate the distance between the user and the store
                   const storeDistance = calculateDistance(
                       parseFloat(latitude),
@@ -100,6 +102,9 @@ const productsRoutes = (db, firebaseApp) => {
                   );
                   if (storeDistance <= maxDistance) {
                       // Store is within the specified distance
+                      filteredStores.push(storeData);
+                      storeData.store_distance = storeDistance;
+
                       filteredStores.push(storeData);
                   }
               });
