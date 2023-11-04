@@ -32,16 +32,6 @@ function App() {
   return (
     <BrowserRouter>
 
-
-      {/* Producted Routes - Authenticated Only */}
-      <Route path='/' element={<HomePage />}>
-        <Route index element={<AllProducts />} />
-        <Route path='/product/:id' element={<ProductPage />} />
-        <Route path='/orders' element={<OrdersPage />} />
-        <Route path='/account' element={<AccountPage />} />
-      </Route>
-
-
       <AuthContext.Provider value={{ user, setUser }}>
 
         <ProductContext.Provider value={{ productList, setProductList }} >
