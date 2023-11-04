@@ -206,7 +206,6 @@ IMPORTANT: role is 0 for customer and 1 for vendor
   "reviews_count": 25,
   "store_id": "store_12345"
 }
-
 ```
 - payload format
 ```
