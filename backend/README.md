@@ -328,3 +328,6 @@ Path Variable: product_id=9becfe8d-3e2c-4197-b60c-9d6157d586b8
         "rating": 4.5
     }
 ```
+
+### search functionality to get products by name
+
