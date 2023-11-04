@@ -22,4 +22,14 @@ const getSingleProductWithId = async ({ id }) => {
         return { isError: true, ...err }
     }
 }
-export { searchProductsByQuery, getSingleProductWithId }
+
+const addProduct = async (postData) => {
+    try {
+        const response = await axiosApi.post('products/add-product', postData);
+        console.log(response.data);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export { searchProductsByQuery, getSingleProductWithId, addProduct }
