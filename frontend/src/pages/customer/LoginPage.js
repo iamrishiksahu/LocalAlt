@@ -9,21 +9,32 @@ import {
   useTheme,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { login } from "../../api/productApis";
+import { useNavigate } from 'react-router-dom';
+
+
 
 const LoginPage = () => {
-
-
   const theme = useTheme()
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+
+
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    console.log({ data });
-    console.log({
+    const postData = {
       email: data.get("email"),
       password: data.get("password"),
-    });
+    };
+
+    try {
+      await login(postData).then(navigate('/'));
+      ;
+    } catch (err) {
+      alert('Invalid credentials!');
+    }
   };
 
 

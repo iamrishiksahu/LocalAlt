@@ -36,11 +36,19 @@ const getAllProduct = async () => {
 
 const addProduct = async (postData) => {
     try {
-        const response = await axiosApi.post('products/add-product', postData);
+        const response = await axiosApi.post('/products/add-product', postData);
+        console.log(response.data);
+    } catch (err) {
+        console.log(err);
+    }
+};
+const login = async (postData) => {
+    try {
+        const response = await axiosApi.post('/auth/login', postData);
         console.log(response.data);
     } catch (err) {
         console.log(err);
     }
 };
 
-export { searchProductsByQuery, getSingleProductWithId, addProduct, getAllProduct }
+export { searchProductsByQuery, getSingleProductWithId, addProduct, getAllProduct, login }
