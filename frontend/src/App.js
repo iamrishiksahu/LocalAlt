@@ -31,7 +31,7 @@ function App() {
           {/* Producted Routes - Authenticated Only */}
           <Route path='/' element={<HomePage />}>
             <Route index element={<AllProducts />} />
-            <Route path='/product' element={<ProductPage />} />
+            <Route path='/product/:id' element={<ProductPage />} />
             <Route path='/orders' element={<OrdersPage />} />
             <Route path='/account' element={<AccountPage />} />
           </Route>
