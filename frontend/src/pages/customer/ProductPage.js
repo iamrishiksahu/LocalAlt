@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { getSingleProductWithId } from '../../api/productApis'
 import HeaderProgress from '../../components/HeaderProgress'
 import AuthContext from '../../context/AuthContext'
-import axios from 'axios'
 
 const ProductPage = () => {
 
@@ -32,7 +31,6 @@ const ProductPage = () => {
     })
     // console.log(user);
 
-
   }, [])
 
 
@@ -42,7 +40,7 @@ const ProductPage = () => {
         width: '100%'
       }}
     >
-      {!data? <HeaderProgress /> :
+      {!data ? <HeaderProgress /> :
 
 
         <Box
@@ -98,7 +96,7 @@ const ProductPage = () => {
                     borderRadius: '0.5rem',
                     cursor: 'pointer'
                   }}>
-                  <span class="material-symbols-outlined">
+                  <span className="material-symbols-outlined">
                     pin_drop
                   </span>
                   <Typography>Locate Store</Typography>
@@ -116,7 +114,7 @@ const ProductPage = () => {
                     borderRadius: '0.5rem',
                     cursor: 'pointer'
                   }}>
-                  <span class="material-symbols-outlined">
+                  <span className="material-symbols-outlined">
                     call
                   </span>
                   <Typography>Call Store</Typography>

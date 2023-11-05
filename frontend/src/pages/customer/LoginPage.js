@@ -116,7 +116,7 @@ const LoginPage = () => {
 
 
 
-            <Link className="link-text" to="/signup" variant="body2">
+            <Link classNameName="link-text" to="/signup" variant="body2">
               <Typography align="center" mt={'10rem'}> Don't have an account? Sign Up</Typography>
             </Link>
 

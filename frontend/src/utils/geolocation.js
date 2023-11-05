@@ -22,12 +22,14 @@ const getCurrentLocation = async () => {
     );
 }
 
-const getLatLong = async ()=> {
+const getLatLong = async () => {
     await getCurrentLocation()
-    const lat = localStorage.getItem('latitude')
-    const lon = localStorage.getItem('longitude')
-    return { lat,lon }
-
+    const latitude = parseInt(localStorage.getItem('latitude'), 10)
+    const longitude = parseInt(localStorage.getItem('longitude'), 10)
+    return { latitude, longitude }
 }
+
+
+
 
 export { getCurrentLocation, getLatLong }
