@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import {Container,Grid,TextField,Button,Box,Typography,Input} from "@mui/material";
 import { Link } from "react-router-dom";
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import { getPlaceNameWithLatLong } from '../api/mapApis';
+//import { getPlaceNameWithLatLong } from '../api/mapApis';
 
 const VManageStore = () => {
   const handleSubmit = async (event) => {
@@ -23,9 +23,6 @@ const VManageStore = () => {
       latitude: data.get('latitude'),
       contact: data.get('contact'),
     };
-    getPlaceNameWithLatLong(postData.latitude, postData.longitude).then((res) => {
-      console.log(res);
-    });
 
     <IconButton
       color="primary"
@@ -132,12 +129,6 @@ const VManageStore = () => {
   label="Longitude"
   name="longitude"
 />
-
-
-
-
-
-   
     <Button
       type="submit"
       fullWidth
