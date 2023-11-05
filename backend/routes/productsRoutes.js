@@ -219,11 +219,13 @@ const productsRoutes = (db, firebaseApp) => {
       // const maxDistance = (parseFloat)distance;
       const filteredStores = []; 
       console.log(longitude);  
+
+      let filteredProds = []
   
       const storeRef = collection(dbs, 'stores');
       getDocs(storeRef)
           .then((storeSnapshot) => {
-              storeSnapshot.forEach((storeDoc) => {
+              storeSnapshot.forEach(async (storeDoc) => {
                   const storeData = storeDoc.data();
                   
                   // Calculate the distance between the user and the store
@@ -233,17 +235,26 @@ const productsRoutes = (db, firebaseApp) => {
                       storeData.latitude,
                       storeData.longitude
                   );
-                  if (storeDistance <= maxDistance) {
+                  // if (storeDistance <= maxDistance) {
                       // Store is within the specified distance
                       filteredStores.push(storeData);
+                      const prodRef = collection(dbs, 'products')
+
+                      const q =  query(prodRef, where('store_id', '==', storeData.store_id))
+                      getDocs(q).then((querySnapshot) => {
+                        querySnapshot.forEach((doc) =>{
+
+                          filteredProds.push(doc.data())
+                        })
+                      })
                       storeData.store_distance = storeDistance;
 
                       filteredStores.push(storeData);
-                  }
+                  // }
               });
   
               // Send the filtered stores as a response after the loop is completed
-              res.status(200).json({ stores: filteredStores });
+              res.status(200).json({ products: filteredProds });
           })
           .catch((error) => {
               console.error('Error querying stores:', error);
