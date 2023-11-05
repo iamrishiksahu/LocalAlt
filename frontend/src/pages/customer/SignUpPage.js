@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addUser } from "../../api/userApi";
-import { fontSize } from "@mui/system";
+
 
 
 const SignUpPage = () => {
@@ -94,7 +94,7 @@ const SignUpPage = () => {
           }}
         >
           <Typography component="h1" variant="body1" sx={{ fontSize: '30px' }}>
-            Signup
+            Sign up
           </Typography>
 
           <FormControl component="fieldset" sx={{ display: "flow", mt: '1rem' }}
