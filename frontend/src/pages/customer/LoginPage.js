@@ -121,9 +121,9 @@ const LoginPage = () => {
             <Typography align="center"> <Modal /></Typography>
 
 
-
             <Link className="link-text" to="/signup" variant="body2">
               <Typography align="center" mt={'5rem'}> Don't have an account? Sign Up</Typography>
+
             </Link>
 
           </Box>

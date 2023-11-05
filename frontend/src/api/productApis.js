@@ -10,7 +10,7 @@ const searchProductsByQuery = async ({ query }) => {
 
     try {
         const data = await axiosApi.post(`/products/products-by-distance/${query}`, {
-            longitude: lat ,
+            longitude: lat,
             latitude: lon
         })
         if (data) {
@@ -69,5 +69,22 @@ const login = async (postData) => {
     }
 };
 
+const addWishlist = async (postData) => {
+    try {
+        const response = await axiosApi.post('/orders/wishlist")', postData);
+        console.log(response.data);
+    } catch (err) {
+        console.log(err);
+    }
+};
+const getAllProductByDistance = async (postData) => {
+    try {
+        const response = await axiosApi.post('/products/products-by-distance")', postData);
+        console.log(response.data);
+    } catch (err) {
+        console.log(err);
+    }
+};
 
-export { searchProductsByQuery, getSingleProductWithId, addProduct, getAllProduct, login }
+
+export { searchProductsByQuery, getSingleProductWithId, addProduct, getAllProduct, login, addWishlist, getAllProductByDistance }
