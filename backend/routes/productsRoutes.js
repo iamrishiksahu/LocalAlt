@@ -1,6 +1,6 @@
 const express = require('express');
 const admin= require('firebase-admin');
-const { collection, addDoc, getDocs, getFirestore, doc, setDoc, getDoc, query, where, or } = require('firebase/firestore');
+const { collection, getDocs, getFirestore, doc, setDoc, getDoc, query, where} = require('firebase/firestore');
 const router = express.Router();
 const uuid=require('uuid');
 
@@ -92,23 +92,123 @@ const productsRoutes = (db, firebaseApp) => {
   
 
     //DISCLAIMER: this gives all products listed on the database. This is not the way to go in production.
-    router.get('/all-products', (req, res) => {
-        const productRef = collection(dbs, 'products');
+    // router.post('/all-products', (req, res) => {
+    //   const longitude=req.body.longitude;
+    //   const latitude=req.body.latitude;
+    //   const productRef = collection(dbs, 'products');
         
-        getDocs(productRef)
-            .then((snapshot) => {
-                const products = [];
-                snapshot.forEach((doc) => {
-                    products.push({ id: doc.id, data: doc.data() });
-                });
-                // Send the retrieved data as a response to the client
-                res.status(200).json({ products });
-            })
-            .catch((error) => {
-                console.log('Error getting products: ', error);
-                res.status(500).json({ error: 'Failed to retrieve products' });
-            });
+    //     getDocs(productRef)
+    //         .then((snapshot) => {
+    //             const products = [];
+    //             snapshot.forEach((doc) => {
+    //                 products.push({ id: doc.id, data: doc.data() });
+    //                 store_id=doc.data().store_id;
+    //                 //console.log(doc.data());
+    //                 const storeRef=collection(dbs,'stores');
+    //                 getDocs(storeRef)
+    //                 .then((storeSnapshot)=>{
+    //                   storeSnapshot.forEach((storeDoc)=>{
+    //                     const storeData=storeDoc.data();
+    //                     if(storeData.store_id==store_id){
+    //                       const store_latitude=storeData.latitude;
+    //                       const store_longitude=storeData.longitude;
+    //                       const store_distance=calculateDistance(latitude,longitude,store_latitude,store_longitude);
+    //                       console.log(store_distance);
+    //                       products.push({store_distance:store_distance});
+    //                       //products.push({store_distance:store_distance});
+    //                     }
+    //                   });
+    //                 });
+
+    //                 //const store_distance=calculateDistance(latitude,longitude,store_latitude,store_longitude);
+    //                 //products.push({store_distance:store_distance});
+    //             });
+    //             // Send the retrieved data as a response to the client
+    //             res.status(200).json({products});
+    //         })
+    //         .catch((error) => {
+    //             console.log('Error getting products: ', error);
+    //             res.status(500).json({ error: 'Failed to retrieve products' });
+    //         });
+    // });
+    router.post('/all-products', async (req, res) => {
+      const longitude = req.body.longitude;
+      const latitude = req.body.latitude;
+      const productRef = collection(dbs, 'products');
+    
+      try {
+        const snapshot = await getDocs(productRef);
+        const products = [];
+    
+        for (const doc of snapshot.docs) {
+          const productData = doc.data();
+          const store_id = productData.store_id;
+    
+          const storeRef = collection(dbs, 'stores');
+          const storeSnapshot = await getDocs(storeRef);
+    
+          storeSnapshot.forEach((storeDoc) => {
+            const storeData = storeDoc.data();
+            if (storeData.store_id === store_id) {
+              const store_latitude = storeData.latitude;
+              const store_longitude = storeData.longitude;
+              const store_distance = calculateDistance(latitude, longitude, store_latitude, store_longitude);
+              products.push({ id: doc.id, data: productData, store_distance });
+            }
+          });
+        }
+    
+        // Send the retrieved data as a response to the client
+        res.status(200).json({ products });
+      } catch (error) {
+        console.log('Error getting products: ', error);
+        res.status(500).json({ error: 'Failed to retrieve products' });
+      }
     });
+    
+
+
+
+
+
+
+    // router.post('/all-products', (req, res) => {
+    //   const { latitude, longitude } = req.body;
+    //   //console.log(latitude);
+    //   //console.log(longitude);
+    //   const user_latitude=parseFloat(latitude);
+    //   const user_longitude=parseFloat(longitude);
+    //   console.log(user_latitude);
+    //   const productRef = collection(dbs, 'products');
+      
+    //   getDocs(productRef)
+    //     .then((snapshot) => {
+    //       const products = [];
+    
+    //       snapshot.forEach((doc) => {
+    //         const productData = doc.data();
+    //         const store_id=productData.store_id;
+    //         console.log(store_id);
+    
+    //         // Calculate the distance using the calculateDistance function
+    //         const store_distance = calculateDistance(latitude, longitude, store_latitude, store_longitude);
+            
+    //         // Add the store_distance to the product data
+    //         productData.store_distance = store_distance;
+    
+    //         // Push the product data with the calculated store_distance to the products array
+    //         products.push(productData);
+    //       });
+    
+    //       // Send the retrieved data as a response to the client
+    //       res.status(200).json({ products });
+    //     })
+    //     .catch((error) => {
+    //       console.log('Error getting products: ', error);
+    //       res.status(500).json({ error: 'Failed to retrieve products' });
+    //     });
+    // });
+    
 
     //This gives products filtered by the distance from the user's location (it gives in a 5km radius)
     router.post('/products-by-distance', (req, res) => {
@@ -197,7 +297,7 @@ router.post('/products-by-distance/:search_name', (req, res) => {
       
 
       queryCheck = query(productsRef, where('product_name', '>=', searchName), where('product_name', '<=', searchName + '\uf8ff'));
-      
+        
       //console.log('queryCheck', queryCheck);
 
       getDocs(queryCheck)

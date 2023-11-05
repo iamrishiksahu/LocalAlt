@@ -8,39 +8,36 @@ const ProductListItem = ({ item }) => {
 
     const navigate = useNavigate();
     let data = []
-    if(item.data != undefined){
+    if (item.data != undefined) {
         data = item.data
-    }else{
+    } else {
         data = item;
     }
-
+    // console.log(item);
     return (
         <>
-
-            <Card onClick={() => navigate(`/product/${data.product_id}`)} sx={{ 
-                cursor: 'pointer' ,
+            <Card onClick={() => navigate(`/product/${data.product_id}`)} sx={{
+                cursor: 'pointer',
                 transition: 'all 200ms ease',
-                boxShadow: {md: '0 0 2rem #00000010', sm: '0 0 1rem #00000010', xs: '0 0 1rem #00000010'},
+                boxShadow: { md: '0 0 2rem #00000010', sm: '0 0 1rem #00000010', xs: '0 0 1rem #00000010' },
                 '&:hover': {
                     scale: '1.02',
 
-                    boxShadow: {md: '0 0 10rem #00000010', sm: '0 0 2rem #00000010', xs: '0 0 1rem #00000010'}
+                    boxShadow: { md: '0 0 10rem #00000010', sm: '0 0 2rem #00000010', xs: '0 0 1rem #00000010' }
                 }
-        }}>
-                <Box sx={{ width: '100%', display: 'flex', gap: {md: '1rem', xs: '0px', sm: '0px'}, padding: '1rem', boxSizing: 'border-box' }}>
-
-
+            }}>
+                <Box sx={{ width: '100%', display: 'flex', gap: { md: '1rem', xs: '0px', sm: '0px' }, padding: '1rem', boxSizing: 'border-box' }}>
 
                     {/* RIGHT SIDE (DESCRIPTION CONTAINER) */}
 
                     <CardContent sx={{
+
                         padding: {md: '1rem', xs: '0px', sm: '0px'},
                         width: '100%'
                     }}>
 
-
                         {/* LEFT SIDE (MIMAGE CONTAINER) */}
-                        <Box sx={{ width: '100%', height: '160px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', mb: '1rem'}}>
+                        <Box sx={{ width: '100%', height: '160px', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', mb: '1rem' }}>
                             <img src={data?.images?.[0]} alt='product_image'
                                 style={{
                                     maxWidth: '100%',
@@ -48,9 +45,10 @@ const ProductListItem = ({ item }) => {
                                 }} />
                         </Box>
                         <Typography variant="h6">{data.product_name}</Typography>
-                        <Typography>₹{data.product_price}</Typography>
+                        {/* {console.log(data.product_name)} */}
+                        <Typography>₹{data.price}</Typography>
                         <Rating value={data.rating} readOnly />
-                        <Typography>{data.store_name + ' (' + data.distance + ')'}</Typography>
+                        <Typography>{data.store_id + ' (' + data.distance + ')'}</Typography>
                         <Typography mt='1.5rem' variant="body2">{data.description}</Typography>
                         <CardActions>
                             <Button
