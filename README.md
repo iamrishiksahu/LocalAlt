@@ -120,6 +120,10 @@ Interested in contributing to LocalAlt ? Contact us for details on our code of c
 
 This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for details.
 
+## Declaration
+
+We declare that each and every component of this project has been built within the duration of the hackathon and none of the parts/segments of code are copied from any sources neither personal nor global.
+
 ---
 
 Happy shopping with **LocalAlt**! 🛍️
