@@ -42,8 +42,17 @@ const getSingleProductWithId = async ({ id }) => {
 }
 
 const getAllProduct = async () => {
+
+    await getCurrentLocation()
+    const lat = localStorage.getItem('latitude')
+    const lon = localStorage.getItem('longitude')
+
     try {
-        const data = await axiosApi.get(`/products/all-products`)
+        const data = await axiosApi.post(`/products/all-products`, {
+            longitude: lon,
+            latitude: lat
+        })
+        console.log(data.data.products)
         return data.data.products
     } catch (err) {
         console.log(err)

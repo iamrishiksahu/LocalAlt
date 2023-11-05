@@ -96,7 +96,7 @@ const Header = () => {
 
                 }}>
 
-                <img src="/logo192.png" alt="logo" width="50px" onClick={() => navigate('/')} />
+                <img src="/logo192.png" alt="logo" width="35px" onClick={() => navigate('/')} />
 
                 <Box sx={{
                     display: 'flex',

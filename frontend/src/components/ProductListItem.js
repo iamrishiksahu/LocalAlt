@@ -13,7 +13,7 @@ const ProductListItem = ({ item }) => {
     } else {
         data = item;
     }
-    // console.log(item);
+    console.log(data);
     return (
         <>
             <Card onClick={() => navigate(`/product/${data.product_id}`)} sx={{
@@ -32,7 +32,7 @@ const ProductListItem = ({ item }) => {
 
                     <CardContent sx={{
 
-                        padding: {md: '1rem', xs: '0px', sm: '0px'},
+                        padding: { md: '1rem', xs: '0px', sm: '0px' },
                         width: '100%'
                     }}>
 
@@ -48,7 +48,19 @@ const ProductListItem = ({ item }) => {
                         {/* {console.log(data.product_name)} */}
                         <Typography>₹{data.price}</Typography>
                         <Rating value={data.rating} readOnly />
-                        <Typography>{data.store_id + ' (' + data.distance + ')'}</Typography>
+
+                        <Box sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            marginTop: '0.5rem'
+                        }}>
+
+                            <span class="material-symbols-outlined">
+                                location_chip
+                            </span>
+                            <Typography>{' (' + Math.round(item.store_distance) + 'km)'}</Typography>
+                        </Box>
                         <Typography mt='1.5rem' variant="body2">{data.description}</Typography>
                         <CardActions>
                             <Button

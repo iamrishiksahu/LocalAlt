@@ -34,7 +34,7 @@ const VHeader = ({ title }) => {
 
                 }}>
 
-                <img src="/logo192.png" alt="logo" width="50px" onClick={() => navigate('/vendor/home')} />
+                <img src="/logo192.png" alt="logo" width="35px" onClick={() => navigate('/vendor/home')} />
 
                 <Typography variant='body1' sx={{ color: 'white' }} >{title} </Typography>
 

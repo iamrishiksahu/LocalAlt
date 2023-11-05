@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addUser } from "../../api/userApi";
-
+import { fontSize } from "@mui/system";
 
 
 const SignUpPage = () => {
@@ -48,6 +48,7 @@ const SignUpPage = () => {
 
     try {
       await addUser(postData);
+      
     } catch (err) {
       if (err.response && err.response.status === 401) {
         alert('User already exists');
@@ -93,8 +94,10 @@ const SignUpPage = () => {
             alignItems: "center",
           }}
         >
+          <img src="/logo192.png" alt="logo" width="35px" style={{marginBottom: '1rem'}} />
+
           <Typography component="h1" variant="body1" sx={{ fontSize: '30px' }}>
-            Sign up
+            Signup
           </Typography>
 
           <FormControl component="fieldset" sx={{ display: "flow", mt: '1rem' }}
