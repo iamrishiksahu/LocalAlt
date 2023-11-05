@@ -15,9 +15,7 @@ import { setLocalUserData } from "../../utils/localUserData";
 
 const LoginPage = () => {
   const { user, setUser } = useContext(AuthContext);
-
   const navigate = useNavigate();
-
 
   //submit button
   const handleSubmit = async (event) => {
@@ -31,13 +29,18 @@ const LoginPage = () => {
 
     try {
       const response = await login(postData);
-      setLocalUserData(response.data?.user)
+      console.log(response);
+      setLocalUserData(response)
       setUser(response);
-      console.log(user);
-      navigate('/');
+      if (response.role == 1) {
+        navigate('/vendor/home')
+      } else {
+        navigate('/')
+      }
 
     } catch (err) {
       alert('Invalid credentials!');
+      console.log(err);
     }
   };
 
@@ -47,17 +50,20 @@ const LoginPage = () => {
         height: '100vh',
         display: 'grid',
         gap: '2rem',
-        backgroundColor: `linear-gradient(135deg, blue, red)`,
+        backgroundColor: '#f5fcff',
         gridTemplateColumns: { md: '1fr 1fr', xs: '1fr' }
       }}>
 
 
         <Box sx={{
-          padding: { md: '8rem 0 0 8rem', sm: '1rem', xs: '1rem' }
+          margin: 'auto',
+          marginTop: '3rem',
+          padding: { md: '6rem 0 0 8rem', sm: '3rem', xs: '3rem' }
         }}>
+          <Typography variant="h4" align="left">LocalAlt</Typography>
+          <Typography variant="body1" align="left" sx={{width: {md: '50%', xs: '80%'}}} mt={'1rem'} mb={'1rem'}>LocalAlt - A platform to make products in your local shops and outlets visible to you online!</Typography>
 
-          {/* <Typography variant="h4" align="center">LocalAlt</Typography> */}
-          <img width={'450px'} src="/images/login-hero.png" alt="login hero" />
+          <img width={'300px'} src="/images/login-hero.png" alt="login hero" />
 
         </Box>
 
@@ -117,7 +123,7 @@ const LoginPage = () => {
 
 
             <Link className="link-text" to="/signup" variant="body2">
-              <Typography align="center" mt={'10rem'}> Don't have an account? Sign Up</Typography>
+              <Typography align="center" mt={'5rem'}> Don't have an account? Sign Up</Typography>
             </Link>
 
           </Box>

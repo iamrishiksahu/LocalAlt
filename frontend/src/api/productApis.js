@@ -62,8 +62,7 @@ const addProduct = async (postData) => {
 const login = async (postData) => {
     try {
         const response = await axiosApi.post('/auth/login', postData);
-        console.log(response.data);
-        return response.data
+        return response.data.user
     } catch (err) {
         console.log(err);
         return err

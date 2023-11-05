@@ -1,8 +1,8 @@
-const setLocalUserData = ({data}) => {
-    localStorage.setItem('user', data )
+const setLocalUserData = (response) => {
+    localStorage.setItem('user', JSON.stringify(response))
 }
 
 const getLocalUserData = () => {
-    return localStorage.getItem('user')
+    return JSON.parse(localStorage.getItem('user'))
 }
 export {setLocalUserData, getLocalUserData}

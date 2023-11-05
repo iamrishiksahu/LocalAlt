@@ -34,7 +34,8 @@ const ProductListItem = ({ item }) => {
                     {/* RIGHT SIDE (DESCRIPTION CONTAINER) */}
 
                     <CardContent sx={{
-                        padding: {md: '1rem', xs: '0px', sm: '0px'}
+                        padding: {md: '1rem', xs: '0px', sm: '0px'},
+                        width: '100%'
                     }}>
 
 

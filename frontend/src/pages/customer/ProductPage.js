@@ -62,7 +62,7 @@ const ProductPage = () => {
               <img src={data?.images?.[0]} alt='product_image'
                 style={{
                   maxWidth: '100%',
-                  maxHeight: '100%',
+                  maxHeight: '350px',
                 }} />
             </Box>
 
