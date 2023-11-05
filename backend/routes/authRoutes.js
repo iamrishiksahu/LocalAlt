@@ -1,36 +1,23 @@
 const express = require('express');
-const admin= require('firebase-admin');
+const admin = require('firebase-admin');
 const { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } = require("firebase/auth");
 const { collection, addDoc, getDocs, getFirestore, doc, getDoc, setDoc } = require('firebase/firestore');
 
 const router = express.Router();
 admin.initializeApp();
 
-//db=getFirestore(firebaseApp);
+
 const authRoutes = (auth, db, firebaseApp) => {
-  // Route for handling the user registration
-  /**
-  {name,
-  email,
-  password,
-  role,
-  contact,
-  locality,
-  longitude,
-  latitude,
-  address,
-  }
-   */
-  //console.log(firebaseApp);
-  const dbs=getFirestore(firebaseApp);
+
+  const dbs = getFirestore(firebaseApp);
 
   router.post('/register', (req, res) => {
-    const { name, email, password, role, contact, locality, longitude, latitude,address } = req.body;
+    const { name, email, password, role, contact, locality, longitude, latitude, address } = req.body;
 
     // First, as soon as we have the email and password, we create the user in the auth table
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        
+
         const userUID = userCredential.user.uid;
         //console.log(user);
 
@@ -38,7 +25,7 @@ const authRoutes = (auth, db, firebaseApp) => {
         // const userRef =÷ collection('users').doc(userUID);
         //const userRef = doc(db, 'users', userUID);
 
-         setDoc(doc(dbs, 'users', userUID),{
+        setDoc(doc(dbs, 'users', userUID), {
           role: role,
           uid: userUID,
           user_name: name,
@@ -51,23 +38,25 @@ const authRoutes = (auth, db, firebaseApp) => {
         })
           .then(() => {
             console.log('User added to the database');
-            res.status(200).json({ message: 'Registration successful', 
-            user:{
-              uid: userCredential.user.uid,
-              documentId: userCredential.user.uid,
-              email: userCredential.user.email,
-              emailVerified: userCredential.user.emailVerified,
-              phoneNumber: contact,
-              displayName: name,
-              role: role,
-              location: locality,
-              longitude: longitude,
-              latitude: latitude,
-              address: address,
-              tokensValidAfterTime: userCredential.user.tokensValidAfterTime,
-              tenantId: userCredential.user.tenantId,
-              providerData: userCredential.user.providerData,
-            } });
+            res.status(200).json({
+              message: 'Registration successful',
+              user: {
+                uid: userCredential.user.uid,
+                documentId: userCredential.user.uid,
+                email: userCredential.user.email,
+                emailVerified: userCredential.user.emailVerified,
+                phoneNumber: contact,
+                displayName: name,
+                role: role,
+                location: locality,
+                longitude: longitude,
+                latitude: latitude,
+                address: address,
+                tokensValidAfterTime: userCredential.user.tokensValidAfterTime,
+                tenantId: userCredential.user.tenantId,
+                providerData: userCredential.user.providerData,
+              }
+            });
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -85,23 +74,23 @@ const authRoutes = (auth, db, firebaseApp) => {
   });
 
   // route for handling the login request
-  router.post('/login',(req, res) => {
+  router.post('/login', (req, res) => {
     const { email, password } = req.body;
     signInWithEmailAndPassword(auth, email, password)
-      .then( (userCredential) => {
-        const user =  userCredential.user;
+      .then((userCredential) => {
+        const user = userCredential.user;
 
         let toSend = {}
 
         getDoc(doc(dbs, 'users', user.uid)).then((doc) => {
           if (doc.exists()) {
             // user.role=doc.data().role;
-            toSend = {uid: user.uid, ...doc.data()}
-            console.log("Docu/ment data:", toSend);
-            res.status(200).json({ 
-              message: 'Login successful', 
-              user: {...toSend}
-             });
+            toSend = { uid: user.uid, ...doc.data() }
+            console.log("Document data:", toSend);
+            res.status(200).json({
+              message: 'Login successful',
+              user: { ...toSend }
+            });
 
           } else {
             // doc.data() will be undefined in this case
@@ -112,7 +101,7 @@ const authRoutes = (auth, db, firebaseApp) => {
         })
         // console.log(toSend);
 
-       
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -123,7 +112,7 @@ const authRoutes = (auth, db, firebaseApp) => {
   });
   // router.post('/login', (req, res) => {
   //   const { email, password } = req.body;
-    
+
   //   signInWithEmailAndPassword(auth, email, password)
   //     .then(async (userCredential) => {
   //       const user = userCredential.user;
@@ -134,7 +123,7 @@ const authRoutes = (auth, db, firebaseApp) => {
   //       if (userDoc.exists) {
   //         const userData = userDoc.data();
   //         const role = userData.role;
-  
+
   //         res.status(200).json({ 
   //           message: 'Login successful', 
   //           user,
@@ -152,7 +141,7 @@ const authRoutes = (auth, db, firebaseApp) => {
   //       res.status(401).json({ error: 'Login failed', errorCode, errorMessage });
   //     });
   // });
-  
+
   // Route for handling the "forgot password" request
   router.post('/forgot-password', (req, res) => {
     const { email } = req.body;

@@ -26,26 +26,6 @@ const AllProducts = () => {
 
     }, [])
 
-    // useEffect(() => {
-    //     const fetchProducts = async () => {
-    //         setShowProgress(true);
-    //         try {
-    //             const latlog = await getLatLong();
-    //             console.log(latlog);
-    //             const data = await getAllProductByDistance({ latlog });
-    //             console.log(data);
-    //             setProductList(data);
-    //         } catch (err) {
-    //             console.log(err);
-    //         } finally {
-    //             setShowProgress(false);
-    //         }
-    //     };
-
-    //     fetchProducts();
-    // }, []);
-
-
     useEffect(() => {
 
     }, [productList])

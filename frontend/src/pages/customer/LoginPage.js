@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     try {
       const response = await login(postData);
-      console.log(response);
+      // console.log(response);
       setLocalUserData(response)
       setUser(response);
       if (response.role == 1) {

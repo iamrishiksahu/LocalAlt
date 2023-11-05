@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import { TextField, Box, Autocomplete, IconButton, FormGroup, Typography, CircularProgress } from "@mui/material";
+import { TextField, Box, IconButton, Typography, CircularProgress } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
 import { getAllProduct, searchProductsByQuery } from '../api/productApis';
 import { ProductListData } from '../utils/data';
@@ -27,9 +27,9 @@ const Header = () => {
         const lat = (position.coords.latitude);
         const lon = (position.coords.longitude);
 
-        console.log(lat, lon)
+        // console.log(lat, lon)
         const res = await getPlaceNameWithLatLong({ lat, lon })
-        console.log(res)
+        // console.log(res)
         if (res.isError) {
             alert('Error Detecting Location!')
         } {
@@ -66,8 +66,6 @@ const Header = () => {
         navigator.geolocation.getCurrentPosition(
             successHandler, errorHandler,
             { enableHighAccuracy: true, maximumAge: 10000 });
-
-        // navigate('/')
 
     }
 

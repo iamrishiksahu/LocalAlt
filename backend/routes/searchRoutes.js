@@ -10,10 +10,10 @@ const searchRoutes = (firebaseApp) => {
     // Route for Searching using Product name 
     router.get("/searchProduct", (req, res) => {
         const productName = req.query.product_name;
-        console.log( req.query);
+        // console.log( req.query);
         // Create a query against the collection
         const productsRef = query(collection(dbs, "products"), where("product_name", "==", productName));
-        
+
         getDocs(productsRef)
             .then(productsSnapshot => {
                 const products = productsSnapshot.docs.map(doc => doc.data());

@@ -21,7 +21,7 @@ const StyledBox = styled(Box)`
 
 const Order = ({ order_id, order_date, status, items }) => {
   const theme = useTheme();
-  console.log(items);
+  // console.log(items);
 
   return (
     <Card

@@ -19,7 +19,7 @@ const AccountPage = () => {
   const [selectedValue, setSelectedValue] = useState('');
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
-    console.log(selectedValue);
+    // console.log(selectedValue);
   };
 
   //submit button
@@ -44,7 +44,7 @@ const AccountPage = () => {
       },
     };
 
-    console.log(postData);
+    // console.log(postData);
 
     try {
       await addUser(postData);
