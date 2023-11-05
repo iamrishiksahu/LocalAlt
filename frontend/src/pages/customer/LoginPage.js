@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     try {
       const response = await login(postData);
-      console.log(response);
+      // console.log(response);
       setLocalUserData(response)
       setUser(response);
       if (response.role == 1) {
@@ -61,7 +61,7 @@ const LoginPage = () => {
           padding: { md: '6rem 0 0 8rem', sm: '3rem', xs: '3rem' }
         }}>
           <Typography variant="h4" align="left">LocalAlt</Typography>
-          <Typography variant="body1" align="left" sx={{width: {md: '50%', xs: '80%'}}} mt={'1rem'} mb={'1rem'}>LocalAlt - A platform to make products in your local shops and outlets visible to you online!</Typography>
+          <Typography variant="body1" align="left" sx={{ width: { md: '50%', xs: '80%' } }} mt={'1rem'} mb={'1rem'}>LocalAlt - A platform to make products in your local shops and outlets visible to you online!</Typography>
 
           <img width={'300px'} src="/images/login-hero.png" alt="login hero" />
 

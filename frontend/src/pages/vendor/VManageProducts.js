@@ -18,9 +18,9 @@ const VManageProducts = () => {
       if (res.isError) {
         alert('Error Occurred!')
         navigate('/vendor/home')
-        
+
       } else {
-        console.log(res)
+        // console.log(res)
         setData(res) // Set the data from the response
       }
       setShowProgress(false)
@@ -30,7 +30,7 @@ const VManageProducts = () => {
     <>
       <VHeader title={'Manage Products'} />
       <Box m="1.5rem 2.5rem">
-        {showProgress ? <HeaderProgress /> :(
+        {showProgress ? <HeaderProgress /> : (
           <Box
             mt="20px"
             display="grid"
@@ -39,14 +39,14 @@ const VManageProducts = () => {
             columnGap="1.33%"
 
             sx={{
-              gridTemplateColumns: {md: '1fr 1fr 1fr 1fr', sm: '1fr 1fr 1fr', xs: '1fr 1fr'}
+              gridTemplateColumns: { md: '1fr 1fr 1fr 1fr', sm: '1fr 1fr 1fr', xs: '1fr 1fr' }
             }}
           >
             {data.map((product) => (
               <VendorProductItem key={product.product_id} {...product} />
             ))}
           </Box>
-        ) }
+        )}
       </Box>
     </>
   )

@@ -1,18 +1,16 @@
 import React from 'react'
-import VHeader from './VHeader'
-import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
-import { Container, Grid, TextField, Button, Box, Typography, Input } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Container, TextField, Button, Box, Typography } from "@mui/material";
+
 import MyLocationIcon from '@mui/icons-material/MyLocation';
-import { getPlaceNameWithLatLong } from '../../api/mapApis';
+
 
 
 const VManageStore = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data);
+    // console.log(data);
     const postData = {
       store_name: data.get("store_name"),
       address: data.get("address"),
@@ -33,9 +31,9 @@ const VManageStore = () => {
       <MyLocationIcon />
     </IconButton>
 
-    console.log(postData);
+    // console.log(postData);
 
-    //await addStore(postData);
+    //await updateStore(postData);
   };
 
   return (

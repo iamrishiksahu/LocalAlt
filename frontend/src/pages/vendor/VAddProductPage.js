@@ -79,22 +79,30 @@ const VAddProductPage = () => {
       category: data.get("category"),
       subcategory: data.get('sub_category'),
       availability: Boolean('true'),
-      rating: parseInt('5'),
-      reviews_count: parseInt('0'),
-      store_id: parseInt('111'),
-
+      rating: parseInt('3.5'),
+      reviews_count: parseInt('10'),
+      store_id: 'store_zGL8PUJJ3NcdruVeFGDJG91hLBF2',
     };
 
-    console.log(postData);
+    // console.log(postData);
 
-    await addProduct(postData);
+    try {
+      await addProduct(postData);
+      alert('Product upload successful');
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        alert('Error: ' + err.message);
+      } else {
+        alert('An error occurred: ' + err.message);
+      }
+    }
   };
 
   return (
 
     <>
 
-<VHeader title={'Add Product'} />
+      <VHeader title={'Add Product'} />
 
 
       <Container component="main" maxWidth="sm">
@@ -234,7 +242,7 @@ const VAddProductPage = () => {
             >
               Add Product
             </Button>
-            
+
           </Box>
         </Box>
       </Container>

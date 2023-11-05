@@ -25,7 +25,7 @@ const getSingleProductWithId = async ({ id }) => {
 
     try {
         const data = await axiosApi.get(`/products/${id}`)
-        console.log(data)
+        // console.log(data)
         return data.data.product
 
     } catch (err) {
@@ -54,7 +54,7 @@ const getAllProduct = async () => {
 const addProduct = async (postData) => {
     try {
         const response = await axiosApi.post('/products/add-product', postData);
-        console.log(response.data);
+        // console.log(response.data);
     } catch (err) {
         console.log(err);
     }
@@ -72,7 +72,7 @@ const login = async (postData) => {
 const getAllProductByDistance = async (postData) => {
     try {
         const response = await axiosApi.post('/products/products-by-distance")', postData);
-        console.log(response.data);
+        // console.log(response.data);
     } catch (err) {
         console.log(err);
     }
