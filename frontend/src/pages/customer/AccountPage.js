@@ -6,10 +6,12 @@ import {
   Button,
   Box,
   Typography,
-  FormControl, FormControlLabel, Checkbox
+  FormControl, FormControlLabel, Checkbox, FormLabel, Radio, RadioGroup
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { addUser } from "../../api/userApi";
+
+
 
 const AccountPage = () => {
 
@@ -35,10 +37,10 @@ const AccountPage = () => {
       longitude: "",
       latitude: "",
       address: {
-        address_line_1: data.get("address_line_1"),
-        address_line_2: data.get("address_line_2"),
-        city: data.get("city"),
-        pincode: data.get("pincode"),
+        address_line_1: '',
+        address_line_2: '',
+        city: '',
+        pincode: '',
       },
     };
 
@@ -70,7 +72,8 @@ const AccountPage = () => {
           padding: { md: '8rem 0 0 8rem', sm: '1rem', xs: '1rem' }
         }}>
 
-          {/* <Typography variant="h4" align="center">LocalAlt</Typography> */}
+          <Typography variant="h4" align="left">LocalAlt</Typography>
+          <Typography variant="body1" align="left" width={'50%'} mt={'1rem'} mb={'1rem'}>LocalAlt - A platform to make products in your local shops and outlets visible to you online!</Typography>
           <img width={'450px'} src="/images/login-hero.png" alt="login hero" />
         </Box>
 
@@ -84,21 +87,18 @@ const AccountPage = () => {
             px: 4,
             py: 6,
             width: { md: '60%', sm: '100%' },
-            marginTop: 8,
+            marginTop: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="body1">
-            Register
+          <Typography component="h1" variant="body1" sx={{ fontSize: '30px' }}>
+            Edit Details
           </Typography>
-          <FormControl component="fieldset" display="flow"
-          // sx={{
-          //   "& .css-1nrlq1o-MuiFormControl-root": {
-          //     display: 'flow',
-          //   }
-          // }}
+
+          <FormControl component="fieldset" sx={{ display: "flow", mt: '1rem' }}
+
           >
             <FormControlLabel
               control={<Checkbox checked={selectedValue === "0"} onChange={handleChange} value="0" />}
@@ -110,6 +110,9 @@ const AccountPage = () => {
             />
           </FormControl>
 
+
+
+
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -120,6 +123,7 @@ const AccountPage = () => {
               name="name"
               autoFocus
             />
+
             <TextField
               margin="normal"
               required
@@ -149,55 +153,37 @@ const AccountPage = () => {
               type="password"
               id="cpassword"
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="locality"
-              label="Locality"
-              type="string"
-              id="locality"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="phone"
-              label="Contact Number"
-              type="number"
-              id="phone"
 
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="address_line_1"
-              label="Address Line 1"
-              type="string"
-              id="address_line_1"
+            <Box sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem'
+            }}>
 
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="address_line_2"
-              label="Address Line 2"
-              type="string"
-              id="address_line_2"
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="locality"
+                label="Locality"
+                type="string"
+                id="locality"
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="phone"
+                label="Contact Number"
+                type="number"
+                id="phone"
 
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="pincode"
-              label="Pincode"
-              type="number"
-              id="pincode"
+              />
 
-            />
+            </Box>
+
+
+
             <Button
               type="submit"
               fullWidth
@@ -205,13 +191,8 @@ const AccountPage = () => {
               color="primary"
               sx={{ mt: 3, mb: 2 }}
             >
-              Register
+              Update
             </Button>
-
-
-            <Link className="link-text" to="/login" variant="body2">
-              <Typography align="center" mt={'10rem'}> Already Registerd ?</Typography>
-            </Link>
 
           </Box>
         </Box>
