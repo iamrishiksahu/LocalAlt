@@ -37,10 +37,10 @@ const SignUpPage = () => {
       longitude: "",
       latitude: "",
       address: {
-        address_line_1: data.get("address_line_1"),
-        address_line_2: data.get("address_line_2"),
-        city: data.get("city"),
-        pincode: data.get("pincode"),
+        address_line_1: '',
+        address_line_2: '',
+        city: '',
+        pincode: '',
       },
     };
 
@@ -72,7 +72,8 @@ const SignUpPage = () => {
           padding: { md: '8rem 0 0 8rem', sm: '1rem', xs: '1rem' }
         }}>
 
-          {/* <Typography variant="h4" align="center">LocalAlt</Typography> */}
+          <Typography variant="h4" align="left">LocalAlt</Typography>
+          <Typography variant="body1" align="left" width={'50%'} mt={'1rem'} mb={'1rem'}>LocalAlt - A platform to make products in your local shops and outlets visible to you online!</Typography>
           <img width={'450px'} src="/images/login-hero.png" alt="login hero" />
         </Box>
 
@@ -86,7 +87,7 @@ const SignUpPage = () => {
             px: 4,
             py: 6,
             width: { md: '60%', sm: '100%' },
-            marginTop: 8,
+            marginTop: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -96,6 +97,18 @@ const SignUpPage = () => {
             Signup
           </Typography>
 
+          <FormControl component="fieldset" sx={{ display: "flow", mt: '1rem' }}
+
+          >
+            <FormControlLabel
+              control={<Checkbox checked={selectedValue === "0"} onChange={handleChange} value="0" />}
+              label="Customer"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={selectedValue === "1"} onChange={handleChange} value="1" />}
+              label="Vendor"
+            />
+          </FormControl>
 
 
 
@@ -140,68 +153,37 @@ const SignUpPage = () => {
               type="password"
               id="cpassword"
             />
-            <Typography>Role</Typography>
-            <FormControl component="fieldset" style={{ display: "flow" }}
 
-            >
-              <FormControlLabel
-                control={<Checkbox checked={selectedValue === "0"} onChange={handleChange} value="0" />}
-                label="Customer"
+            <Box sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem'
+            }}>
+
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="locality"
+                label="Locality"
+                type="string"
+                id="locality"
               />
-              <FormControlLabel
-                control={<Checkbox checked={selectedValue === "1"} onChange={handleChange} value="1" />}
-                label="Vendor"
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="phone"
+                label="Contact Number"
+                type="number"
+                id="phone"
+
               />
-            </FormControl>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="locality"
-              label="Locality"
-              type="string"
-              id="locality"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="phone"
-              label="Contact Number"
-              type="number"
-              id="phone"
 
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="address_line_1"
-              label="Address Line 1"
-              type="string"
-              id="address_line_1"
+            </Box>
 
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="address_line_2"
-              label="Address Line 2"
-              type="string"
-              id="address_line_2"
 
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="pincode"
-              label="Pincode"
-              type="number"
-              id="pincode"
 
-            />
             <Button
               type="submit"
               fullWidth
@@ -214,7 +196,7 @@ const SignUpPage = () => {
 
 
             <Link className="link-text" to="/login" variant="body2">
-              <Typography align="center" mt={'10rem'}> Already Registerd ?</Typography>
+              <Typography align="center" mt={'2rem'}> Already Registerd ?</Typography>
             </Link>
 
           </Box>

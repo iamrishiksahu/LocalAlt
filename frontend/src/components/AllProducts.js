@@ -55,7 +55,7 @@ const AllProducts = () => {
         <Box sx={{
             display: 'grid',
             gap: { xs: '1rem', sm: '1rem', md: '1rem' },
-            gridTemplateColumns: { xs: '1fr 1fr', sm: '1fr 1fr', md: '1fr 1fr 1fr 1fr' },
+            gridTemplateColumns: { xs: '1fr 1fr', sm: '1fr 1fr 1fr', md: '1fr 1fr 1fr 1fr' },
 
         }}>
 

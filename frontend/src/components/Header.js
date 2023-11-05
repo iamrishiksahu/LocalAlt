@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 import { TextField, Box, Autocomplete, IconButton, FormGroup, Typography, CircularProgress } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
-import { searchProductsByQuery } from '../api/productApis';
+import { getAllProduct, searchProductsByQuery } from '../api/productApis';
 import { ProductListData } from '../utils/data';
 import ProductContext from '../context/ProductsContext';
 import { getPlaceNameWithLatLong } from '../api/mapApis';
@@ -47,10 +47,15 @@ const Header = () => {
     }
 
     const searchWithQuery = async () => {
-        setShowProgress(true)
         const query = searchRef.current.value;
-        const list = await searchProductsByQuery({ query: query })
-        await setProductList(list)
+        setShowProgress(true)
+        if (query == '') {
+            const list = await getAllProduct()
+            await setProductList(list)
+        } else {
+            const list = await searchProductsByQuery({ query: query })
+            await setProductList(list)
+        }
         setShowProgress(false)
     }
 
@@ -112,8 +117,7 @@ const Header = () => {
                         display: 'flex',
                         alignItems: 'center',
                         marginRight: '1rem',
-
-                        display: { "md": 'block', "sm": 'none', "xs": 'none' }
+                        display: { "md": 'flex', "sm": 'none', "xs": 'none' }
                     }}>
 
                         {showLocationProgress ? <CircularProgress size={'1rem'} /> : <Typography sx={{
@@ -182,12 +186,13 @@ const Header = () => {
                     </span>
                     <Typography sx={{
                         fontSize: '0.75rem',
+                        color: 'white',
                         display: { md: 'block', xs: 'none', sm: 'none' },
 
                     }}>Accounts</Typography>
 
                 </IconButton>
-
+                {/* 
                 <IconButton aria-label="orders"
                     onClick={() => navigate('/orders')}
                     sx={{ display: 'flex', flexDirection: 'column', color: 'white' }}>
@@ -199,10 +204,11 @@ const Header = () => {
                     </span>
                     <Typography sx={{
                         fontSize: '0.75rem',
+                        color: 'white',
                         display: { md: 'block', xs: 'none', sm: 'none' },
                     }}>Wishlist</Typography>
 
-                </IconButton>
+                </IconButton> */}
 
 
             </Box>

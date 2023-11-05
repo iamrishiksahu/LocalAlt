@@ -10,7 +10,7 @@ import {
 
 } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import VHeader from './VHeader'
 import { addProduct } from "../../api/productApis";
 
 import { initializeApp, getApps } from 'firebase/app';
@@ -91,150 +91,155 @@ const VAddProductPage = () => {
   };
 
   return (
-    <Container component="main" maxWidth="sm">
 
-      <Box
-        sx={{
-          boxShadow: 3,
-          borderRadius: 2,
-          px: 4,
-          py: 6,
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          ADD PRODUCT
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+    <>
+
+<VHeader title={'Add Product'} />
 
 
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="product_name"
-            label="Product Name"
-            name="product_name"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="subtitle"
-            label="Product Subtitle"
-            name="subtitle"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="description"
-            label="Description"
+      <Container component="main" maxWidth="sm">
 
-            id="description"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="price"
-            label="Price"
-            type="number"
-            id="price"
-            onChange={(event) => {
-              event.target.value = event.target.value.replace(/[^0-9]/g, '');
-            }}
-          />
-
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="quantity"
-            label="Quantity"
-            type="number"
-            id="quantity"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="category"
-            label="Category"
-            type="string"
-            id="category"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="sub_category"
-            label="Sub Category"
-            type="string"
-            id="sub_category"
-          />
+        <Box
+          sx={{
+            boxShadow: 3,
+            borderRadius: 2,
+            px: 4,
+            py: 6,
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            ADD PRODUCT
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 
 
-          {/* image upload */}
-          <div className="mg20">
-            <label htmlFor="btn-upload">
-              <input
-                id="btn-upload"
-                name="btn-upload"
-                style={{ display: 'none' }}
-                type="file"
-                accept="image/*"
-                onChange={selectFile} />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="product_name"
+              label="Product Name"
+              name="product_name"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="subtitle"
+              label="Product Subtitle"
+              name="subtitle"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="description"
+              label="Description"
+
+              id="description"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="price"
+              label="Price"
+              type="number"
+              id="price"
+              onChange={(event) => {
+                event.target.value = event.target.value.replace(/[^0-9]/g, '');
+              }}
+            />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="quantity"
+              label="Quantity"
+              type="number"
+              id="quantity"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="category"
+              label="Category"
+              type="string"
+              id="category"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="sub_category"
+              label="Sub Category"
+              type="string"
+              id="sub_category"
+            />
+
+
+            {/* image upload */}
+            <div className="mg20">
+              <label htmlFor="btn-upload">
+                <input
+                  id="btn-upload"
+                  name="btn-upload"
+                  style={{ display: 'none' }}
+                  type="file"
+                  accept="image/*"
+                  onChange={selectFile} />
+                <Button
+                  className="btn-choose"
+                  variant="outlined"
+                  component="span" >
+                  Choose Image
+                </Button>
+              </label>
+              <div className="file-name">
+                {currentFile ? currentFile.name : null}
+              </div>
               <Button
-                className="btn-choose"
-                variant="outlined"
-                component="span" >
-                Choose Image
+                className="btn-upload"
+                color="primary"
+                variant="contained"
+                component="span"
+                disabled={!currentFile}
+                sx={{
+                  mt: '1rem'
+                }}
+                onClick={upload}>
+                Upload
               </Button>
-            </label>
-            <div className="file-name">
-              {currentFile ? currentFile.name : null}
+
+              {imageURL && (
+                <div>
+                  <img className="preview" src={imageURL} alt="" style={{ width: '100px', height: '100px' }} />
+                </div>
+              )}
             </div>
             <Button
-              className="btn-upload"
-              color="primary"
+              type="submit"
+              fullWidth
               variant="contained"
-              component="span"
-              disabled={!currentFile}
-              onClick={upload}>
-              Upload
+              color="primary"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Add Product
             </Button>
-
-            {imageURL && (
-              <div>
-                <img className="preview" src={imageURL} alt="" style={{ width: '100px', height: '100px' }} />
-              </div>
-            )}
-          </div>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Add Product
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="#" variant="body2">
-                Cancel
-              </Link>
-            </Grid>
-          </Grid>
+            
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </>
+
   );
 };
 
